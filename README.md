@@ -1,7 +1,8 @@
 # TEE-BOR-WEB-APPLICATION-DEVELOPMENT-MINI-PROJECT
 
-Web Application Development Mini Project using ASP.NET MVC
-This Application make help for gather people to attend event.
+Web Application Development Mini Project using ASP.NET MVC.
+
+This app helps bring people together for events.
 
 ## Building a sample
 
