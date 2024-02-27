@@ -1,3 +1,5 @@
+console.log("hello world");
+
 
 class Dropdown {
     constructor() {
@@ -36,11 +38,6 @@ class Dropdown {
             }
         });
     }
-}
-
-
-const template = () =>{
-    
 }
 
 
