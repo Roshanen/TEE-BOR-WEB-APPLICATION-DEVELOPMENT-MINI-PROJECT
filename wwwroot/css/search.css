@@ -1,3 +1,17 @@
+.TopPage{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.display-paragraph{
+    padding-left: 10%;
+    padding-right: 15%;
+    display: flex;
+}
+
+.right{
+    max-width: 20%;
+}
 
 nav {
     width: 100%;
@@ -13,7 +27,7 @@ nav a {
     border-radius: 4px;
     display: inline-block;
     text-decoration: none;
-    color: green;
+    color: green; 
 }
 
 nav a:hover{
