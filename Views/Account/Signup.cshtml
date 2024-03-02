@@ -1,0 +1,61 @@
+
+@{
+    
+} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/signup.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Finish signing up</h1>
+
+        <form action="#" method="post">
+            <div class="input-group">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" required >
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" required >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" required value="Bangkok, TH">
+            </div>
+
+            <label class="input-group.age">
+                <label for="age">Age Ⓡ</label><br>
+                <input type="checkbox" checked="checked" id="age" name="age" required>
+                <span class="checkmark"></span>
+                I am 18 years of age or older                
+            </label>
+
+            <br>
+
+            <button type="submit">Sign up</button>
+        </form>
+
+        <div class="links">
+            <span class="privacy">Privacy</span>
+            <span class="terms">- Terms</span>
+        </div>
+
+        <p class="Already a Member?">Already a Member?
+            <a asp-controller="Account" asp-action="Login">Log in</a>
+        </p>
+    </div>
+</body>
+</html>
