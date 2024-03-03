@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Event</title>
+    <link rel="stylesheet" href="your-event.css"></link>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div class="your-event-container">
+        <div class="left">
+            <a class="back-button" href="#">
+                <span class="material-symbols-outlined">arrow_back</span>
+                <p>Back to home page</p>
+            </a>
+            <div class="header-small"><h1>Your Events</h1></div>
+            <div class="categories">
+                <label class="category-button" id="category-1">Attending</label>
+                <label class="category-button" id="category-2">Hosting</label>
+                <label class="category-button" id="category-3">Saved</label>
+                <label class="category-button" id="category-4">Past</label>
+            </div>
+            <div class="calendar">
+                <!-- Seriously -->
+            </div>
+        </div>
+        <div class="right">
+            <div class="your-event-displayer">
+                <div class="header-large"><h1>Your Events</h1></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let eventDisplayer = document.getElementById("your-event-displayer");
+        let category1 = document.getElementById("category-1");
+        let category2 = document.getElementById("category-2");
+        let category3 = document.getElementById("category-3");
+        let category4 = document.getElementById("category-4");
+        let categories = [category1, category2, category3, category4];
+        
+        function changeEventType(categoryNum){
+            // some logic to fetch events here
+            categories.forEach((element, i)=>{
+                if(i === categoryNum) categories[i].style.color = "var(--cyan-button)";
+                else categories[i].style.color = "black";
+            });
+        }
+        
+        categories.forEach((element, i)=>{
+            element.onclick = ()=>{changeEventType(i)};
+        });
+
+    </script>
+</body>
+</html>
