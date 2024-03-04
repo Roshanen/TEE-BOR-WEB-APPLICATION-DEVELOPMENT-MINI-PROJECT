@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <link rel="stylesheet" href="/style/event-page.css" />
+  <link rel="stylesheet" href="/style/EventPage.css" />
   <body>
     <nav>
       <li><a class="active" href="#home">Home</a></li>
@@ -14,12 +16,15 @@
       <li><a href="#about">About</a></li>
     </nav>
     <div class="header">
-      <h1 id="event-name"></h1>
+      <h1 id="event-name">@event.eventname</h1>
       <div>
-        <img id="host-img" />
+        <img 
+        id="host-img" 
+        src={event.hostimg}
+        />
         <section>
           <div>Hosted By</div>
-          <h4 id="host-name"></h4>
+          <h4 id="host-name">@event.hostname</h4>
         </section>
       </div>
     </div>
@@ -27,24 +32,49 @@
       <div>
         <img
           id="event-img"
-          src="https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/80414e484d3d40804e4618a59ad835dc_8910707568631093135.jpeg"
+          src={@event.img}
         />
         <h2>Details</h2>
-        <div id="content-details"></div>
-        <section id="tag"></section>
+        <div id="content-details">@{}</div>
+        <section id="tag">
+          @foreach (var tag in event.tags)
+          {
+            <a href="" class="tag">${tag}</a>
+          }
+        </section>
         <section id="attendees">
           <h2 id="num-attendees">Attendees</h2>
-          <section id="attendees-list"></section>
+          <section id="attendees-list">
+            <section class="attendee-profile">
+            <img
+            src="@host_img"
+            alt=""
+            />
+            <div>@event.hostname</div>
+            <div>Host</div>
+            </section>
+            @foreach (var attendee in event.attendees)
+            {
+            <section class="attendee-profile">
+            <img
+            src="https://secure-content.meetupstatic.com/images/classic-member/311160299/45x45.jpg"
+            alt=""
+            />
+            <div>${data['host-name']}</div>
+            <div>Host</div>
+            </section>
+            }
+          </section>
         </section>
       </div>
       <section id="details">
         <section id="time-details">
           <img src="/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
-          <h3 id="time"></h3>
+          <h3 id="time">@event.time</h3>
         </section>
         <section id="time-details">
           <img src="/src/place.png" alt="" />
-          <h3 id="place"></h3>
+          <h3 id="place">@event.place</h3>
         </section>
         <iframe
           id="map"
@@ -53,10 +83,20 @@
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
+          src="@event.map_url"
         ></iframe>
       </section>
     </div>
-    <div id="attend-line"></div>
+    <div id="attend-line">
+    @if(event.attendees.includes(data['host-name']))
+    {
+      <button id="cancel-attend">Cancel Attend</button>
+    }
+    else
+    {
+      <button id="attend-btn">Attend</button>
+    }
+    </div>
     <section id="attend">
       <section id="attend-details">
         <div id="short-time"></div>
@@ -77,6 +117,6 @@
         <p>This is the footer content.</p>
       </div>
     </footer>
-    <script src="/script/event-page.js"></script>
+    <script src="/script/EventPage.js"></script>
   </body>
 </html>
