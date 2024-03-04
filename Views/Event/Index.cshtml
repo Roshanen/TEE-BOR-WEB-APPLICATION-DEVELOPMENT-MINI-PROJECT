@@ -1,0 +1,26 @@
+@model List<Event>
+
+<h2>Party List</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Place</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var party in Model)
+        {
+            <tr>
+                <td>@party.Name</td>
+                <td>@party.Place</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@party.Id.ToString()">Edit</a> |
+                    <!-- Add delete link if needed -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

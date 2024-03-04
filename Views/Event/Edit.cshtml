@@ -1,0 +1,18 @@
+@model Event
+@{
+
+}
+<h2>Edit Party</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Place"></label>
+        <input asp-for="Place" />
+    </div>
+    <button type="submit">Save Changes</button>
+</form>
