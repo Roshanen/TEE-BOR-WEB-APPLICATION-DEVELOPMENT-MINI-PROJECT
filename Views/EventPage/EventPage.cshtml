@@ -1,4 +1,7 @@
-
+@model Event
+@{
+    ViewData["Title"] = "EventPage";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +19,15 @@
       <li><a href="#about">About</a></li>
     </nav>
     <div class="header">
-      <h1 id="event-name">@event.eventname</h1>
+      <h1 id="event-name">@Model.EventName</h1>
       <div>
         <img 
         id="host-img" 
-        src={event.hostimg}
+        src={@Model.Host.Img}
         />
         <section>
           <div>Hosted By</div>
-          <h4 id="host-name">@event.hostname</h4>
+          <h4 id="host-name">@Model.Host.Name</h4>
         </section>
       </div>
     </div>
@@ -32,14 +35,14 @@
       <div>
         <img
           id="event-img"
-          src={@event.img}
+          src={@Model.EventImg}
         />
         <h2>Details</h2>
-        <div id="content-details">@{}</div>
+        <div id="content-details">@Model.EventDetails</div>
         <section id="tag">
-          @foreach (var tag in event.tags)
+          @foreach (var tag in Model.Tags)
           {
-            <a href="" class="tag">${tag}</a>
+            <a href="" class="tag">@tag</a>
           }
         </section>
         <section id="attendees">
@@ -47,21 +50,21 @@
           <section id="attendees-list">
             <section class="attendee-profile">
             <img
-            src="@host_img"
+            src="@Model.Host.Img"
             alt=""
             />
-            <div>@event.hostname</div>
+            <div>@Model.Host.Name</div>
             <div>Host</div>
             </section>
-            @foreach (var attendee in event.attendees)
+            @foreach (var Attendee in Model.Attendees)
             {
             <section class="attendee-profile">
             <img
-            src="https://secure-content.meetupstatic.com/images/classic-member/311160299/45x45.jpg"
+            src="@Attendee.Img"
             alt=""
             />
-            <div>${data['host-name']}</div>
-            <div>Host</div>
+            <div>@Attendee.Name</div>
+            <div>Member</div>
             </section>
             }
           </section>
@@ -70,11 +73,11 @@
       <section id="details">
         <section id="time-details">
           <img src="/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
-          <h3 id="time">@event.time</h3>
+          <h3 id="time">@Model.Time</h3>
         </section>
         <section id="time-details">
           <img src="/src/place.png" alt="" />
-          <h3 id="place">@event.place</h3>
+          <h3 id="place">@Model.Place</h3>
         </section>
         <iframe
           id="map"
@@ -83,19 +86,11 @@
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          src="@event.map_url"
+          src="@Model.MapUrl"
         ></iframe>
       </section>
     </div>
     <div id="attend-line">
-    @if(event.attendees.includes(data['host-name']))
-    {
-      <button id="cancel-attend">Cancel Attend</button>
-    }
-    else
-    {
-      <button id="attend-btn">Attend</button>
-    }
     </div>
     <section id="attend">
       <section id="attend-details">
@@ -109,6 +104,14 @@
             src="/src/share.png"
           />
         </button>
+        @if (@ViewBag.IsAttending)
+        {
+          <button id="cancel-btn">Cancel</button>
+        }
+        else
+        {
+          <button id="attend-btn">Attend</button>
+        }
         <button id="attend-btn">Attend</button>
       </div>
     </section>
