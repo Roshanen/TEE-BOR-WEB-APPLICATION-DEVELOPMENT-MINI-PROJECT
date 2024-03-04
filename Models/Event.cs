@@ -1,10 +1,10 @@
-using WebApp.Models;
+using MongoDB.Bson;
 
-namespace Event.Models
+namespace WebApp.Models;
+
+public class Event
 {
-    public class EventModel
-    {
-        public string? Name { get; set; }
-        public string? Place { get; set; }
-    }
+    public ObjectId Id { get; set; }
+    public string? Name { get; set; }
+    public string? Place { get; set; }
 }

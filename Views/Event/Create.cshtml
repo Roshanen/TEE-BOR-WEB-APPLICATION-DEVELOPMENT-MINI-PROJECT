@@ -1,6 +1,29 @@
+@model Event
 @{
 
 }
+
+<h2>Create Event</h2>
+<table>
+    <tr>
+        <td>
+
+            <form asp-action="Create">
+                <div>
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" />
+                </div>
+                <div>
+                    <label asp-for="Place"></label>
+                    <input asp-for="Place" />
+                </div>
+                <button type="submit">Create</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+
 
 <form action="">
 

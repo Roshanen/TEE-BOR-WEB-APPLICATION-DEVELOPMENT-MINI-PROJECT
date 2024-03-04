@@ -1,67 +1,50 @@
 using Microsoft.AspNetCore.Mvc;
-using Event.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using WebApp.Models;
 
-namespace WebApp.Controllers
+public class EventController : Controller
 {
-    public class EventController : Controller
+    private readonly MongoContext _mongoContext;
+
+    public EventController(MongoContext mongoContext)
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        _mongoContext = mongoContext;
+    }
 
-        [HttpGet]
-        [ActionName("Create")]
-        public IActionResult CreateGet()
-        {
-            return View();
-        }
+    public IActionResult Index()
+    {
+        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
+        return View(events);
+    }
 
-        [HttpPost]
-        [ActionName("Create")]
-        public IActionResult CreatePost()
-        {
-            try
-            {
-                EventModel evModel = new EventModel();
-                // UpdateModel(evModel);
+    public IActionResult Create()
+    {
+        return View();
+    }
 
-                ViewData["Name"] = evModel.Name;
-                ViewData["Place"] = evModel.Place;
+    [HttpPost]
+    public IActionResult Create(Event Event)
+    {
+        _mongoContext.GetCollection<Event>("events").InsertOne(Event);
+        return RedirectToAction("Index");
+    }
 
-                return View("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+    public IActionResult Edit(string id)
+    {
+        var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+        return View(Event);
+    }
 
-        [HttpGet]
-        [ActionName("Edit")]
-        public IActionResult EditGet()
-        {
-            return View();
-        }
+    [HttpPost]
+    public IActionResult Edit(string id, Event updatedEvent)
+    {
+        var filter = Builders<Event>.Filter.Eq("_id", ObjectId.Parse(id));
+        var update = Builders<Event>.Update
+            .Set("Name", updatedEvent.Name)
+            .Set("Place", updatedEvent.Place);
 
-        [HttpPut]
-        [ActionName("Edit")]
-        public IActionResult EditPut()
-        {
-            // try
-            // {
-            //     PartyModel ptmodel = new PartyModel();
-            //     UpdateModel(ptmodel);
-
-            //     ViewData["Name"] = ptmodel.Name;
-            //     ViewData["Place"] = ptmodel.Place;
-
-            //     return View("Index");
-            // }
-            // catch
-            {
-                return View();
-            }
-        }
+        _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
+        return RedirectToAction("Index");
     }
 }
