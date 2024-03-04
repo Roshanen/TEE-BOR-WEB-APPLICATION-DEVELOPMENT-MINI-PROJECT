@@ -1,22 +1,40 @@
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
+  font-size: 16px;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-weight: 500;
   min-height: 100%;
+  margin: 1rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 60px;
 }
 
-body {
-  margin-bottom: 60px;
+a,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  background-color: inherit;
+  color: inherit;
+  outline: none;
+}
+
+.main-container {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+@media screen and (max-width: 720px) {
+  .main-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

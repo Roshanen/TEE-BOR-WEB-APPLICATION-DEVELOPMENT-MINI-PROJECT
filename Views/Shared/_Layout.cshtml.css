@@ -1,48 +1,219 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿/* :root {
+  --cyan-button: #00798a;
+  --red-search: #f65858;
+  --logo-color: #f64060;
+  --black-color: #212121;
+  --grey-color: #f6f7f8;
+  --border-color: #d9d9d9;
+} */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-a {
-  color: #0077cc;
+.homepage-link {
+  color: #f64060;
+  padding-left: 0.5rem;
+  padding-top: 0.25rem;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.left-navbar {
+  display: flex;
+  flex-direction: row;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+/* .form-container > *  */
+.search-name,
+.search-place,
+.submit-button {
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 1.5rem;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.search-name,
+.search-place {
+  padding-right: 1.5rem;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.search-name {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-right: 0;
+  border: 1px solid #d9d9d9;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.search-place {
+  border-right: 0;
+  border: 1px solid #d9d9d9;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
+.submit-button,
+.block-submit-button {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: #f65858;
+  border: 0;
+  color: white;
+  height: 100%;
+  margin: 0;
+}
+
+:where(.form-container, .block-search) input,
+button {
+  border: 0;
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+}
+
+:where(.form-container, .search-base, .search-extend) > div:has(input:focus) {
+  border-color: #00798a;
+}
+
+.search-place:focus {
+  border-right: 0;
+}
+
+:where(.form-container, .search-base, .search-extend) > div:has(input:hover) {
+  border-color: grey;
+}
+
+.search-place:hover {
+  border-right: 0;
+}
+
+.search-name svg {
+  fill: grey;
+}
+
+.submit-button svg {
+  fill: white;
+}
+
+.submit-button:hover,
+.block-submit-button:hover {
+  cursor: pointer;
+}
+
+:where(.block-submit-button, .submit-button) *:hover {
+  cursor: pointer;
+}
+
+.search-form {
+  margin-left: 2.5rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .search-form {
+    display: none;
+  }
+}
+
+.right-navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.right-navbar * {
+  margin-left: 1.5rem;
+}
+
+.right-navbar p {
+  display: inline;
+  margin: 0.25rem;
+}
+
+.lang {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: fit-content;
+}
+
+.lang-icon {
+  margin: 0;
+}
+
+.right-navbar .sign-up {
+  padding: 0.5rem 1rem;
+  background-color: #00798a;
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.log-in:hover {
+  color: #008fa3;
+}
+
+.sign-up:hover {
+  background-color: #008fa3;
+}
+
+@media screen and (max-width: 768px) {
+  p.lang-text {
+    display: none;
+  }
+}
+
+/* breakpoint search bar */
+
+.block-search {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .block-search {
+    display: none;
+  }
+}
+
+.search-base,
+.search-extend {
+  margin-bottom: 0.5rem;
+}
+
+.search-extend {
+  display: none;
+  flex-direction: row;
+}
+
+.block-search-name,
+.block-search-place,
+.block-submit-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.block-search-name {
+  width: calc(100% - 0.5rem);
+  border: 1px solid #d9d9d9;
+  border-radius: 0.5rem;
+  padding-right: 0;
+}
+
+.block-search-place {
+  display: inline;
+  border: 1px solid #d9d9d9;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  width: calc(100% - 2.5rem);
+}
+
+.block-submit-button {
+  display: inline;
+  width: 2.5rem;
 }
