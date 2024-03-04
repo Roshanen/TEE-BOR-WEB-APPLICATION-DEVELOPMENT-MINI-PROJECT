@@ -1,7 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
+DotNetEnv.Env.Load();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<MongoContext>();
 
 var app = builder.Build();
 
@@ -20,8 +24,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
