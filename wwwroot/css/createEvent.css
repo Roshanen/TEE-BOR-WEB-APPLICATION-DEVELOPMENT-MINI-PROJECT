@@ -1,0 +1,112 @@
+:root{
+    --cyan-button: #00798A;
+    --red-search: #F65858;
+    --logo-color: #F64060;
+    --black-color: #212121;
+    --grey-color: #F6F7F8;
+    --circle-size: 40px;
+}
+
+*{
+    font-family: Graphik Meetup,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+}
+
+.party-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-party-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    filter: drop-shadow(0px 0px 4px #9999);
+    width: 600px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 450px;
+}
+
+.progress-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.circle {
+    width: var(--circle-size);
+    height: var(--circle-size);
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan-button);
+    border: 4px solid var(--cyan-button);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.hyphen {
+    width: var(--circle-size);
+    height: 4px;
+    background-color: var(--cyan-button);
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-area input {
+    height: 25px;
+    border-radius: 5px;
+}
+
+.step-4 .input-area {
+    flex-direction: row;
+
+}
+
+.step-4 .input-area .group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.max-member-group input{
+    width: 3rem;
+}
+
+.step-5 textarea {
+    padding: 4px;
+    height: 5rem;
+    resize: none;
+}
+
+.button-area {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: end;
+}
+.button-area button {
+    position: relative;
+    bottom: 0;
+    width: 70px;
+    padding: 7px;
+    border: none;
+    background-color: var(--logo-color);
+    color: white;
+    border-radius: 5px;
+}
