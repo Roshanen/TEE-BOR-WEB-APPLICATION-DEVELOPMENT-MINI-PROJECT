@@ -8,8 +8,6 @@
 } */
 
 navbar {
-  margin: 1rem;
-  margin-right: 0.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,6 +37,11 @@ navbar {
   flex-direction: row;
   align-items: center;
   height: 1.5rem;
+}
+
+.search-name,
+.search-place {
+  padding-right: 1.5rem;
 }
 
 .search-name {

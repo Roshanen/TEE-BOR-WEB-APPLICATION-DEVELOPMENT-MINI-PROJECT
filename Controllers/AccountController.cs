@@ -5,19 +5,6 @@ namespace WebApp.Controllers
 {
     public class AccountController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
-        public IActionResult SignUp()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(Login model)
@@ -34,12 +21,6 @@ namespace WebApp.Controllers
             return View(model);
         }
 
-        // GET: /Account/Register
-        public ActionResult Signup()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(Signup model)
@@ -51,7 +32,6 @@ namespace WebApp.Controllers
                 // Redirect the user to the login page after successful registration
             }
 
-           // If the model state is invalid, return the view with validation errors
             return View(model);
          }
     }

@@ -5,9 +5,9 @@ html {
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-weight: 500;
   min-height: 100%;
-}
-
-body {
+  margin: 1rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
   margin-bottom: 60px;
 }
 
@@ -25,4 +25,16 @@ button {
   background-color: inherit;
   color: inherit;
   outline: none;
+}
+
+.main-container {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+@media screen and (max-width: 720px) {
+  .main-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
