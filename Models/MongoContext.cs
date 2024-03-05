@@ -25,4 +25,29 @@ public class MongoContext
     {
         return _database.GetCollection<T>(collectionName);
     }
+
+    public void DBInsertOne<T>(string collectionName, T obj)
+    {
+        var collection = _database.GetCollection<T>(collectionName);
+        collection.InsertOne(obj);
+    }
+
+    public T DBSearchOne<T>(string collectionName, Expression<Func<T, bool>> filter)
+    {
+        var collection = _database.GetCollection<T>(collectionName);
+        return collection.Find(filter).FirstOrDefault();
+    }
+
+    public IEnumerable<T> DBSearchAll<T>(string collectionName)
+    {
+        var collection = _database.GetCollection<T>(collectionName);
+        return collection.Find(Builders<T>.Filter.Empty).ToList();
+    }
+
+    public void DBUpdateOne<T>(string collectionName, Expression<Func<T, bool>> filter, UpdateDefinition<T> update)
+    {
+        var collection = _database.GetCollection<T>(collectionName);
+        collection.UpdateOne(filter, update);
+    }
+
 }
