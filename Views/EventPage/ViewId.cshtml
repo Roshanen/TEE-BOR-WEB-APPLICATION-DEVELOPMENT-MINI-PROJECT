@@ -1,0 +1,114 @@
+@model Event
+@{
+    ViewData["Title"] = "EventPage";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="~/css/EventPage.css" />
+  <body>
+    <div class="header">
+      <h1 id="event-name">@Model.EventName</h1>
+      <div>
+        <img 
+        id="host-img" 
+        src="@Model.HostImg"
+        />
+        <section>
+          <div>Hosted By</div>
+          <h4 id="host-name">@Model.HostName</h4>
+        </section>
+      </div>
+    </div>
+    <div class="content">
+      <div>
+        <img
+          id="event-img"
+          src="@Model.EventImg"
+        />
+        <h2>Details</h2>
+        <div id="content-details">@Model.EventDetails</div>
+        <section id="tag">
+           @foreach (var tag in Model.Tags)
+          {
+            <a href="" class="tag">@tag</a>
+          } 
+        </section>
+        <section id="attendees">
+          <h2 id="num-attendees">Attendees</h2>
+          <section id="attendees-list">
+            <section class="attendee-profile">
+            <img
+            src="@Model.HostImg"
+            alt=""
+            />
+            <div>@Model.HostName</div>
+            <div>Host</div>
+            </section>
+            @foreach (var Attendee in Model.Attendees)
+            {
+            <section class="attendee-profile">
+            <img
+            src="@Attendee.Img"
+            alt=""
+            />
+            <div>@Attendee.UserName</div>
+            <div>Member</div>
+            </section>
+            }
+          </section>
+        </section>
+      </div>
+      <section id="details">
+        <section id="time-details">
+          <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
+          <h3 id="time">@Model.Time</h3>
+        </section>
+        <section id="time-details">
+          <img src="~/src/place.png" alt="" />
+          <h3 id="place">@Model.Place</h3>
+        </section>
+        <iframe
+          id="map"
+          width="100%"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="@Model.MapUrl"
+        ></iframe>
+      </section>
+    </div>
+    <div id="attend-line">
+    </div>
+    <section id="attend">
+      <section id="attend-details">
+        <div id="short-time"></div>
+        <br>
+        <h3 id="short-details"></h3>
+      </section>
+      <div>
+        <button id="share">
+          Share<img
+            style="margin-left: 5px; width: 15px; height: 15px"
+            src="/src/share.png"
+          />
+        </button>
+        @if (@ViewBag.IsAttending)
+        {
+          <button id="cancel-btn" onclick="parent.location=@Url.Action("Cancle","Eventpage")">Cancel</button>
+        }
+        else
+        {
+          <button id="attend-btn" onclick="parent.location=@Url.Action("Attend","Eventpage")">Attend</button>
+        }
+      </div>
+    </section>
+    <script src="~/js/EventPage.js"></script> 
+  </body>
+</html>
