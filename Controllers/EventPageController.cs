@@ -12,9 +12,9 @@ public class EventPageController : Controller
         _mongoContext = mongoContext;
     }
 
-    public IActionResult Index(string id)
+    public IActionResult ViewId(string id)
     {
-        Console.WriteLine("id: " + id);
+        
         var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
         //var User = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(id)).FirstOrDefault();
         if (true)
@@ -35,10 +35,10 @@ public class EventPageController : Controller
     //     return RedirectToAction("Index");
     // }
 
-    // [HttpPost]
-    // public IActionResult Unattend(Event Event)
-    // {
-    //     var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
-    //     return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public IActionResult Cancle()
+     {
+        // var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+        return View();
+     }
 }

@@ -11,7 +11,6 @@ public class Event
     public string? EventImg { get; set; }
     public string? EventDetails { get; set; }
     public List<string>? Tags { get; set; }
-    public User Host { get; set; }
     public List<User>? Attendees { get; set; }
     public string? Time {get; set;}
     public string? Place {get; set;}

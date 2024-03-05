@@ -4,7 +4,8 @@ namespace WebApp.Models;
 
 public class User
 {
-    public ObjectId Id { get; set; }
-    public string? Name { get; set; }
+    public ObjectId UserId { get; set; }
+    public string? UserName { get; set; }
     public string? Img { get; set; }
+    public string? Email { get; set; }
 }

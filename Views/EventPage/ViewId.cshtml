@@ -10,24 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <link rel="stylesheet" href="/style/EventPage.css" />
+  <link rel="stylesheet" href="~/css/EventPage.css" />
   <body>
-    <nav>
-      <li><a class="active" href="#home">Home</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#about">About</a></li>
-    </nav>
     <div class="header">
       <h1 id="event-name">@Model.EventName</h1>
       <div>
         <img 
         id="host-img" 
-        src={@Model.Host.Img}
+        src="@Model.HostImg"
         />
         <section>
           <div>Hosted By</div>
-          <h4 id="host-name">@Model.Host.Name</h4>
+          <h4 id="host-name">@Model.HostName</h4>
         </section>
       </div>
     </div>
@@ -35,25 +29,25 @@
       <div>
         <img
           id="event-img"
-          src={@Model.EventImg}
+          src="@Model.EventImg"
         />
         <h2>Details</h2>
         <div id="content-details">@Model.EventDetails</div>
         <section id="tag">
-          @foreach (var tag in Model.Tags)
+           @foreach (var tag in Model.Tags)
           {
             <a href="" class="tag">@tag</a>
-          }
+          } 
         </section>
         <section id="attendees">
           <h2 id="num-attendees">Attendees</h2>
           <section id="attendees-list">
             <section class="attendee-profile">
             <img
-            src="@Model.Host.Img"
+            src="@Model.HostImg"
             alt=""
             />
-            <div>@Model.Host.Name</div>
+            <div>@Model.HostName</div>
             <div>Host</div>
             </section>
             @foreach (var Attendee in Model.Attendees)
@@ -63,7 +57,7 @@
             src="@Attendee.Img"
             alt=""
             />
-            <div>@Attendee.Name</div>
+            <div>@Attendee.UserName</div>
             <div>Member</div>
             </section>
             }
@@ -72,11 +66,11 @@
       </div>
       <section id="details">
         <section id="time-details">
-          <img src="/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
+          <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
           <h3 id="time">@Model.Time</h3>
         </section>
         <section id="time-details">
-          <img src="/src/place.png" alt="" />
+          <img src="~/src/place.png" alt="" />
           <h3 id="place">@Model.Place</h3>
         </section>
         <iframe
@@ -95,6 +89,7 @@
     <section id="attend">
       <section id="attend-details">
         <div id="short-time"></div>
+        <br>
         <h3 id="short-details"></h3>
       </section>
       <div>
@@ -106,20 +101,14 @@
         </button>
         @if (@ViewBag.IsAttending)
         {
-          <button id="cancel-btn">Cancel</button>
+          <button id="cancel-btn" onclick="parent.location=@Url.Action("Cancle","Eventpage")">Cancel</button>
         }
         else
         {
-          <button id="attend-btn">Attend</button>
+          <button id="attend-btn" onclick="parent.location=@Url.Action("Attend","Eventpage")">Attend</button>
         }
-        <button id="attend-btn">Attend</button>
       </div>
     </section>
-    <footer class="dark-footer">
-      <div class="container">
-        <p>This is the footer content.</p>
-      </div>
-    </footer>
-    <script src="/script/EventPage.js"></script>
+    <script src="~/js/EventPage.js"></script> 
   </body>
 </html>
