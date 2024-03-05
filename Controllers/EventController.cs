@@ -14,8 +14,7 @@ public class EventController : Controller
 
     public IActionResult Index()
     {
-        // var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
-        var events = _mongoContext.DBSearchAll<Event>("events");
+        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
         return View(events);
     }
 
@@ -27,16 +26,13 @@ public class EventController : Controller
     [HttpPost]
     public IActionResult Create(Event Event)
     {
-        // _mongoContext.GetCollection<Event>("events").InsertOne(Event);
-        _mongoContext.DBInsertOne<Event>("events", Event);
+        _mongoContext.GetCollection<Event>("events").InsertOne(Event);
         return RedirectToAction("Index");
     }
 
     public IActionResult Edit(string id)
     {
-        // var event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
-        var eventIdFilter = Builders<Event>.Filter.Eq(ev => ev.Id, ObjectId.Parse(id));
-        var event = _mongoContext.DBSearchOne<Event>("events", eventIdFilter);
+        var event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
         return View(event);
     }
 
@@ -48,8 +44,7 @@ public class EventController : Controller
             .Set(ev => ev.Name, updatedEvent.Name)
             .Set(ev => ev.Place, updatedEvent.Place);
 
-        // _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
-        _mongoContext.DBUpdateOne("events", eventIdFilter, updateDefinition);
+        _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
 
         return RedirectToAction("Index");
     }
