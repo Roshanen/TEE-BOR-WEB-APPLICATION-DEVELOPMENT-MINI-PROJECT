@@ -32,20 +32,19 @@ public class EventController : Controller
 
     public IActionResult Edit(string id)
     {
-        var event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
-        return View(event);
+        var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+        return View(Event);
     }
 
     [HttpPost]
     public IActionResult Edit(string id, Event updatedEvent)
     {
-        var eventIdFilter = Builders<Event>.Filter.Eq(ev => ev.Id, ObjectId.Parse(id));
-        var updateDefinition = Builders<Event>.Update
-            .Set(ev => ev.Name, updatedEvent.Name)
-            .Set(ev => ev.Place, updatedEvent.Place);
+        var filter = Builders<Event>.Filter.Eq("_id", ObjectId.Parse(id));
+        var update = Builders<Event>.Update
+            .Set("Name", updatedEvent.Name)
+            .Set("Place", updatedEvent.Place);
 
         _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
-
         return RedirectToAction("Index");
     }
 }
