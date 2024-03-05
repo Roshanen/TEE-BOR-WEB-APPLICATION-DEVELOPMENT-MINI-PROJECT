@@ -1,155 +1,173 @@
 @model Event
 @{
-
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>Create Event</h2>
-<table>
-    <tr>
-        <td>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+</head>
 
-            <form asp-action="Create">
-                <div>
-                    <label asp-for="Name"></label>
-                    <input asp-for="Name" />
-                </div>
-                <div>
-                    <label asp-for="Place"></label>
-                    <input asp-for="Place" />
-                </div>
-                <button type="submit">Create</button>
-            </form>
-        </td>
-    </tr>
-</table>
+<body>
 
 
+    <h2>Create Event</h2>
+    <table>
+        <tr>
+            <td>
 
-<form action="">
+                <form asp-action="Create">
+                    <div>
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" />
+                    </div>
+                    <div>
+                        <label asp-for="Place"></label>
+                        <input asp-for="Place" />
+                    </div>
+                    <button type="submit">Create</button>
+                </form>
+            </td>
+        </tr>
+    </table>
 
-    <div class="step-1">
 
-        <div>
-            <progress id="make-progrss" value="1" max="5"></progress>
-            <div>STEP 1 OF 5</div>
+
+    <form action="">
+
+        <div class="form-step step-1">
+
+            <div>
+                <progress id="make-progrss" value="1" max="5"></progress>
+                <div>STEP 1 OF 5</div>
+            </div>
+
+            <div>
+                <h1>First, set your location for your party</h1>
+                <input type="text" id="party-name" placeholder="Search for a city">
+                <button class="next-button" type="button">Next</button>
+            </div>
+
+            <div>
+                <h3>Tip</h3>
+                <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
+                    area.
+                </p>
+            </div>
+
         </div>
 
-        <div>
-            <h1>First, set your location for your party</h1>
-            <input type="text" id="party-name" placeholder="Search for a city">
-            <button type="button">Next</button>
+        <div class="form-step step-2">
+
+            <div>
+                <progress id="make-progrss" value="2" max="5"></progress>
+                <div>STEP 2 OF 5</div>
+            </div>
+
+            <div>
+                <div class="back-button">back</div>
+                <h1>Choose topics for your group</h1>
+                <input type="text" id="party-name" placeholder="Choose your topics">
+                <button class="next-button" type="button">Next</button>
+            </div>
+
+            <div>
+                <h3>Tip</h3>
+                <p>Be specific! This will help us promote your group to the right people. Try to select at least 3
+                    topics
+                    before
+                    moving onto the next step.</p>
+            </div>
+
         </div>
 
-        <div>
-            <h3>Tip</h3>
-            <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
-                area.
-            </p>
+        <div class="form-step step-3">
+
+            <div>
+                <progress id="make-progrss" value="3" max="5"></progress>
+                <div>STEP 3 OF 5</div>
+            </div>
+
+            <div>
+                <div class="back-button">back</div>
+                <h1>Name your group</h1>
+                <p>Choose a name that will give people a clear idea of what the group is about.</p>
+                <input type="text" id="party-name" placeholder="Enter your group name">
+                <button class="next-button" type="button">Next</button>
+            </div>
+
+            <div>
+                <h3>Tip</h3>
+                <p>You can edit this later if you change your mind.</p>
+            </div>
+
         </div>
 
-    </div>
+        <div class="form-step step-4">
 
-    <div class="step-2">
+            <div>
+                <progress id="make-progrss" value="4" max="5"></progress>
+                <div>STEP 4 OF 5</div>
+            </div>
 
-        <div>
-            <progress id="make-progrss" value="2" max="5"></progress>
-            <div>STEP 2 OF 5</div>
+            <div>
+                <div class="back-button">back</div>
+                <h1>Describe your group</h1>
+                <p>People will see this when we promote your group, but you’ll be able to update it later too. We care
+                    about
+                    human
+                    connection, so someone will review your group to make sure it meets our community guidelines.</p>
+                <input type="text" id="party-name" placeholder="Please, write at least 50 characters">
+                <button class="next-button" type="button">Next</button>
+            </div>
+
+            <div>
+                <h3>Tip</h3>
+                <p>Questions to consider:
+                <ul>
+                    <li>What’s the group goal?</li>
+                    <li>Who are you hoping to meet?</li>
+                    <li>What will you do at your events?</li>
+                </ul>
+                </p>
+            </div>
+
+            <div>
+                <h3>Examples</h3>
+                <p>"Let's get together for affordable activities in our neighborhood, like going to storytime at the
+                    library, having picnics at McCarren Park, and play dates in our homes. We can also have events for
+                    just
+                    the ladies, like moms night- out, movies, dinner, and anything else that looks like fun."</p>
+            </div>
+
         </div>
 
-        <div>
-            <div>back</div>
-            <h1>Choose topics for your group</h1>
-            <input type="text" id="party-name" placeholder="Choose your topics">
-            <button type="button">Next</button>
+
+        <div class="form-step step-5">
+
+            <div>
+                <progress id="make-progrss" value="5" max="5"></progress>
+                <div>STEP 5 OF 5</div>
+            </div>
+
+            <div>
+                <div class="back-button">back</div>
+                <h1>Final Step</h1>
+                <input type="text" id="party-name" placeholder="Search for a city">
+                <button type="submit">Complete</button>
+            </div>
+
+            <div>
+                <h3>Tip</h3>
+                <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
+                    area.</p>
+            </div>
+
         </div>
+    </form>
+    <script src="~/js/create-events.js"></script>
+</body>
 
-        <div>
-            <h3>Tip</h3>
-            <p>Be specific! This will help us promote your group to the right people. Try to select at least 3 topics
-                before
-                moving onto the next step.</p>
-        </div>
-
-    </div>
-
-    <div class="step-3">
-
-        <div>
-            <progress id="make-progrss" value="3" max="5"></progress>
-            <div>STEP 3 OF 5</div>
-        </div>
-
-        <div>
-            <div>back</div>
-            <h1>Name your group</h1>
-            <p>Choose a name that will give people a clear idea of what the group is about.</p>
-            <input type="text" id="party-name" placeholder="Enter your group name">
-            <button type="button">Next</button>
-        </div>
-
-        <div>
-            <h3>Tip</h3>
-            <p>You can edit this later if you change your mind.</p>
-        </div>
-
-    </div>
-
-    <div class="step-4">
-
-        <div>
-            <progress id="make-progrss" value="4" max="5"></progress>
-            <div>STEP 4 OF 5</div>
-        </div>
-
-        <div>
-            <div>back</div>
-            <h1>Describe your group</h1>
-            <p>People will see this when we promote your group, but you’ll be able to update it later too. We care about
-                human
-                connection, so someone will review your group to make sure it meets our community guidelines.</p>
-            <input type="text" id="party-name" placeholder="Please, write at least 50 characters">
-            <button type="button">Next</button>
-        </div>
-
-        <div>
-            <h3>Tip</h3>
-            <p>Questions to consider:
-            <ul>
-                <li>What’s the group goal?</li>
-                <li>Who are you hoping to meet?</li>
-                <li>What will you do at your events?</li>
-            </ul>
-            </p>
-        </div>
-
-        <div>
-            <h3>Examples</h3>
-            <p>"Let's get together for affordable activities in our neighborhood, like going to storytime at the
-                library, having picnics at McCarren Park, and play dates in our homes. We can also have events for just
-                the ladies, like moms night- out, movies, dinner, and anything else that looks like fun."</p>
-        </div>
-
-    </div>
-
-
-    <div class="step-5">
-
-        <div>
-            <progress id="make-progrss" value="5" max="5"></progress>
-            <div>STEP 5 OF 5</div>
-        </div>
-
-        <div>
-            <h1>Final Step</h1>
-            <input type="text" id="party-name" placeholder="Search for a city">
-            <button type="button">Complete</button>
-        </div>
-
-        <div>
-            <h3>Tip</h3>
-            <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
-                area.</p>
-        </div>
-
-    </div>
-</form>
+</html>
