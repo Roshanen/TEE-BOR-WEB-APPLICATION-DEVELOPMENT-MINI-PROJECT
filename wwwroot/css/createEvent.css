@@ -7,11 +7,71 @@
 }
 
 *{
-    border: solid 1px black;
+    /* border: solid 1px black; */
 }
 
 body {
     padding-left: 15%;
     padding-right: 15%;
     font-family: Graphik Meetup,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create-party-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    filter: drop-shadow(0px 0px 4px #9999);
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-area input {
+    height: 25px;
+    border-radius: 5px;
+}
+
+.step-4 .input-area {
+    flex-direction: row;
+
+}
+
+.step-4 .input-area .group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.max-member-group input{
+    width: 3rem;
+}
+
+.step-5 textarea {
+    padding: 0;
+    height: 5rem;
+    resize: none;
+}
+
+.button-area {
+    display: flex;
+    justify-content: space-between;
+}
+.button-area button {
+    width: 70px;
+    padding: 7px;
+    border: none;
+    background-color: var(--logo-color);
+    color: white;
+    border-radius: 5px;
 }

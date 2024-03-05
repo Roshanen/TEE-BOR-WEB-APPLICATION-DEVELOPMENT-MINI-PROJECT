@@ -1,7 +1,7 @@
 let state = 1;
-formSteps = document.querySelectorAll(".form-step");
-nextButton = document.querySelectorAll(".next-button");
+formSteps = document.querySelectorAll(".step");
 backButton = document.querySelectorAll(".back-button");
+nextButton = document.querySelectorAll(".next-button");
 
 formSteps.forEach((section, index) => {
   section.style.display = "none";
@@ -25,6 +25,7 @@ backButton.forEach((bt) => {
 });
 
 function updateDisplay() {
+  console.log("Hey");
   formSteps.forEach((section, index) => {
     section.style.display = "none";
     if (index === state - 1) {
@@ -33,4 +34,4 @@ function updateDisplay() {
   });
 }
 
-console.log(formSteps);
+// console.log(formSteps);
