@@ -18,4 +18,5 @@ public class Event
     public string? EventDetails { get; set; }
     public int? CurrentMember { get; set; }
     public int? MaxMember { get; set; }
+    public float? Rating { get; set; }
 }
