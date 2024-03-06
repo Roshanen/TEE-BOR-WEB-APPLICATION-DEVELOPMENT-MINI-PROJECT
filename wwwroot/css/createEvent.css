@@ -11,6 +11,10 @@
     font-family: Graphik Meetup,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .party-wrapper {
     display: flex;
     justify-content: center;
