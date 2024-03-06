@@ -14,11 +14,10 @@
         @foreach (var party in Model)
         {
             <tr>
-                <td>@party.Name</td>
-                <td>@party.Place</td>
+                <td>@party.EventName</td>
+                <td>party.Place</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@party.Id.ToString()">Edit</a> |
-                    <!-- Add delete link if needed -->
                 </td>
             </tr>
         }
