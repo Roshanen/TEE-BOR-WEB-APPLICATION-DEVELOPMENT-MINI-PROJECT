@@ -9,6 +9,6 @@ namespace WebApp.Models
         public string Name {get; set;}
     }
 
-    //search/view 
+    //search/view
 
 }
