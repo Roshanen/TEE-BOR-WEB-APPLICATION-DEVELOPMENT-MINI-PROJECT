@@ -1,3 +1,5 @@
+
+
 class Dropdown {
     constructor() {
         this.dropdowns = document.querySelectorAll('.dropdown .dropdown-menu');
@@ -46,37 +48,43 @@ template.innerHTML = `
     <img class="img" src="https://i.ibb.co/6Z6MftT/chigiri.jpg"/>
 </div>
 <div class="details">
-<div class="date"><h3>THU, FEB 29 · 6:00 PM ICT</h3></div>
-<div class="header"><h2> Goodbye VPN! Hello Microsoft Global Secure Access</h2>
-<div class="sub-header"><p>.NET Developers Community Singapore</p>
+<div class="date"><h3></h3></div>
+<div class="header"><h2></h2>
+<div class="sub-header"><p></p>
 <div class="share"><i class="fa-solid fa-upload"></i></div >
-<div class="attendee"> 1 attendee</div>
+<div class="attendee">attendee</div>
 </div></div>
 </div>`;
 
 class topicElement extends HTMLElement {
     constructor() {
         super();
-
         const clone = template.content.cloneNode(true);
         this.appendChild(clone);
-        console.log("hello world");
     }
 
     static get observedAttributes() {
-        return ["name", "avatar"];
+        return ["name", "avatar", "event-name", "event-date", "event-image", "event-sub-header", "event-attendee"];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        this.shadowRoot.querySelector(".details h2").innerText =
-        this.getAttribute("name");
-        this.shadowRoot.querySelector(".avatar img").src =
-        this.getAttribute("avatar");
-        this.shadowRoot.querySelector(".avatar img").alt =
-        this.getAttribute("name");
+
+        switch(name) {
+            case 'event-name':
+                this.querySelector(".header h2").innerText = newValue;
+                
+            case 'event-date':
+                this.querySelector(".date h3").innerText = newValue;
+            case 'event-image':
+                this.querySelector(".pics img").src = newValue;
+            case 'event-sub-header':
+                this.querySelector(".sub-header p").innerText = newValue;
+            case 'event-attendee':
+                this.querySelector(".attendee").innerText = newValue + "attendees";
+            
+        }
     }
 }
-
 
 window.customElements.define("topic-element", topicElement)
 document.addEventListener('DOMContentLoaded',  () => new Dropdown);

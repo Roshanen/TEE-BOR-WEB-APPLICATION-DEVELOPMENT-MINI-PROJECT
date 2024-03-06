@@ -147,21 +147,14 @@
                     <li><a href="#">Relevance</a></li>
                 </ul>
             </div>
-
-
         </nav>
     </div>
     <div class="display-paragraph">
         <div class="left">
             @foreach (var e in Model)
             {
-
-                <p>@e.EventName</p>
-                
+            <topic-element event-name="@e.EventName" event-date="@e.StartDate" event-sub-header="@e.EventDetails" event-attendee="@e.CurrentMember" event-image="@e.EventImg" ></topic-element>
             }
-            <topic-element></topic-element>
-            <topic-element></topic-element>
-            <topic-element></topic-element>
         </div>
         <div class="right">
             <iframe
