@@ -1,4 +1,4 @@
-@model Event
+@model EventPage
 @{
     ViewData["Title"] = "EventPage";
 }
@@ -54,7 +54,7 @@
             {
             <section class="attendee-profile">
             <img
-            src="@Attendee.Img"
+            src="@Attendee.ProfilePicture"
             alt=""
             />
             <div>@Attendee.UserName</div>
