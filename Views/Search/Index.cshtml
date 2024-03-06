@@ -1,4 +1,6 @@
+@model List<Event>
 @{
+    ViewData["title"] = "Search";
 }
 
 <!DOCTYPE html>
@@ -8,9 +10,8 @@
     <link rel="stylesheet" href="~/css/search.css" type="text/css" />
     <meta charset="UTF-8">
     <script src="https://kit.fontawesome.com/f907d90de1.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="../css/card.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search page</title>
 </head>
 
 <body>
@@ -57,15 +58,17 @@
                 <ul class="dropdown-menu">
                     <li><a href="#">Any type</a></li>
                     <li><a href="#">Online</a></li>
-                    <ul class="inperson">
-                        <li>
-                            <a href="#">Inperson</a>
-                        </li>
-                        <ul>
-                            <li><a href="">Indoor only</a></li>
-                            <li><a href="">Outdoor only</a></li>
+                    <li>
+                        <ul class="inperson">
+                            <li>
+                                <a href="#">Inperson</a>
+                            </li>
+                            <ul>
+                                <li><a href="">Indoor only</a></li>
+                                <li><a href="">Outdoor only</a></li>
+                            </ul>
                         </ul>
-                    </ul>
+                    </li>
                     <li><a href="#">Storytelling</a></li>
                 </ul>
             </div>
@@ -143,15 +146,31 @@
                     <li><a href="#">Relevance</a></li>
                 </ul>
             </div>
-
-
         </nav>
     </div>
     <div class="display-paragraph">
         <div class="left">
-            <topic-element></topic-element>
-            <topic-element></topic-element>
-            <topic-element></topic-element>
+            @foreach (var ev in Model)
+            {
+                <div class="card">
+                    <div class="pics">
+                        <img class="img" src="@ev.EventImg" />
+                    </div>
+                    <div class="details">
+                        <div class="date">
+                            <h3>@ev.EndDate</h3>
+                        </div>
+                        <div class="header">
+                            <h2>@ev.EventName</h2>
+                            <div class="sub-header">
+                                <p>@ev.EventDetails</p>
+                                <div class="share"><i class="fa-solid fa-upload"></i></div>
+                                <div class="attendee">@ev.CurrentMember Attendees</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
         <div class="right">
             <iframe

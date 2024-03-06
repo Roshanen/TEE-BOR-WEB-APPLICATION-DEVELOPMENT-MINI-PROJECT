@@ -2,7 +2,7 @@ using MongoDB.Bson;
 
 namespace WebApp.Models;
 
-public class Event
+public class EventPage
 {
     public ObjectId Id { get; set; }
     public string? HostImg { get; set; }

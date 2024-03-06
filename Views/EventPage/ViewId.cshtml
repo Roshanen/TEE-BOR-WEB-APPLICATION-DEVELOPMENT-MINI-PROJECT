@@ -1,4 +1,4 @@
-@model Event
+@model EventViewModel
 @{
     ViewData["Title"] = "EventPage";
 }
@@ -34,10 +34,7 @@
         <h2>Details</h2>
         <div id="content-details">@Model.EventDetails</div>
         <section id="tag">
-           @foreach (var tag in Model.TagId)
-          {
-            <a href="" class="tag">@tag</a>
-          } 
+            <a href="" class="tag">@Model.Tags</a>
         </section>
         <section id="attendees">
           <h2 id="num-attendees">Attendees</h2>
@@ -54,7 +51,7 @@
             {
             <section class="attendee-profile">
             <img
-            src="@Attendee.Img"
+            src="@Attendee.ProfilePicture"
             alt=""
             />
             <div>@Attendee.UserName</div>
