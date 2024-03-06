@@ -41,7 +41,7 @@ public class EventPageController : Controller
         eventView.HostName = Host.UserName;
         eventView.EventImg = Event.EventImg;
         eventView.EventDetails = Event.EventDetails;
-        eventView.Tags = Category.TagName;
+        eventView.Tags = Category.CategoryName;
         eventView.Attendees = Attendees;
         eventView.Time = Event.EndDate;
         eventView.Place = Place.ActualPlace;

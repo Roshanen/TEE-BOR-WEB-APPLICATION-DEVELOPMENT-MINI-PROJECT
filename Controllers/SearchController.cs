@@ -67,7 +67,7 @@ public class SearchController : Controller
 
             if (!string.IsNullOrEmpty(search.Category))
             {
-                var tag =  _mongoContext.GetCollection<Category>("tags").Find(t => t.TagName == search.Category).FirstOrDefault();
+                var tag =  _mongoContext.GetCollection<Category>("tags").Find(t => t.CategoryName == search.Category).FirstOrDefault();
 
                 if (tag != null)
                 {
