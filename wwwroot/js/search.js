@@ -8,7 +8,7 @@ class Dropdown {
 
   initialize() {
     document.addEventListener("click", (e) => {
-      if (e.target.classList.contains("dropdown-action")) {
+      if (e.target.matches(".dropdown-action, .dropdown-action *")) {
         this.hideOtherDropdown(e.target);
         this.handleClick(e.target);
       } else {
