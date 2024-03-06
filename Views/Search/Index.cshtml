@@ -153,6 +153,12 @@
     </div>
     <div class="display-paragraph">
         <div class="left">
+            @foreach (var e in Model)
+            {
+
+                <p>@e.EventName</p>
+                
+            }
             <topic-element></topic-element>
             <topic-element></topic-element>
             <topic-element></topic-element>
