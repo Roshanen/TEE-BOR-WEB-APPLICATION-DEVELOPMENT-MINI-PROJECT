@@ -14,7 +14,7 @@ public class SearchController : Controller
         _mongoContext = mongoContext;
     }
 
-    public async Task<IActionResult> Index(Search search)
+    public IActionResult Index(Search search)
     {
         try
         {
@@ -31,7 +31,7 @@ public class SearchController : Controller
             if (!string.IsNullOrEmpty(search.Place))
             {
                 var placesCollection = _mongoContext.GetCollection<Place>("places");
-                var place = await placesCollection.Find(p => p.ActualPlace == search.Place).FirstOrDefaultAsync();
+                var place =  placesCollection.Find(p => p.ActualPlace == search.Place).FirstOrDefault();
 
                 if (place != null)
                 {
@@ -67,16 +67,17 @@ public class SearchController : Controller
 
             if (!string.IsNullOrEmpty(search.Category))
             {
-                var tag = await _mongoContext.GetCollection<Category>("tags").Find(t => t.CategoryName == search.Category).FirstOrDefaultAsync();
+                var tag =  _mongoContext.GetCollection<Category>("tags").Find(t => t.TagName == search.Category).FirstOrDefault();
+
                 if (tag != null)
                 {
                     filter &= filterBuilder.Eq("TagId", tag.Id);
                 }
             }
 
-            var events = await eventsCollection.Find(filter).ToListAsync();
+            var events =  eventsCollection.Find(filter).ToList();
 
-            return View("events", events);
+            return View(events);
         }
         catch (Exception ex)
         {

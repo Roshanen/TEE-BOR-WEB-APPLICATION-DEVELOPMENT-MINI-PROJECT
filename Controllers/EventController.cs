@@ -3,6 +3,8 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using WebApp.Models;
 
+namespace WebApp.Controllers;
+
 public class EventController : Controller
 {
     private readonly MongoContext _mongoContext;
@@ -12,11 +14,11 @@ public class EventController : Controller
         _mongoContext = mongoContext;
     }
 
-    // public IActionResult Index()
-    // {
-    //     var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
-    //     return View(events);
-    // }
+    public IActionResult Index()
+    {
+        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
+        return View(events);
+    }
 
     public IActionResult Create()
     {
@@ -47,4 +49,5 @@ public class EventController : Controller
     //     _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
     //     return RedirectToAction("Index");
     // }
+
 }

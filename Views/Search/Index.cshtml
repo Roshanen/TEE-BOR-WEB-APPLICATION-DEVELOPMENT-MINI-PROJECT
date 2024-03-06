@@ -1,4 +1,6 @@
+@model List<Event>
 @{
+
 }
 
 <!DOCTYPE html>
@@ -57,15 +59,17 @@
                 <ul class="dropdown-menu">
                     <li><a href="#">Any type</a></li>
                     <li><a href="#">Online</a></li>
-                    <ul class="inperson">
-                        <li>
-                            <a href="#">Inperson</a>
-                        </li>
-                        <ul>
-                            <li><a href="">Indoor only</a></li>
-                            <li><a href="">Outdoor only</a></li>
+                    <li>
+                        <ul class="inperson">
+                            <li>
+                                <a href="#">Inperson</a>
+                            </li>
+                            <ul>
+                                <li><a href="">Indoor only</a></li>
+                                <li><a href="">Outdoor only</a></li>
+                            </ul>
                         </ul>
-                    </ul>
+                    </li>
                     <li><a href="#">Storytelling</a></li>
                 </ul>
             </div>

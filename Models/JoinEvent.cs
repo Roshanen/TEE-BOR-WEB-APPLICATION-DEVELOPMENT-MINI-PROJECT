@@ -4,8 +4,9 @@ namespace WebApp.Models;
 
 public class JoinEvent
 {
-    public ObjectId JoinId { get; set; }
-    public string UserId { get; set; }
-    public string EventId { get; set; }
-    public DateTime JoinDate { get; set; }
+    public ObjectId? Id { get; set; }
+    public ObjectId? UserId { get; set; }
+    public ObjectId? EventId { get; set; }
+    public int BringFriends { get; set; }
+    public DateTime? JoinDate { get; set; }
 }
