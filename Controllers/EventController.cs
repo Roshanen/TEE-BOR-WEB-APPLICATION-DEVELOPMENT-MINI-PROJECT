@@ -12,11 +12,11 @@ public class EventController : Controller
         _mongoContext = mongoContext;
     }
 
-    public IActionResult Index()
-    {
-        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
-        return View(events);
-    }
+    // public IActionResult Index()
+    // {
+    //     var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
+    //     return View(events);
+    // }
 
     public IActionResult Create()
     {
@@ -30,21 +30,21 @@ public class EventController : Controller
         return RedirectToAction("Index");
     }
 
-    public IActionResult Edit(string id)
-    {
-        var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
-        return View(Event);
-    }
+    // public IActionResult Edit(string id)
+    // {
+    //     var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+    //     return View(Event);
+    // }
 
-    [HttpPost]
-    public IActionResult Edit(string id, Event updatedEvent)
-    {
-        var filter = Builders<Event>.Filter.Eq("_id", ObjectId.Parse(id));
-        var update = Builders<Event>.Update
-            .Set("Name", updatedEvent.Name)
-            .Set("Place", updatedEvent.Place);
+    // [HttpPost]
+    // public IActionResult Edit(string id, Event updatedEvent)
+    // {
+    //     var filter = Builders<Event>.Filter.Eq("_id", ObjectId.Parse(id));
+    //     var update = Builders<Event>.Update
+    //         .Set("Name", updatedEvent.Name)
+    //         .Set("Place", updatedEvent.Place);
 
-        _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
-        return RedirectToAction("Index");
-    }
+    //     _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
+    //     return RedirectToAction("Index");
+    // }
 }

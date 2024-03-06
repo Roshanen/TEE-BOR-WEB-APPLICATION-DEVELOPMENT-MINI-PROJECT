@@ -1,34 +1,79 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using WebApp.Models;
 
-namespace WebApp.Controllers
+namespace WebApp.Controllers;
+
+public class SearchController : Controller
 {
-    public class SearchController : Controller
+    public async Task<IActionResult> Index(Search search)
     {
-        public IActionResult Index()
+        try
         {
-            return View();
-        }
+            var eventsCollection = _mongoContext.GetCollection<Event>("events");
 
-        public IActionResult Random()
-        {
-            var movie = new Search() {Name = "hello", Id=1};
-            
-            var customers = new List<Customer>
-            {
-                new Customer { Name = "Customer 1" }
-                new Customer { Name = "Customer 1" }
-            };
+            var filterBuilder = Builders<Event>.Filter;
+            var filter = filterBuilder.Empty;
 
-            var viewModel = new RandomMovieViewModel
+            if (!string.IsNullOrEmpty(search.Name))
             {
-                Movie = movie,
-                Customers = customers
+                filter &= filterBuilder.Regex("EventName", new BsonRegularExpression(search.Name, "i"));
             }
-            // return View(movie);
-            // return Content("Hello world!");
-            // return new EmptyResult();
-            return RedirectToAction("Index", "Search", new {hello=1 , soy=1});
+
+            if (!string.IsNullOrEmpty(search.Place))
+            {
+                var placesCollection = _mongoContext.GetCollection<Place>("places");
+                var place = await placesCollection.Find(p => p.ActualPlace == search.Place).FirstOrDefaultAsync();
+
+                if (place != null)
+                {
+                    filter &= filterBuilder.Eq("PlaceId", place.Id);
+                }
+                else
+                {
+                    return View("events", new List<Event>());
+                }
+            }
+
+            if (!string.IsNullOrEmpty(search.DateChoice))
+            {
+                DateTime currentDate = DateTime.UtcNow.Date;
+                switch (search.DateChoice.ToLower())
+                {
+                    case "today":
+                        filter &= filterBuilder.Gte("EndDate", currentDate) & filterBuilder.Lt("EndDate", currentDate.AddDays(1));
+                        break;
+                    case "this week":
+                        filter &= filterBuilder.Gte("EndDate", currentDate) & filterBuilder.Lt("EndDate", currentDate.AddDays(7));
+                        break;
+                    case "next week":
+                        filter &= filterBuilder.Gte("EndDate", currentDate.AddDays(7)) & filterBuilder.Lt("EndDate", currentDate.AddDays(14));
+                        break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(search.Type))
+            {
+                filter &= filterBuilder.Eq("EventType", search.Type);
+            }
+
+            if (!string.IsNullOrEmpty(search.Category))
+            {
+                var tag = await _mongoContext.GetCollection<Tag>("tags").Find(t => t.TagName == search.Category).FirstOrDefaultAsync();
+                if (tag != null)
+                {
+                    filter &= filterBuilder.Eq("TagId", tag.Id);
+                }
+            }
+
+            var events = await eventsCollection.Find(filter).ToListAsync();
+
+            return View("events", events);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
         }
     }
 }

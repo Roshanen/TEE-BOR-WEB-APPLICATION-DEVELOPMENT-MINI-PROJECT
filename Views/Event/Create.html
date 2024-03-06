@@ -1,117 +1,122 @@
+@model Event
+@{
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
-    <link rel="stylesheet" href="/wwwroot/css/createEvent.css">
+    <link rel="stylesheet" href="/wwwroot/css/createEvent.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <div class="create-party-container">
-        <h2>Create Event</h2>
-        <div class="progress-area">
-            <div class="circle">1</div>
-            <div class="hyphen"></div>
-            <div class="circle">2</div>
-            <div class="hyphen"></div>
-            <div class="circle">3</div>
-            <div class="hyphen"></div>
-            <div class="circle">4</div>
-            <div class="hyphen"></div>
-            <div class="circle">5</div>
+    <div class="party-wrapper">
+        <div class="create-party-container">
+            <h2>Create Event</h2>
+            <div class="progress-area">
+                <div class="circle">1</div>
+                <div class="hyphen"></div>
+                <div class="circle">2</div>
+                <div class="hyphen"></div>
+                <div class="circle">3</div>
+                <div class="hyphen"></div>
+                <div class="circle">4</div>
+                <div class="hyphen"></div>
+                <div class="circle">5</div>
+            </div>
+            <form action="">
+                <div class="step step-1">
+                    <h2>First, set your location</h2>
+                    <div class="tip-area">
+                        <h3>Tip</h3>
+                        <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
+                            area.
+                        </p>
+                    </div>
+                    <div class="input-area">
+                        <input type="text" name="place" placeholder="สถานที่">
+                        <input type="text" name="province" placeholder="จังหวัด">
+                        <input type="text" name="district" placeholder="อำเภอ">
+                        <input type="text" name="subDistrict" placeholder="ตำบล">
+                        <div>หรือ</div>
+                        <input type="text" name="locationLink" placeholder="ลิงก์จาก Google Map">
+                    </div>
+                </div>
+        
+                <div class="step step-2">
+                    <h2>Choose topics for your group</h2>
+                    <div class="tip-area">
+                        <h3>Tip</h3>
+                        <p>Be specific! This will help us promote your group to the right people. Try to select at least 3 topics
+                            before
+                            moving onto the next step.</p>
+                    </div>
+                    <div class="input-area">
+                        <input type="text" name="topic" placeholder="หัวข้อของ Party">
+                    </div>
+                </div>
+        
+                <div class="step step-3">
+                    <h2>Name your party</h2>
+                    <div class="tip-area">
+                        <h3>Tip</h3>
+                        <p>You can edit this later if you change your mind.</p>
+                    </div>
+                    <div class="input-area">
+                        <input type="text" name="partyName" placeholder="ชื่อของ party">
+                    </div>
+                </div>
+                
+                <div class="step step-4">
+                    <h2>Your party detail</h2>
+                    <div class="input-area">
+                        <div class="date-group group">
+                            <span>Start date</span>
+                            <input type="date" name="startDate">
+                        </div>
+                        <div class="date-group group">
+                            <span>End date</span>
+                            <input type="date" name="endDate">
+                        </div>
+                        <div class="max-member-group group">
+                            <span>Max member</span>
+                            <input type="number" name="maxMember">
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="step step-5">
+                    <h2>Describe your group</h2>
+                    <div class="tip-area">
+                        <h3>Tip</h3>
+                        <p>Questions to consider:
+                        <ul>
+                            <li>What’s the group goal?</li>
+                            <li>Who are you hoping to meet?</li>
+                            <li>What will you do at your events?</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="input-area">
+                        <label>Please, write at least 50 characters</label>
+                        <textarea type="text" id="party-name"></textarea>
+                    </div>
+                    <div class="example-area">
+                        <h3>Examples</h3>
+                        <p>"Let's get together for affordable activities in our neighborhood, like going to storytime at the
+                            library, having picnics at McCarren Park, and play dates in our homes. We can also have events for just
+                            the ladies, like moms night- out, movies, dinner, and anything else that looks like fun."</p>
+                    </div>
+                </div>
+    
+                <div class="button-area">
+                    <button type="button" class="back-button" id="back-button">Previous</button>
+                    <button type="button" class="next-button" id="next-button">Next</button>
+                </div>
+            </form>
         </div>
-        <form action="">
-            <div class="step step-1">
-                <h2>First, set your location</h2>
-                <div class="tip-area">
-                    <h3>Tip</h3>
-                    <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
-                        area.
-                    </p>
-                </div>
-                <div class="input-area">
-                    <input type="text" name="place" placeholder="สถานที่">
-                    <input type="text" name="province" placeholder="จังหวัด">
-                    <input type="text" name="district" placeholder="อำเภอ">
-                    <input type="text" name="subDistrict" placeholder="ตำบล">
-                    <div>หรือ</div>
-                    <input type="text" name="locationLink" placeholder="ลิงก์จาก Google Map">
-                </div>
-            </div>
-    
-            <div class="step step-2">
-                <h2>Choose topics for your group</h2>
-                <div class="tip-area">
-                    <h3>Tip</h3>
-                    <p>Be specific! This will help us promote your group to the right people. Try to select at least 3 topics
-                        before
-                        moving onto the next step.</p>
-                </div>
-                <div class="input-area">
-                    <input type="text" name="topic" placeholder="หัวข้อของ Party">
-                </div>
-            </div>
-    
-            <div class="step step-3">
-                <h2>Name your party</h2>
-                <div class="tip-area">
-                    <h3>Tip</h3>
-                    <p>You can edit this later if you change your mind.</p>
-                </div>
-                <div class="input-area">
-                    <input type="text" name="partyName" placeholder="ชื่อของ party">
-                </div>
-            </div>
-            
-            <div class="step step-4">
-                <h2>Your party detail</h2>
-                <div class="input-area">
-                    <div class="date-group group">
-                        <span>Start date</span>
-                        <input type="date" name="startDate">
-                    </div>
-                    <div class="date-group group">
-                        <span>End date</span>
-                        <input type="date" name="endDate">
-                    </div>
-                    <div class="max-member-group group">
-                        <span>Max member</span>
-                        <input type="number" name="maxMember">
-                    </div>
-                </div>
-            </div>
-
-            <div class="step step-5">
-                <h2>Describe your group</h2>
-                <div class="tip-area">
-                    <h3>Tip</h3>
-                    <p>Questions to consider:
-                    <ul>
-                        <li>What’s the group goal?</li>
-                        <li>Who are you hoping to meet?</li>
-                        <li>What will you do at your events?</li>
-                    </ul>
-                    </p>
-                </div>
-                <div class="input-area">
-                    <label>Please, write at least 50 characters</label>
-                    <textarea type="text" id="party-name"></textarea>
-                </div>
-                <div class="example-area">
-                    <h3>Examples</h3>
-                    <p>"Let's get together for affordable activities in our neighborhood, like going to storytime at the
-                        library, having picnics at McCarren Park, and play dates in our homes. We can also have events for just
-                        the ladies, like moms night- out, movies, dinner, and anything else that looks like fun."</p>
-                </div>
-            </div>
-
-            <div class="button-area">
-                <button type="button" class="back-button" id="back-button">Previous</button>
-                <button type="button" class="next-button" id="next-button">Next</button>
-            </div>
-        </form>
     </div>
-    <script type="text/javascript" src="/wwwroot/js/create-events.js"></script>
+    <script type="text/javascript" src="/js/create-event.js"></script>
 </body>
 </html>

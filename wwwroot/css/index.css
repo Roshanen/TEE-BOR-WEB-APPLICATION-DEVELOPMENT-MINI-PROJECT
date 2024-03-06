@@ -6,10 +6,6 @@
     --grey-color: #F6F7F8;
 }
 
-*{
-    border: solid 1px black;
-}
-
 body {
     padding-left: 15%;
     padding-right: 15%;
