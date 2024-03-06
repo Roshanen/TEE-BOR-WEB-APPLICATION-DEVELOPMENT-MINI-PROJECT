@@ -25,7 +25,7 @@
                 <div class="hyphen"></div>
                 <div class="circle">5</div>
             </div>
-            <form action="">
+            <form action="" method="post">
                 <div class="step step-1">
                     <h2>First, set your location</h2>
                     <div class="tip-area">
@@ -45,7 +45,7 @@
                 </div>
         
                 <div class="step step-2">
-                    <h2>Choose topics for your group</h2>
+                    <h2>Choose a tag for your group</h2>
                     <div class="tip-area">
                         <h3>Tip</h3>
                         <p>Be specific! This will help us promote your group to the right people. Try to select at least 3 topics
@@ -53,10 +53,24 @@
                             moving onto the next step.</p>
                     </div>
                     <div class="input-area">
-                        <input type="text" name="topic" placeholder="หัวข้อของ Party">
+                        <label>Choose from this</label>
+                        <select asp-for="TagId" asp-items="@GetTags()"></select>
                     </div>
                 </div>
-        
+                @functions {
+                    List<SelectListItem> GetTags()
+                    {
+                        return new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "Gaming", Value = "Gaming" },
+                            new SelectListItem { Text = "Art", Value = "Art" },
+                            new SelectListItem { Text = "Party", Value = "Party" },
+                            new SelectListItem { Text = "Dancing", Value = "Dancing" },
+                            new SelectListItem { Text = "Shabuing", Value = "Sahbuing" },
+                            new SelectListItem { Text = "Other", Value = "Other" },
+                        };
+                    }
+                }
                 <div class="step step-3">
                     <h2>Name your party</h2>
                     <div class="tip-area">
@@ -64,7 +78,7 @@
                         <p>You can edit this later if you change your mind.</p>
                     </div>
                     <div class="input-area">
-                        <input type="text" name="partyName" placeholder="ชื่อของ party">
+                        <input type="text" name="eventName" placeholder="ชื่อของ party">
                     </div>
                 </div>
                 
@@ -100,7 +114,7 @@
                     </div>
                     <div class="input-area">
                         <label>Please, write at least 50 characters</label>
-                        <textarea type="text" id="party-name"></textarea>
+                        <textarea type="text" id="party-name" name="eventDetails"></textarea>
                     </div>
                     <div class="example-area">
                         <h3>Examples</h3>
