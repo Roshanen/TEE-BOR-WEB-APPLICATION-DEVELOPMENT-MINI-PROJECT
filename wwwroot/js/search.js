@@ -48,7 +48,7 @@ template.innerHTML = `
     <img class="img" src="https://i.ibb.co/6Z6MftT/chigiri.jpg"/>
 </div>
 <div class="details">
-<div class="date"><h3></h3></div>
+<div class="date"><h3>Hi</h3></div>
 <div class="header"><h2></h2>
 <div class="sub-header"><p></p>
 <div class="share"><i class="fa-solid fa-upload"></i></div >
