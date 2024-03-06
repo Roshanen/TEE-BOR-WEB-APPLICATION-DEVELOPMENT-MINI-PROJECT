@@ -54,19 +54,19 @@
                     </div>
                     <div class="input-area">
                         <label>Choose from this</label>
-                        <select asp-for="TagId" asp-items="@GetTags()" value="@Model.Tag"></select>
+                        <select asp-for="Tag" asp-items="@GetTags()" value="@Model.Tag"></select>
                     </div>
                     @functions {
                         List<SelectListItem> GetTags()
                         {
                             return new List<SelectListItem>
                             {
-                                new SelectListItem { Text = "Gaming", Value =@Model. "Gaming" },
-                                new SelectListItem { Text = "Art", Value =@Model. "Art" },
-                                new SelectListItem { Text = "Party", Value =@Model. "Party" },
-                                new SelectListItem { Text = "Dancing", Value =@Model. "Dancing" },
-                                new SelectListItem { Text = "Shabuing", Value =@Model. "Sahbuing" },
-                                new SelectListItem { Text = "Other", Value =@Model. "Other" },
+                                new SelectListItem { Text = "Gaming", Value ="Gaming" },
+                                new SelectListItem { Text = "Art", Value ="Art" },
+                                new SelectListItem { Text = "Party", Value ="Party" },
+                                new SelectListItem { Text = "Dancing", Value ="Dancing" },
+                                new SelectListItem { Text = "Shabuing", Value ="Sahbuing" },
+                                new SelectListItem { Text = "Other", Value ="Other" },
                             };
                         }
                     }

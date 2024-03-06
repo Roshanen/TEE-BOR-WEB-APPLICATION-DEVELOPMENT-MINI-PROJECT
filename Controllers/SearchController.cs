@@ -67,7 +67,7 @@ public class SearchController : Controller
 
             if (!string.IsNullOrEmpty(search.Category))
             {
-                var tag = await _mongoContext.GetCollection<Category>("tags").Find(t => t.TagName == search.Category).FirstOrDefaultAsync();
+                var tag = await _mongoContext.GetCollection<Category>("tags").Find(t => t.CategoryName == search.Category).FirstOrDefaultAsync();
                 if (tag != null)
                 {
                     filter &= filterBuilder.Eq("TagId", tag.Id);
