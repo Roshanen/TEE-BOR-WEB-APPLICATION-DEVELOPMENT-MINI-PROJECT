@@ -7,6 +7,13 @@ namespace WebApp.Controllers;
 
 public class SearchController : Controller
 {
+    private readonly MongoContext _mongoContext;
+
+    public SearchController(MongoContext mongoContext)
+    {
+        _mongoContext = mongoContext;
+    }
+
     public async Task<IActionResult> Index(Search search)
     {
         try
@@ -60,7 +67,7 @@ public class SearchController : Controller
 
             if (!string.IsNullOrEmpty(search.Category))
             {
-                var tag = await _mongoContext.GetCollection<Tag>("tags").Find(t => t.TagName == search.Category).FirstOrDefaultAsync();
+                var tag = await _mongoContext.GetCollection<Category>("tags").Find(t => t.TagName == search.Category).FirstOrDefaultAsync();
                 if (tag != null)
                 {
                     filter &= filterBuilder.Eq("TagId", tag.Id);
