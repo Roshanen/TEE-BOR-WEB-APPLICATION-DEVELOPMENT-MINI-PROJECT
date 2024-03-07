@@ -12,13 +12,13 @@ using WebApp.Models;
 
 namespace WebApp.Controllers;
 
-public class AccountController : Controller
+public class AccountController : BaseController
 {
-    private readonly MongoContext _mongoContext;
+    private new readonly MongoContext _mongoContext;
     private readonly string _jwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? "";
     private readonly int _jwtExpirationDays = 1;
 
-    public AccountController(MongoContext mongoContext)
+    public AccountController(MongoContext mongoContext) : base(mongoContext)
     {
         _mongoContext = mongoContext;
     }
@@ -84,8 +84,6 @@ public class AccountController : Controller
 
             ViewData["userId"] = userId ?? "Not logged in";
 
-            Console.WriteLine(userId);
-
             return RedirectToAction("Index", "Home");
         }
         catch (Exception ex)
@@ -121,8 +119,8 @@ public class AccountController : Controller
         };
 
         var token = new JwtSecurityToken(
-            issuer: "yourIssuer",
-            audience: "yourAudience",
+            issuer: "Chens",
+            audience: "DotnetWebApps",
             claims: claims,
             expires: DateTime.UtcNow.AddDays(_jwtExpirationDays),
             signingCredentials: credentials

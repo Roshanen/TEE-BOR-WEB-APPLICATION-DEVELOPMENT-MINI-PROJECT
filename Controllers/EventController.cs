@@ -6,12 +6,12 @@ using System;
 
 namespace WebApp.Controllers;
 
-public class EventController : Controller
+public class EventController : BaseController
 {
     private readonly ILogger<EventController> _logger;
-    private readonly MongoContext _mongoContext;
+    private new readonly MongoContext _mongoContext;
 
-    public EventController(ILogger<EventController> logger, MongoContext mongoContext)
+    public EventController(ILogger<EventController> logger, MongoContext mongoContext) : base(mongoContext)
     {
         _logger = logger;
         _mongoContext = mongoContext;
@@ -19,27 +19,14 @@ public class EventController : Controller
 
     public IActionResult Index()
     {
-        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
-        ViewData["userID"] = userId;
-        if (userId != null)
-        {
-            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
-            ViewData["userName"] = userName.UserName;
-        }
-
+        _SetUserDataInViewData();
         var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
         return View(events);
     }
 
     public IActionResult Create()
     {
-        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
-        ViewData["userID"] = userId;
-        if (userId != null)
-        {
-            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
-            ViewData["userName"] = userName.UserName;
-        }
+        _SetUserDataInViewData();
         return View();
     }
 
@@ -90,13 +77,7 @@ public class EventController : Controller
 
     public IActionResult Edit(string id)
     {
-        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
-        ViewData["userID"] = userId;
-        if (userId != null)
-        {
-            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
-            ViewData["userName"] = userName.UserName;
-        }
+        _SetUserDataInViewData();
 
         // Console.WriteLine("Edit");
         var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();

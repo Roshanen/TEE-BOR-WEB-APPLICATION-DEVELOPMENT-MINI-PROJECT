@@ -5,11 +5,11 @@ using WebApp.Models;
 
 namespace WebApp.Controllers;
 
-public class EventPageController : Controller
+public class EventPageController : BaseController
 {
-    private readonly MongoContext _mongoContext;
+    private new readonly MongoContext _mongoContext;
 
-    public EventPageController(MongoContext mongoContext)
+    public EventPageController(MongoContext mongoContext) : base(mongoContext)
     {
         _mongoContext = mongoContext;
     }
