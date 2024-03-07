@@ -8,17 +8,13 @@ namespace WebApp.Controllers;
 
 public class EventController : Controller
 {
+    private readonly ILogger<EventController> _logger;
     private readonly MongoContext _mongoContext;
 
-    public EventController(MongoContext mongoContext)
+    public EventController(ILogger<EventController> logger, MongoContext mongoContext)
     {
+        _logger = logger;
         _mongoContext = mongoContext;
-    }
-
-    public IActionResult Index()
-    {
-        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
-        return View(events);
     }
 
     public IActionResult Create()

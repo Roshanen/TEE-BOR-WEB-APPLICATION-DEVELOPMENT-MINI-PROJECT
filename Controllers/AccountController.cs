@@ -82,7 +82,7 @@ public class AccountController : Controller
             var jwtToken = HttpContext.Session.GetString("JwtToken");
             var userId = JwtHelper.GetUserIdFromToken(jwtToken!);
 
-            ViewData["UserId"] = userId ?? "Not logged in";
+            ViewData["userId"] = userId ?? "Not logged in";
 
             Console.WriteLine(userId);
 
@@ -132,38 +132,9 @@ public class AccountController : Controller
     }
 
 
-    public IActionResult Test()
+    public IActionResult Logout()
     {
-        var jwtToken = HttpContext.Session.GetString("JwtToken");
-        var userId = JwtHelper.GetUserIdFromToken(jwtToken!);
-
-        ViewData["UserId"] = userId ?? "Not logged in";
-
-        // var token = HttpContext.Session.GetString("JwtToken");
-        // Console.WriteLine(HttpContext.Session.GetString("JwtToken"));
-        // if (token != null)
-        // {
-        //     // Decode the token to get user information
-        //     var handler = new JwtSecurityTokenHandler();
-        //     var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
-
-        //     // Extract user information (assuming 'sub' is used for userId)
-        //     var userId = jsonToken?.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Sub)?.Value;
-
-        //     // Pass userId to the view
-        //     ViewData["UserId"] = userId;
-        // }
-        // else
-        // {
-        //     ViewData["UserId"] = "No token found";
-        // }
-
-        User user = new User();
-        // user.Id = ObjectId.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-        // user.Id = ObjectId.Parse("65e7f41223f62e18cc7dcc0d");
-        // user.UserName = User.FindFirst(ClaimTypes.Name)?.Value;
-        // user.Email = User.FindFirst(ClaimTypes.Email)?.Value;
-
-        return View(user);
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index", "Home");
     }
 }

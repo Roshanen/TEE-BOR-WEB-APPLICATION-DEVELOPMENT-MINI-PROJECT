@@ -143,7 +143,11 @@ button {
   margin: 0;
 }
 
-.right-navbar .sign-up {
+.user-name {
+  color: #f65858;
+}
+
+.right-navbar .sign-up, .log-out {
   padding: 0.5rem 1rem;
   background-color: #00798a;
   border-radius: 0.5rem;
@@ -218,6 +222,8 @@ button {
   display: inline;
   width: 2.5rem;
 }
+
+
 
 footer {
   padding-top: 2rem;
