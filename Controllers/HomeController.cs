@@ -17,6 +17,9 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        var jwtToken = HttpContext.Session.GetString("JwtToken");
+        var userId = JwtHelper.GetUserIdFromToken(jwtToken!);
+
         var connectionUri = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
         var settings = MongoClientSettings.FromConnectionString(connectionUri);
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);

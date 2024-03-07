@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 var builder = WebApplication.CreateBuilder(args);
 
 DotNetEnv.Env.Load();
@@ -6,6 +10,24 @@ DotNetEnv.Env.Load();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<MongoContext>();
+
+var tkConf = builder.Configuration.GetSection("Jwt");
+
+var tokenValidationParameters = new TokenValidationParameters{
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateLifetime = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = tkConf!["Issuer"],
+    ValidAudience = tkConf!["Audience"],
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tkConf!["Key"]))
+};
+
+builder.Services.AddSession();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o => {
+    o.TokenValidationParameters = tokenValidationParameters;
+});
 
 var app = builder.Build();
 
@@ -17,11 +39,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
