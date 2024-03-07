@@ -88,12 +88,17 @@
                     <div class="input-area">
                         <div class="date-group group">
                             <span>Start date</span>
-                            <input type="date" name="StartDate" value="@Model.StartDate">
+                            <input type="date" name="StartDate" value="@GetDateString(@Model.StartDate)">
                         </div>
                         <div class="date-group group">
                             <span>End date</span>
-                            <input type="date" name="EndDate" value="@Model.EndDate">
+                            <input type="date" name="EndDate" value="@GetDateString(@Model.EndDate)">
                         </div>
+                        @functions {
+                            String GetDateString(DateTime date){
+                            return date.ToString("yyyy-MM-dd").Replace("/", "-");
+                            }
+                        }
                         <div class="max-member-group group">
                             <span>Max member</span>
                             <input type="number" name="MaxMember" value="@Model.MaxMember">
