@@ -10,7 +10,7 @@ public static class JwtHelper
 {
     private static string JwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? "";
 
-    public static string GetUserIdFromToken(string jwtToken)
+    public static string? GetUserIdFromToken(string jwtToken)
     {
             if (string.IsNullOrEmpty(jwtToken))
             {
