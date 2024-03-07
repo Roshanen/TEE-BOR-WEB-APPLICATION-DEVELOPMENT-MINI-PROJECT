@@ -32,22 +32,37 @@ public class EventController : Controller
         return RedirectToAction("Index");
     }
 
-    // public IActionResult Edit(string id)
-    // {
-    //     var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
-    //     return View(Event);
-    // }
+    public IActionResult Edit(string id)
+    {
+        var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+        CreateEvent createEvent = new CreateEvent();
+        //Place
+        var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
+        createEvent.Place = Place.ActualPlace;
+        createEvent.Province = Place.Province;
+        createEvent.District = Place.District;
+        createEvent.SubDistrict = Place.SubDistrict;
+        createEvent.MapUrl = Place.MapUrl;
+        //Tag
+        var Category = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == (Event.TagId)).FirstOrDefault();
+        createEvent.Tag = Category.CategoryName;
+        //DateTime
+        createEvent.StartDate = Event.StartDate.ToString();
+        createEvent.EndDate = Event.EndDate.ToString();
+        //Event
+        createEvent.EventName = Event.EventName;
+        createEvent.EventImg = Event.EventImg;
+        createEvent.EventDetails = Event.EventDetails;
+        //MemberCount
+        createEvent.MaxMember = Event.MaxMember;
+        return View(createEvent);
+    }
 
-    // [HttpPost]
-    // public IActionResult Edit(string id, Event updatedEvent)
-    // {
-    //     var filter = Builders<Event>.Filter.Eq("_id", ObjectId.Parse(id));
-    //     var update = Builders<Event>.Update
-    //         .Set("Name", updatedEvent.Name)
-    //         .Set("Place", updatedEvent.Place);
-
-    //     _mongoContext.GetCollection<Event>("events").UpdateOne(filter, update);
-    //     return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public IActionResult Edit(string id, Event updatedEvent)
+    {
+        _mongoContext.GetCollection<Event>("events").ReplaceOne(ev => ev.Id == ObjectId.Parse(id), updatedEvent);
+        return RedirectToAction("Index");
+    }
 
 }
