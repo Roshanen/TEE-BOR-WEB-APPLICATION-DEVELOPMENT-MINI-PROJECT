@@ -35,12 +35,12 @@
                         </p>
                     </div>
                     <div class="input-area">
-                        <input type="text" name="place" placeholder="สถานที่" value="@Model.Place">
-                        <input type="text" name="province" placeholder="จังหวัด" value="@Model.Province">
-                        <input type="text" name="district" placeholder="อำเภอ" value="@Model.District">
-                        <input type="text" name="subDistrict" placeholder="ตำบล" value="@Model.SubDistrict">
+                        <input type="text" name="Place" placeholder="สถานที่" value="@Model.ActualPlace">
+                        <input type="text" name="Province" placeholder="จังหวัด" value="@Model.Province">
+                        <input type="text" name="District" placeholder="อำเภอ" value="@Model.District">
+                        <input type="text" name="SubDistrict" placeholder="ตำบล" value="@Model.SubDistrict">
                         <div>หรือ</div>
-                        <input type="text" name="mapUrl" placeholder="ลิงก์จาก Google Map" value="@Model.MapUrl">
+                        <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map" value="@Model.MapUrl">
                     </div>
                 </div>
         
@@ -54,7 +54,7 @@
                     </div>
                     <div class="input-area">
                         <label>Choose from this</label>
-                        <select asp-for="Tag" asp-items="@GetTags()" value="@Model.Tag"></select>
+                        <select name="Category" asp-items="@GetTags()" value="@Model.CategoryName"></select>
                     </div>
                     @functions {
                         List<SelectListItem> GetTags()
@@ -79,7 +79,7 @@
                         <p>You can edit this later if you change your mind.</p>
                     </div>
                     <div class="input-area">
-                        <input type="text" name="eventName" placeholder="ชื่อของ party" value="@Model.EventName">
+                        <input type="text" name="EventName" placeholder="ชื่อของ party" value="@Model.EventName">
                     </div>
                 </div>
                 
@@ -88,15 +88,15 @@
                     <div class="input-area">
                         <div class="date-group group">
                             <span>Start date</span>
-                            <input type="date" name="startDate" value="@Model.StartDate">
+                            <input type="date" name="StartDate" value="@Model.StartDate">
                         </div>
                         <div class="date-group group">
                             <span>End date</span>
-                            <input type="date" name="endDate" value="@Model.EndDate">
+                            <input type="date" name="EndDate" value="@Model.EndDate">
                         </div>
                         <div class="max-member-group group">
                             <span>Max member</span>
-                            <input type="number" name="maxMember" value="@Model.MaxMember">
+                            <input type="number" name="MaxMember" value="@Model.MaxMember">
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="input-area">
                         <label>Please, write at least 50 characters</label>
-                        <textarea type="text" id="party-name" name="eventDetails"
+                        <textarea type="text" id="party-name" name="EventDetails"
                         value="@Model.EventDetails">
                         </textarea>
                     </div>

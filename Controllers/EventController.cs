@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using WebApp.Models;
+using System;
 
 namespace WebApp.Controllers;
 
@@ -26,9 +27,39 @@ public class EventController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Event Event)
+    public IActionResult Create(CreateEvent createEvent)
     {
-        _mongoContext.GetCollection<Event>("events").InsertOne(Event);
+        Event eventModel = new Event();
+        Place placeModel = new Place();
+        Category categoryModel = new Category();
+        User userModel = new User(); // how to get current user
+
+        float defaultRating = 5.0f;
+        eventModel.CurrentMember = 1;
+
+        // can be shared between edit and create
+        DateTime today = DateTime.Today;
+        eventModel.StartDate = createEvent.StartDate;
+        eventModel.EndDate = createEvent.EndDate;
+        eventModel.LastModifiedDate = today;
+        eventModel.EventName = createEvent.EventName;
+        eventModel.EventImg = createEvent.EventImg;
+        eventModel.EventDetails = createEvent.EventDetails;
+        eventModel.MaxMember = createEvent.MaxMember;
+        eventModel.Rating = defaultRating;
+
+        placeModel.MapUrl = createEvent.MapUrl;
+        placeModel.ActualPlace = createEvent.ActualPlace;
+        placeModel.Province = createEvent.Province;
+        placeModel.District = createEvent.District;
+        placeModel.SubDistrict = createEvent.SubDistrict;
+
+        categoryModel.CategoryName = createEvent.CategoryName;
+        // end of sharing
+
+        _mongoContext.GetCollection<Place>("events").InsertOne(placeModel);
+        _mongoContext.GetCollection<Category>("events").InsertOne(categoryModel);
+        _mongoContext.GetCollection<Event>("events").InsertOne(eventModel);
         return RedirectToAction("Index");
     }
 
