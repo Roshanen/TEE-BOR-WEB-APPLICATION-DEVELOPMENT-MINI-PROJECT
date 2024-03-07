@@ -30,7 +30,7 @@ public class CreateEvent
     [Required]
     public string? EventImg { get; set; }
     [Required]
-    [Range(50, 200)]
+    [StringLength(200, MinimumLength = 20)]
     public string? EventDetails { get; set; }
     // member count
     [Required]
