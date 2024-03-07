@@ -1,24 +1,38 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 namespace WebApp.Models;
+using System.ComponentModel.DataAnnotations;
 
 public class CreateEvent
 {   
     // place
-    public string? Place { get; set; }
+    [Required]
+    public string? ActualPlace { get; set; }
+    [Required]
     public string? Province { get; set; }
+    [Required]
     public string? District { get; set; }
+    [Required]
     public string? SubDistrict { get; set; }
+    [Required]
     public string? MapUrl { get; set; }
-    // tag
-    public string? Tag { get; set; }
+    // category
+    [Required]
+    public string? CategoryName { get; set; }
     // date time
-    public string? StartDate { get; set; }
-    public string? EndDate { get; set; }
+    [Required]
+    public DateTime StartDate { get; set; }
+    [Required]
+    public DateTime EndDate { get; set; }
     // event
+    [Required]
     public string? EventName { get; set; }
+    [Required]
     public string? EventImg { get; set; }
+    [Required]
+    [Range(50, 200)]
     public string? EventDetails { get; set; }
     // member count
+    [Required]
     public int? MaxMember { get; set; }
 }
