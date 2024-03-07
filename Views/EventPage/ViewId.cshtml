@@ -1,111 +1,117 @@
 @model EventViewModel
 @{
-    ViewData["Title"] = "EventPage";
+  ViewData["Title"] = "EventPage";
 }
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <link rel="stylesheet" href="~/css/EventPage.css" />
-  <body>
-    <div class="header">
-      <h1 id="event-name">@Model.EventName</h1>
-      <div>
-        <img 
-        id="host-img" 
-        src="@Model.HostImg"
-        />
-        <section>
-          <div>Hosted By</div>
-          <h4 id="host-name">@Model.HostName</h4>
-        </section>
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="~/css/EventPage.css" />
+
+<body>
+  <div class="header">
+    <h1 id="event-name">@Model.EventName</h1>
+    <div>
+      <img id="host-img" src=@Model.HostImg />
+      <section>
+        <div>Hosted By</div>
+        <h4 id="host-name">@Model.HostName</h4>
+      </section>
     </div>
-    <div class="content">
-      <div>
-        <img
-          id="event-img"
-          src="@Model.EventImg"
-        />
-        <h2>Details</h2>
-        <div id="content-details">@Model.EventDetails</div>
-        <section id="tag">
-            <a href="" class="tag">@Model.Tags</a>
-        </section>
-        <section id="attendees">
-          <h2 id="num-attendees">Attendees</h2>
-          <section id="attendees-list">
-            <section class="attendee-profile">
-            <img
-            src="@Model.HostImg"
-            alt=""
-            />
+  </div>
+  <div class="content">
+    <div>
+      <img id="event-img" src=@Model.EventImg />
+      <h2>Details</h2>
+      <div id="content-details">@Model.EventDetails</div>
+      <section id="tag">
+        <a href="" class="tag">@Model.Tags</a>
+      </section>
+
+      <section id="attendees">
+        <h2 id="num-attendees">Attendees</h2>
+        <section id="attendees-list">
+          <section class="attendee-profile">
+            <img src=@Model.HostImg alt="" />
             <div>@Model.HostName</div>
             <div>Host</div>
-            </section>
+          </section>
+          @if (Model.Attendees != null && Model.Attendees.Count > 0)
+          {
             @foreach (var Attendee in Model.Attendees)
             {
-            <section class="attendee-profile">
-            <img
-            src="@Attendee.ProfilePicture"
-            alt=""
-            />
-            <div>@Attendee.UserName</div>
-            <div>Member</div>
-            </section>
+              <section class="attendee-profile">
+                <img src="@Attendee.ProfilePicture" alt="" />
+                <div>@Attendee.UserName</div>
+                <div>Member</div>
+              </section>
             }
-          </section>
+          }
         </section>
+      </section>
+
+    </div>
+    <section id="details">
+      <section id="time-details">
+        <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
+        <h3 id="time">@Model.Time</h3>
+      </section>
+      <section id="time-details">
+        <img src="~/src/place.png" alt="" />
+        <h3 id="place">@Model.Place</h3>
+      </section>
+      <section id="time-details">
+        <h3>Status : @Model.Status</h3>
+      </section>
+      <iframe id="map" width="100%" style="border: 0" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" src=@Model.MapUrl></iframe>
+    </section>
+  </div>
+  <div id="attend-line">
+  </div>
+  <section id="attend">
+    <section id="attend-details">
+      <div id="short-time">
+        <h3 id="time">Start Time : @Model.StartDate</h3>
       </div>
-      <section id="details">
-        <section id="time-details">
-          <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
-          <h3 id="time">@Model.Time</h3>
-        </section>
-        <section id="time-details">
-          <img src="~/src/place.png" alt="" />
-          <h3 id="place">@Model.Place</h3>
-        </section>
-        <iframe
-          id="map"
-          width="100%"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="@Model.MapUrl"
-        ></iframe>
-      </section>
-    </div>
-    <div id="attend-line">
-    </div>
-    <section id="attend">
-      <section id="attend-details">
-        <div id="short-time"></div>
-        <br>
-        <h3 id="short-details"></h3>
-      </section>
-      <div>
-        <button id="share">
-          Share<img
-            style="margin-left: 5px; width: 15px; height: 15px"
-            src="/src/share.png"
-          />
-        </button>
+      <div id="short-time">
+        <h3 id="time">End Time : @Model.Time</h3>
+      </div>
+    </section>
+    <div>
+      <button id="share">
+        Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
+      </button>
+      @if (Model.Status =="available")
+      {
         @if (@ViewBag.IsAttending)
         {
-          <button id="cancel-btn" onclick="parent.location=@Url.Action("Cancle","Eventpage")">Cancel</button>
+          <form id="cancel-form" method="post"
+            action="@Url.Action("Cancel", "EventPage",new {eventId=@ViewBag.EventId,userId = "65e7f41223f62e18cc7dcc13" })">
+            <button id="cancel-btn" type="button">Cancel</button>
+          </form>
         }
         else
         {
-          <button id="attend-btn" onclick="parent.location=@Url.Action("Attend","Eventpage")">Attend</button>
+          <form id="attend-form" method="post"
+            action="@Url.Action("Attend", "EventPage",new {eventId=@ViewBag.EventId,userId = "65e7f41223f62e18cc7dcc13" })">
+            <button id="attend-btn" type="button">Attend</button>
+            <input type="hidden" id="friendInput" name="friend" />
+            <div>
+              <label for="numberInput" style="margin-top: 5px;margin-right:3px">friend:</label>
+              <input name="friend" id="numberInput" type="number" max=@ViewBag.MaxCapacity min=0>
+            </div>
+          </form>
         }
-      </div>
-    </section>
-    <script src="~/js/EventPage.js"></script> 
-  </body>
+      }
+    </div>
+  </section>
+  <script src="~/js/EventPage.js"></script>
+</body>
+
 </html>

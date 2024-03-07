@@ -15,5 +15,7 @@ namespace WebApp.Models
         public DateTime? Time { get; set; }
         public string? Place { get; set; }
         public string? MapUrl { get; set; }
+        public DateTime? StartDate { get; set; }
+        public string? Status { get; set; }
     }
 }

@@ -43,7 +43,7 @@ public class SearchController : Controller
                 }
             }
 
-            if (!string.IsNullOrEmpty(search.DateChoice))
+            if (!string.IsNullOrEmpty(search.DateChoice) && search.DateChoice != "any")
             {
                 DateTime currentDate = DateTime.UtcNow.Date;
                 switch (search.DateChoice.ToLower())
@@ -60,12 +60,12 @@ public class SearchController : Controller
                 }
             }
 
-            if (!string.IsNullOrEmpty(search.Type))
+            if (!string.IsNullOrEmpty(search.Type) && search.Type != "any")
             {
                 filter &= filterBuilder.Eq("EventType", search.Type);
             }
 
-            if (!string.IsNullOrEmpty(search.Category))
+            if (!string.IsNullOrEmpty(search.Category) && search.Category != "any")
             {
                 var tag =  _mongoContext.GetCollection<Category>("tags").Find(t => t.CategoryName == search.Category).FirstOrDefault();
 
