@@ -17,11 +17,11 @@
       <div>
         <img 
         id="host-img" 
-        src="@Model.HostImg"
+        src="Model.HostImg"
         />
         <section>
           <div>Hosted By</div>
-          <h4 id="host-name">@Model.HostName</h4>
+          <h4 id="host-name">Model.HostName</h4>
         </section>
       </div>
     </div>
@@ -29,7 +29,7 @@
       <div>
         <img
           id="event-img"
-          src="@Model.EventImg"
+          src=@Model.EventImg
         />
         <h2>Details</h2>
         <div id="content-details">@Model.EventDetails</div>
@@ -41,10 +41,10 @@
           <section id="attendees-list">
             <section class="attendee-profile">
             <img
-            src="@Model.HostImg"
+            src="Model.HostImg"
             alt=""
             />
-            <div>@Model.HostName</div>
+            <div>Model.HostName</div>
             <div>Host</div>
             </section>
             @foreach (var Attendee in Model.Attendees)
