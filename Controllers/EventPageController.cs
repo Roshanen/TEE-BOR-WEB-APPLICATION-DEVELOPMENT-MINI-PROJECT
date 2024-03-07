@@ -47,7 +47,8 @@ public class EventPageController : Controller
         ViewBag.MaxCapacity = Event.MaxMember - Event.CurrentMember -1;
         eventView.StartDate = Event.StartDate;
 
-        if(DateTime.Compare(Event.EndDate, DateTime.Now) < 0)
+        DateTime dateTimeNow = DateTime.Now;
+        if(DateTime.Compare(Event.EndDate, dateTimeNow) < 0)
         {
             eventView.Status = "ended";
         }

@@ -57,9 +57,17 @@ public class EventController : Controller
         categoryModel.CategoryName = createEvent.CategoryName;
         // end of sharing
 
-        _mongoContext.GetCollection<Place>("events").InsertOne(placeModel);
-        _mongoContext.GetCollection<Category>("events").InsertOne(categoryModel);
+        _mongoContext.GetCollection<Place>("places").InsertOne(placeModel);
+        _mongoContext.GetCollection<Category>("tags").InsertOne(categoryModel);
+
+        var userId = new ObjectId(JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!));
+
+        eventModel.HostId = userId;
+        eventModel.PlaceId = placeModel.Id;
+        eventModel.CategoryId = categoryModel.Id;
+
         _mongoContext.GetCollection<Event>("events").InsertOne(eventModel);
+
         return RedirectToAction("Index");
     }
 
@@ -69,23 +77,24 @@ public class EventController : Controller
         CreateEvent createEvent = new CreateEvent();
         //Place
         var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
-        createEvent.Place = Place.ActualPlace;
+        createEvent.ActualPlace = Place.ActualPlace;
         createEvent.Province = Place.Province;
         createEvent.District = Place.District;
         createEvent.SubDistrict = Place.SubDistrict;
         createEvent.MapUrl = Place.MapUrl;
         //Tag
-        var Category = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == (Event.TagId)).FirstOrDefault();
-        createEvent.Tag = Category.CategoryName;
+        var Category = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == (Event.CategoryId)).FirstOrDefault();
+        createEvent.CategoryName = Category.CategoryName;
         //DateTime
-        createEvent.StartDate = Event.StartDate.ToString();
-        createEvent.EndDate = Event.EndDate.ToString();
+        createEvent.StartDate = Event.StartDate;
+        createEvent.EndDate = Event.EndDate;
         //Event
         createEvent.EventName = Event.EventName;
         createEvent.EventImg = Event.EventImg;
         createEvent.EventDetails = Event.EventDetails;
         //MemberCount
         createEvent.MaxMember = Event.MaxMember;
+
         return View(createEvent);
     }
 

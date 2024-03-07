@@ -9,9 +9,9 @@ public class Event
     public ObjectId CategoryId { get; set; }
     public ObjectId HostId { get; set; }
 
-    public DateTime? StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
-    public DateTime? LastModifiedDate { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public DateTime LastModifiedDate { get; set; }
 
     public string? EventName { get; set; }
     public string? EventImg { get; set; }
