@@ -17,8 +17,29 @@ public class EventController : Controller
         _mongoContext = mongoContext;
     }
 
+    public IActionResult Index()
+    {
+        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        ViewData["userID"] = userId;
+        if (userId != null)
+        {
+            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            ViewData["userName"] = userName.UserName;
+        }
+
+        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
+        return View(events);
+    }
+
     public IActionResult Create()
     {
+        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        ViewData["userID"] = userId;
+        if (userId != null)
+        {
+            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            ViewData["userName"] = userName.UserName;
+        }
         return View();
     }
 
@@ -40,7 +61,7 @@ public class EventController : Controller
         eventModel.LastModifiedDate = today;
         eventModel.EventName = createEvent.EventName;
         eventModel.EventImg = createEvent.EventImg;
-        eventModel.EventDetails = createEvent.EventDetails;
+        eventModel.EventDetails = createEvent.EventDetails.ToString();
         eventModel.MaxMember = createEvent.MaxMember;
         eventModel.Rating = defaultRating;
 
@@ -69,6 +90,15 @@ public class EventController : Controller
 
     public IActionResult Edit(string id)
     {
+        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        ViewData["userID"] = userId;
+        if (userId != null)
+        {
+            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            ViewData["userName"] = userName.UserName;
+        }
+
+        // Console.WriteLine("Edit");
         var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
         CreateEvent createEvent = new CreateEvent();
         //Place
@@ -95,9 +125,36 @@ public class EventController : Controller
     }
 
     [HttpPost]
-    public IActionResult Edit(string id, Event updatedEvent)
+    public IActionResult Edit(string id, CreateEvent createEvent)
     {
-        _mongoContext.GetCollection<Event>("events").ReplaceOne(ev => ev.Id == ObjectId.Parse(id), updatedEvent);
+        // Console.WriteLine(updatedEvent);
+        // _mongoContext.GetCollection<Event>("events").ReplaceOne(ev => ev.Id == ObjectId.Parse(id), updatedEvent);
+        var eventModel = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+        var placeModel = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == eventModel.PlaceId).FirstOrDefault();
+        var categoryModel = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == eventModel.CategoryId).FirstOrDefault();
+
+        DateTime today = DateTime.Today;
+        eventModel.StartDate = createEvent.StartDate;
+        eventModel.EndDate = createEvent.EndDate;
+        eventModel.LastModifiedDate = today;
+        eventModel.EventName = createEvent.EventName;
+        eventModel.EventImg = createEvent.EventImg;
+        eventModel.EventDetails = createEvent.EventDetails;
+        eventModel.MaxMember = createEvent.MaxMember;
+        eventModel.Rating = eventModel.Rating;
+
+        placeModel.MapUrl = createEvent.MapUrl;
+        placeModel.ActualPlace = createEvent.ActualPlace;
+        placeModel.Province = createEvent.Province;
+        placeModel.District = createEvent.District;
+        placeModel.SubDistrict = createEvent.SubDistrict;
+
+        categoryModel.CategoryName = createEvent.CategoryName;
+
+        _mongoContext.GetCollection<Event>("events").ReplaceOne(ev => ev.Id == eventModel.Id, eventModel);
+        _mongoContext.GetCollection<Place>("places").ReplaceOne(ev => ev.Id == placeModel.Id, placeModel);
+        _mongoContext.GetCollection<Category>("tags").ReplaceOne(ev => ev.Id == categoryModel.Id, categoryModel);
+
         return RedirectToAction("Index");
     }
 
