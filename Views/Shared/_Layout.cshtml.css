@@ -143,6 +143,11 @@ button {
   margin: 0;
 }
 
+.img-profile:hover {
+  transition: all 0.2s;
+  transform: scale(1.5);
+}
+
 .user-name {
   color: #f65858;
 }

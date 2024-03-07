@@ -69,6 +69,7 @@
                 </a>
                 @if (@ViewData["UserId"] != null)
                 {
+                    <img class="img-profile" src='@ViewData["userProfile"]' height="35px" width="35px" alt="img">
                     <p class="user-name">User : @ViewData["userName"]</p>
                     <a href="/account/logout" class="log-out">Logout</a>
                 }

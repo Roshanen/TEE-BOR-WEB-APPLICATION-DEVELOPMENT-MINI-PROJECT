@@ -22,6 +22,7 @@ public class BaseController : Controller
         {
             var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
             ViewData["userName"] = userName?.UserName;
+            ViewData["userProfile"] = userName?.ProfilePicture;
         }
     }
 }
