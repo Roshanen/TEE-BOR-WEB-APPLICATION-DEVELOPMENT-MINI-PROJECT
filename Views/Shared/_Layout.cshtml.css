@@ -218,3 +218,7 @@ button {
   display: inline;
   width: 2.5rem;
 }
+
+footer {
+  padding-top: 2rem;
+}

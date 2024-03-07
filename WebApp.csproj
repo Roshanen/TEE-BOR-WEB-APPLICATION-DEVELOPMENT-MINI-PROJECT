@@ -8,5 +8,6 @@
     <PackageReference Include="DotNetEnv" Version="3.0.0"/>
     <PackageReference Include="MongoDB.Driver" Version="2.24.0"/>
     <PackageReference Include="MongoDB.Bson" Version="2.24.0"/>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0"/>
   </ItemGroup>
 </Project>
