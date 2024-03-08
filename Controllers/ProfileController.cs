@@ -15,12 +15,11 @@ namespace WebApp.Controllers
             _context = context;
         }
 
-        // GET: Profile/Index
         public async Task<ActionResult> Index()
         {
-            // Assuming you have a way to identify the current user (e.g., by username or email)
-            var userProfile = await _context.GetCollection<UserProfile>("UserProfiles")
-                                             .Find(u => u.UserName == "User123")
+
+            var userProfile = await _context.GetCollection<User>("users")
+                                             .Find(u => u.UserName == "MiaMartin")
                                              .FirstOrDefaultAsync();
             if (userProfile == null)
             {
@@ -30,7 +29,6 @@ namespace WebApp.Controllers
             return View(userProfile);
         }
 
-        // GET: Profile/Edit
         public async Task<ActionResult> Edit(string id)
         {
             var userProfile = await _context.GetCollection<UserProfile>("UserProfiles")
