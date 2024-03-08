@@ -20,8 +20,11 @@ public class HomeController : BaseController
 
     public IActionResult Index()
     {
-        _SetUserDataInViewData();
-        return View();
+        var userId = _SetUserDataInViewData();
+
+        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
+
+        return View(events);
     }
 
     public IActionResult Privacy()

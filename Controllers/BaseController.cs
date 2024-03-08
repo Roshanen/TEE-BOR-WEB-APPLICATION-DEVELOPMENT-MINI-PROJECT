@@ -13,16 +13,18 @@ public class BaseController : Controller
         _mongoContext = mongoContext;
     }
 
-    protected void _SetUserDataInViewData()
+    protected string _SetUserDataInViewData()
     {
         var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
         ViewData["userID"] = userId;
 
         if (userId != null)
         {
-            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
-            ViewData["userName"] = userName?.UserName;
-            ViewData["userProfile"] = userName?.ProfilePicture;
+            var user = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            ViewData["user"] = user?.UserName;
+            ViewData["userProfile"] = user?.ProfilePicture;
         }
+        
+        return userId;
     }
 }
