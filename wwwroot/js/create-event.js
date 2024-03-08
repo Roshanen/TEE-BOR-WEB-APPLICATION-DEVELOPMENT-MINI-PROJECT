@@ -38,6 +38,7 @@ function setProgress(){
   });
 }
 
+
 nextButtons.forEach((bt) => {
   bt.addEventListener("click", () => {
     state++;

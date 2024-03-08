@@ -21,7 +21,6 @@ public class SearchController : BaseController
         try
         {
             var eventsCollection = _mongoContext.GetCollection<Event>("events");
-
             var filterBuilder = Builders<Event>.Filter;
             var filter = filterBuilder.Empty;
 
