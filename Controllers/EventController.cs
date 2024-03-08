@@ -33,10 +33,13 @@ public class EventController : BaseController
     [HttpPost]
     public IActionResult Create(CreateEvent createEvent)
     {
+        String userIdString = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        if(userIdString is null) return RedirectToAction("login", "account");
+        var userId = new ObjectId(userIdString);
+
         Event eventModel = new Event();
         Place placeModel = new Place();
         Category categoryModel = new Category();
-        User userModel = new User(); // how to get current user
 
         float defaultRating = 5.0f;
         eventModel.CurrentMember = 1;
@@ -64,7 +67,6 @@ public class EventController : BaseController
         _mongoContext.GetCollection<Place>("places").InsertOne(placeModel);
         _mongoContext.GetCollection<Category>("tags").InsertOne(categoryModel);
 
-        var userId = new ObjectId(JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!));
 
         eventModel.HostId = userId;
         eventModel.PlaceId = placeModel.Id;
@@ -78,9 +80,15 @@ public class EventController : BaseController
     public IActionResult Edit(string id)
     {
         _SetUserDataInViewData();
+        // Handle user not login
+        String userIdString = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        if(userIdString is null) return RedirectToAction("login", "account");
+        // Handle user not the owner of event
+        var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+        var userId = new ObjectId(userIdString);
+        if(Event.HostId != userId) return RedirectToAction("login", "account");
 
         // Console.WriteLine("Edit");
-        var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
         CreateEvent createEvent = new CreateEvent();
         //Place
         var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
