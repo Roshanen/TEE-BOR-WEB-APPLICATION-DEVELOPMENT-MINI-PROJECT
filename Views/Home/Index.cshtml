@@ -16,42 +16,44 @@
 </head>
 
 <body>
-    <div class="event-group event-ongoing">
-        <div class="header">
-            <h2>Ongoing Event</h2>
-            <a href="#">See more</a>
-        </div>
-        <div class="event-container">
-            @foreach (var ev in Model)
-            {
-                <div class="event event-1">
-                    <a href="/eventpage/viewid/@ev.Id" >
-                        <div class="event-img-container">
-                            <img class="event-image" src="@ev.EventImg" alt="event-1 image">
-                        </div>
-                    </a>
-                    <div class="content">
-                        <a href="/eventpage/viewid/@ev.Id" class="event-name">
-                            @ev.EventName
-                        </a>
-                        <div class="host" style="color: red;">@ev.HostId change later</div>
-                        <div class="date">
-                            <span class="material-symbols-outlined">calendar_month</span>
-                            <p>MON, FEB 26 7:00 PM UCT</p>
-                        </div>
-                        <div class="event-footer">
-                            <div class="going">
-                                <span class="material-symbols-outlined">check_circle</span>
-                                <p>1 Going</p>
+    <div class="container">
+        <div class="event-group event-ongoing">
+            <div class="header">
+                <h2>Ongoing Event</h2>
+                <a href="#">See more</a>
+            </div>
+            <div class="event-container">
+                @foreach (var ev in Model)
+                {
+                    <div class="event event-1">
+                        <a href="/eventpage/viewid/@ev.Id" >
+                            <div class="event-img-container">
+                                <img class="event-image" src="@ev.EventImg" alt="event-1 image">
                             </div>
-                            <div class="price">
-                                <span class="material-symbols-outlined">confirmation_number</span>
-                                <p>Free</p>
+                        </a>
+                        <div class="content">
+                            <p><a href="/eventpage/viewid/@ev.Id" class="event-name">
+                                @ev.EventName
+                            </a></p>
+                            <div class="host" style="color: red;">@ev.HostId change later</div>
+                            <div class="date">
+                                <span class="material-symbols-outlined">calendar_month</span>
+                                <p>MON, FEB 26 7:00 PM UCT</p>
+                            </div>
+                            <div class="event-footer">
+                                <div class="going">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    <p>1 Going</p>
+                                </div>
+                                <div class="price">
+                                    <span class="material-symbols-outlined">confirmation_number</span>
+                                    <p>Free</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
 </body>
