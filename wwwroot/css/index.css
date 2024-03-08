@@ -12,6 +12,11 @@ body {
     sans-serif;
 }
 
+.container {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
 .event-group > .header > a {
   color: var(--cyan-button);
   text-decoration: none;
@@ -73,8 +78,8 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-  body {
-    padding: 0 10px 0 10px;
+  .container {
+    padding: 0;
   }
   .event-container {
     display: flex;
