@@ -40,15 +40,26 @@
             <img src=@Model.HostImg alt="" />
             <div>@Model.HostName</div>
             <div>Host</div>
+            <section>
+            <img src="~/src/friend.png"  style="width:15px;height:15px;display:inline"alt="">
+            <div style="display: inline;">+ @ViewData["host-friend"]</div>
+            </section>
           </section>
           @if (Model.Attendees != null && Model.Attendees.Count > 0)
           {
             @foreach (var Attendee in Model.Attendees)
             {
               <section class="attendee-profile">
-                <img src="@Attendee.ProfilePicture" alt="" />
-                <div>@Attendee.UserName</div>
+                <img src="@Attendee.user.ProfilePicture" alt="" />
+                <div>@Attendee.user.UserName</div>
                 <div>Member</div>
+                @if(@Attendee.friend!=0)
+                {
+                <div>
+                  <img src="~/src/friend.png"  style="width:15px;height:15px;display:inline"alt="">
+                  <div style="display: inline;">+@Attendee.friend</div>
+                </div>
+                }
               </section>
             }
           }
