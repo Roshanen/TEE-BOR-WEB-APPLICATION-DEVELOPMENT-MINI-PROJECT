@@ -13,7 +13,7 @@ public class BaseController : Controller
         _mongoContext = mongoContext;
     }
 
-    protected void _SetUserDataInViewData()
+    protected string _SetUserDataInViewData()
     {
         var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
         ViewData["userID"] = userId;
@@ -24,5 +24,6 @@ public class BaseController : Controller
             ViewData["userName"] = userName?.UserName;
             ViewData["userProfile"] = userName?.ProfilePicture;
         }
+        return userId;
     }
 }

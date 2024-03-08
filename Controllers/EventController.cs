@@ -34,7 +34,7 @@ public class EventController : BaseController
     public IActionResult Create(CreateEvent createEvent)
     {
         String userIdString = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
-        if(userIdString is null) return RedirectToAction("login", "account");
+        if (userIdString is null) return RedirectToAction("login", "account");
         var userId = new ObjectId(userIdString);
 
         Event eventModel = new Event();
@@ -81,12 +81,18 @@ public class EventController : BaseController
     {
         _SetUserDataInViewData();
         // Handle user not login
-        String userIdString = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
-        if(userIdString is null) return RedirectToAction("login", "account");
+        String userIdString = _SetUserDataInViewData();
+        if (userIdString is null)
+        {
+            return RedirectToAction("login", "account");
+        }
         // Handle user not the owner of event
         var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
         var userId = new ObjectId(userIdString);
-        if(Event.HostId != userId) return RedirectToAction("login", "account");
+        if (Event.HostId != userId)
+        {
+            return RedirectToAction("login", "account");
+        }
 
         // Console.WriteLine("Edit");
         CreateEvent createEvent = new CreateEvent();
