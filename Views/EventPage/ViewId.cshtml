@@ -92,14 +92,14 @@
         @if (@ViewBag.IsAttending)
         {
           <form id="cancel-form" method="post"
-            action="@Url.Action("Cancel", "EventPage",new {eventId=@ViewBag.EventId,userId = "65e7f41223f62e18cc7dcc13" })">
+            action="@Url.Action("Cancel", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
             <button id="cancel-btn" type="button">Cancel</button>
           </form>
         }
         else
         {
           <form id="attend-form" method="post"
-            action="@Url.Action("Attend", "EventPage",new {eventId=@ViewBag.EventId,userId = "65e7f41223f62e18cc7dcc13" })">
+            action="@Url.Action("Attend", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
             <button id="attend-btn" type="button">Attend</button>
             <input type="hidden" id="friendInput" name="friend" />
             <div>

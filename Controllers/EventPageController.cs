@@ -5,21 +5,20 @@ using WebApp.Models;
 
 namespace WebApp.Controllers;
 
-public class EventPageController : Controller
+public class EventPageController : BaseController
 {
-    private readonly MongoContext _mongoContext;
+    private new readonly MongoContext _mongoContext;
 
-    public EventPageController(MongoContext mongoContext)
+    public EventPageController(MongoContext mongoContext) : base(mongoContext)
     {
         _mongoContext = mongoContext;
     }
 
     public IActionResult ViewId(string id)
     {
-        System.Diagnostics.Debug.WriteLine("This is a log message");
         var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
         var Host = _mongoContext.GetCollection<User>("users").Find(u => u.Id == (Event.HostId)).FirstOrDefault();
-        var Category = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == (Event.TagId)).FirstOrDefault();
+        var Category = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == (Event.CategoryId)).FirstOrDefault();
         var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
 
         var Joins = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(j => j.Id == ObjectId.Parse(id)).ToList();
@@ -44,14 +43,15 @@ public class EventPageController : Controller
         eventView.Place = Place.ActualPlace;
         eventView.MapUrl = Place.MapUrl;
         ViewBag.EventId = id;
-        ViewBag.MaxCapacity = Event.MaxMember - Event.CurrentMember -1;
+        ViewBag.MaxCapacity = Event.MaxMember - Event.CurrentMember - 1;
         eventView.StartDate = Event.StartDate;
 
-        if(DateTime.Compare(Event.EndDate, DateTime.Now) < 0)
+        DateTime dateTimeNow = DateTime.Now;
+        if (DateTime.Compare(Event.EndDate, dateTimeNow) < 0)
         {
             eventView.Status = "ended";
         }
-        else if (Event.CurrentMember>=Event.MaxMember)
+        else if (Event.CurrentMember >= Event.MaxMember)
         {
             eventView.Status = "full";
         }
@@ -59,12 +59,22 @@ public class EventPageController : Controller
         {
             eventView.Status = "available";
         }
-
-        // Check if the user is already joined to the event
-        var existingJoinEvent = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(je => je.UserId == Host.Id && je.EventId == Event.Id).FirstOrDefault();
-        if (existingJoinEvent != null)
+        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        ViewData["userID"] = userId;
+        if (userId != null)
         {
-            ViewBag.IsAttending = true;
+            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            ViewData["userName"] = userName?.UserName;
+            ViewData["userProfile"] = userName?.ProfilePicture;
+            var existingJoinEvent = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(je => je.UserId == userName.Id && je.EventId == Event.Id).FirstOrDefault();
+            if (existingJoinEvent != null)
+            {
+                ViewBag.IsAttending = true;
+            }
+            else
+            {
+                ViewBag.IsAttending = false;
+            }
         }
         else
         {
@@ -75,10 +85,14 @@ public class EventPageController : Controller
     }
 
     [HttpPost]
-    public IActionResult Attend(string userId, string eventId,int friend)
+    public IActionResult Attend(string userId, string eventId, int friend)
     {
         try
         {
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var userIdObj = ObjectId.Parse(userId);
             var eventIdObj = ObjectId.Parse(eventId);
 
@@ -99,17 +113,19 @@ public class EventPageController : Controller
             }
 
             // Create JoinEvent document
-            var joinEvent = new JoinEvent
-            {
-                UserId = userIdObj,
-                EventId = eventIdObj,
-                BringFriends = friend,
-                JoinDate = DateTime.Now
-            };
+            JoinEvent joinEvent = new JoinEvent();
+            joinEvent.UserId = userIdObj;
+            joinEvent.EventId = eventIdObj;
+            joinEvent.BringFriends = friend;
+            joinEvent.JoinDate = DateTime.Now;
+            // EventId = eventIdObj,
+            // BringFriends = friend,
+            // JoinDate = DateTime.Now
+
 
             // Insert JoinEvent document
             _mongoContext.GetCollection<JoinEvent>("joinEvents").InsertOne(joinEvent);
-            _mongoContext.GetCollection<Event>("events").UpdateOne(e => e.Id == eventIdObj, Builders<Event>.Update.Inc(e => e.CurrentMember,friend + 1));
+            _mongoContext.GetCollection<Event>("events").UpdateOne(e => e.Id == eventIdObj, Builders<Event>.Update.Inc(e => e.CurrentMember, friend + 1));
             return RedirectToAction("ViewId", new { id = eventId });
         }
         catch (Exception ex)
@@ -140,7 +156,7 @@ public class EventPageController : Controller
 
             // Remove JoinEvent document from the collection
             await _mongoContext.GetCollection<JoinEvent>("joinEvents").DeleteOneAsync(je => je.Id == existingJoinEvent.Id);
-            await _mongoContext.GetCollection<Event>("events").UpdateOneAsync(e => e.Id == eventIdObj, Builders<Event>.Update.Inc(e => e.CurrentMember, -(existingJoinEvent.BringFriends + 1) ));
+            await _mongoContext.GetCollection<Event>("events").UpdateOneAsync(e => e.Id == eventIdObj, Builders<Event>.Update.Inc(e => e.CurrentMember, -(existingJoinEvent.BringFriends + 1)));
             return RedirectToAction("ViewId", new { id = eventId });
         }
         catch (Exception ex)

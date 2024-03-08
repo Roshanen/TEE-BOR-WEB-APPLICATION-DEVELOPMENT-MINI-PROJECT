@@ -1,4 +1,4 @@
-@model Event
+@model CreateEvent
 @{
 }
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
                 <div class="hyphen"></div>
                 <div class="circle">5</div>
             </div>
-            <form action="" method="post">
+            <form asp-action="create" method="post">
                 <div class="step step-1">
                     <h2>First, set your location</h2>
                     <div class="tip-area">
@@ -39,12 +39,12 @@
                         </p>
                     </div>
                     <div class="input-area">
-                        <input type="text" name="place" placeholder="สถานที่">
-                        <input type="text" name="province" placeholder="จังหวัด">
-                        <input type="text" name="district" placeholder="อำเภอ">
-                        <input type="text" name="subDistrict" placeholder="ตำบล">
+                        <input type="text" name="ActualPlace" placeholder="สถานที่">
+                        <input type="text" name="Province" placeholder="จังหวัด">
+                        <input type="text" name="District" placeholder="อำเภอ">
+                        <input type="text" name="SubDistrict" placeholder="ตำบล">
                         <div>หรือ</div>
-                        <input type="text" name="locationLink" placeholder="ลิงก์จาก Google Map">
+                        <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map">
                     </div>
                 </div>
 
@@ -59,23 +59,23 @@
                     </div>
                     <div class="input-area ">
                         <label>Choose from this</label>
-                        <select asp-for="TagId" asp-items="@GetTags()"></select>
+                        <select name="Category" asp-items="@GetTags()"></select>
+                        @functions {
+                            List<SelectListItem> GetTags()
+                            {
+                                return new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Gaming", Value = "Gaming" },
+                                    new SelectListItem { Text = "Art", Value = "Art" },
+                                    new SelectListItem { Text = "Party", Value = "Party" },
+                                    new SelectListItem { Text = "Dancing", Value = "Dancing" },
+                                    new SelectListItem { Text = "Shabuing", Value = "Sahbuing" },
+                                    new SelectListItem { Text = "Other", Value = "Other" },
+                                };
+                            }
+                        }
                     </div>
                 </div>
-                @functions {
-                    List<SelectListItem> GetTags()
-                    {
-                        return new List<SelectListItem>
-                {
-                new SelectListItem { Text = "Gaming", Value = "Gaming" },
-                new SelectListItem { Text = "Art", Value = "Art" },
-                new SelectListItem { Text = "Party", Value = "Party" },
-                new SelectListItem { Text = "Dancing", Value = "Dancing" },
-                new SelectListItem { Text = "Shabuing", Value = "Sahbuing" },
-                new SelectListItem { Text = "Other", Value = "Other" },
-                };
-                    }
-                }
                 <div class="step step-3">
                     <h2>Name your party</h2>
                     <div class="tip-area">
@@ -83,7 +83,8 @@
                         <p>You can edit this later if you change your mind.</p>
                     </div>
                     <div class="input-area">
-                        <input type="text" name="eventName" placeholder="ชื่อของ party">
+                        <input type="text" name="EventName" placeholder="ชื่อของ party">
+                        <input type="text" name="EventImg" placeholder="ลิงก์รูปของ party">
                     </div>
                 </div>
 
@@ -92,15 +93,15 @@
                     <div class="input-area">
                         <div class="date-group group">
                             <span>Start date</span>
-                            <input type="date" name="startDate">
+                            <input type="date" name="StartDate">
                         </div>
                         <div class="date-group group">
                             <span>End date</span>
-                            <input type="date" name="endDate">
+                            <input type="date" name="EndDate">
                         </div>
                         <div class="max-member-group group">
                             <span>Max member</span>
-                            <input type="number" name="maxMember">
+                            <input type="number" name="MaxMember">
                         </div>
                     </div>
                 </div>
@@ -119,7 +120,7 @@
                     </div>
                     <div class="input-area">
                         <label>Please, write at least 50 characters</label>
-                        <textarea type="text" id="party-name" name="eventDetails"></textarea>
+                        <textarea id="party-name" name="EventDetails"></textarea>
                     </div>
                     <div class="example-area">
                         <h3>Examples</h3>
