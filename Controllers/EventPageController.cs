@@ -21,15 +21,28 @@ public class EventPageController : BaseController
         var Category = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == (Event.CategoryId)).FirstOrDefault();
         var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
 
-        var Joins = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(j => j.Id == ObjectId.Parse(id)).ToList();
-        var Attendees = new List<User>();
+        var Joins = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(j => j.EventId == ObjectId.Parse(id)).ToList();
+        var Attendees = new List<object>();
+        var debug = new List<dynamic>();
+        
         foreach (var join in Joins)
         {
-            var attendee = _mongoContext.GetCollection<User>("users").Find(u => u.Id == (join.UserId)).FirstOrDefault();
-            Attendees.Add(attendee);
+            var person = _mongoContext.GetCollection<User>("users").Find(u => u.Id == (join.UserId)).FirstOrDefault();
+            if (person == Host)
+            {
+                ViewData["host-friend"] = join.BringFriends;
+            }
+            else
+            {
+                var friend = join.BringFriends;
+                Attendee attendee = new Attendee();
+                attendee.user = person;
+                attendee.friend = friend;
+                Attendees.Add(attendee);
+            }
         }
 
-
+        Console.WriteLine(debug);
         EventViewModel eventView = new EventViewModel();
 
         eventView.EventName = Event.EventName;
@@ -59,6 +72,7 @@ public class EventPageController : BaseController
         {
             eventView.Status = "available";
         }
+
         var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
         ViewData["userID"] = userId;
         if (userId != null)
@@ -67,14 +81,17 @@ public class EventPageController : BaseController
             ViewData["userName"] = userName?.UserName;
             ViewData["userProfile"] = userName?.ProfilePicture;
             var existingJoinEvent = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(je => je.UserId == userName.Id && je.EventId == Event.Id).FirstOrDefault();
+            
             if (existingJoinEvent != null)
             {
+                eventView.Status = "available";
                 ViewBag.IsAttending = true;
             }
             else
             {
                 ViewBag.IsAttending = false;
             }
+
         }
         else
         {
@@ -118,10 +135,6 @@ public class EventPageController : BaseController
             joinEvent.EventId = eventIdObj;
             joinEvent.BringFriends = friend;
             joinEvent.JoinDate = DateTime.Now;
-            // EventId = eventIdObj,
-            // BringFriends = friend,
-            // JoinDate = DateTime.Now
-
 
             // Insert JoinEvent document
             _mongoContext.GetCollection<JoinEvent>("joinEvents").InsertOne(joinEvent);
