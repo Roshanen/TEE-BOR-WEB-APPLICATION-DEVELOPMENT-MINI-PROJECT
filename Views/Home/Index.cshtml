@@ -25,11 +25,15 @@
             @foreach (var ev in Model)
             {
                 <div class="event event-1">
-                    <div class="event-img-container">
-                        <img class="event-image" src="@ev.EventImg" alt="event-1 image">
-                    </div>
+                    <a href="/eventpage/viewid/@ev.Id" >
+                        <div class="event-img-container">
+                            <img class="event-image" src="@ev.EventImg" alt="event-1 image">
+                        </div>
+                    </a>
                     <div class="content">
-                        <div class="event-name">@ev.EventName</div>
+                        <a href="/eventpage/viewid/@ev.Id" class="event-name">
+                            @ev.EventName
+                        </a>
                         <div class="host" style="color: red;">@ev.HostId change later</div>
                         <div class="date">
                             <span class="material-symbols-outlined">calendar_month</span>
