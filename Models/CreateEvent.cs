@@ -6,13 +6,13 @@ using System.ComponentModel.DataAnnotations;
 public class CreateEvent
 {   
     // place
-    [Required]
+    [Required][StringLength(64)]
     public string? ActualPlace { get; set; }
-    [Required]
+    [Required][StringLength(64)]
     public string? Province { get; set; }
-    [Required]
+    [Required][StringLength(64)]
     public string? District { get; set; }
-    [Required]
+    [Required][StringLength(64)]
     public string? SubDistrict { get; set; }
     [Required]
     public string? MapUrl { get; set; }
@@ -25,12 +25,11 @@ public class CreateEvent
     [Required]
     public DateTime EndDate { get; set; }
     // event
-    [Required]
+    [Required][StringLength(32)]
     public string? EventName { get; set; }
     [Required]
     public string? EventImg { get; set; }
-    [Required]
-    [StringLength(200, MinimumLength = 20)]
+    [Required][StringLength(248, MinimumLength = 16)]
     public string? EventDetails { get; set; }
     // member count
     [Required]
