@@ -60,17 +60,29 @@ public class EventPageController : BaseController
         {
             eventView.Status = "available";
         }
-
-        // Check if the user is already joined to the event
-        var existingJoinEvent = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(je => je.UserId == Host.Id && je.EventId == Event.Id).FirstOrDefault();
-        if (existingJoinEvent != null)
+        
+        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        ViewData["userID"] = userId;
+        if (userId != null)
         {
-            ViewBag.IsAttending = true;
+            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            ViewData["userName"] = userName.UserName;
+            var existingJoinEvent = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(je => je.UserId == userName.Id && je.EventId == Event.Id).FirstOrDefault();
+            if (existingJoinEvent != null)
+            {
+                ViewBag.IsAttending = true;
+            }
+            else
+            {
+                ViewBag.IsAttending = false;
+            }
         }
         else
         {
             ViewBag.IsAttending = false;
         }
+
+        // Check if the user is already joined to the event
 
         return View(eventView);
     }
@@ -80,6 +92,10 @@ public class EventPageController : BaseController
     {
         try
         {
+            if(userId==null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var userIdObj = ObjectId.Parse(userId);
             var eventIdObj = ObjectId.Parse(eventId);
 

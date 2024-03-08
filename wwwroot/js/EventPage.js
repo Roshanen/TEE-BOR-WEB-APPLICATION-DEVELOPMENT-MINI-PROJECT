@@ -117,33 +117,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", handleScroll);
 });
-var cancelbtn =document.getElementById("cancel-btn")
-if(cancelbtn!=null)
-{
+
+
+var cancelbtn = document.getElementById("cancel-btn");
+if (cancelbtn != null) {
   cancelbtn.addEventListener("click", function () {
     var confirmation = confirm("Are you sure you want to cancel?");
     if (confirmation) {
-      document.getElementById('cancel-form').submit();
+      document.getElementById("cancel-form").submit();
     }
   });
 }
-var attendbtn =document.getElementById("attend-btn")
-if (attendbtn!=null)
-{
+
+var attendbtn = document.getElementById("attend-btn");
+if (attendbtn != null) {
   attendbtn.addEventListener("click", function () {
     var confirmation = confirm("Are you sure you want to attend?");
     if (confirmation) {
       event.preventDefault();
-        
-        // Get the value from the number input field
-      var friendValue = document.getElementById('numberInput').value;
-        
-        // Set the value to the hidden input field in the form
-      document.getElementById('friendInput').value = friendValue;
-      document.getElementById('attend-form').submit();
+
+      // Get the value from the number input field
+      var friendValue = document.getElementById("numberInput").value;
+
+      // Set the value to the hidden input field in the form
+      document.getElementById("friendInput").value = friendValue;
+      document.getElementById("attend-form").submit();
     }
   });
-
 }
 
 document.getElementById("share").addEventListener("click", function () {
