@@ -36,7 +36,7 @@ public class EventController : BaseController
         Event eventModel = new Event();
         Place placeModel = new Place();
         Category categoryModel = new Category();
-        User userModel = new User(); // how to get current user
+User userModel = new User(); // how to get current user
 
         float defaultRating = 5.0f;
         eventModel.CurrentMember = 1;
@@ -64,7 +64,7 @@ public class EventController : BaseController
         _mongoContext.GetCollection<Place>("places").InsertOne(placeModel);
         _mongoContext.GetCollection<Category>("tags").InsertOne(categoryModel);
 
-        var userId = new ObjectId(JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!));
+var userId = new ObjectId(JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!));
 
         eventModel.HostId = userId;
         eventModel.PlaceId = placeModel.Id;
@@ -78,10 +78,10 @@ public class EventController : BaseController
     public IActionResult Edit(string id)
     {
         _SetUserDataInViewData();
-
+        
         // Console.WriteLine("Edit");
         var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
-        CreateEvent createEvent = new CreateEvent();
+                CreateEvent createEvent = new CreateEvent();
         //Place
         var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
         createEvent.ActualPlace = Place.ActualPlace;

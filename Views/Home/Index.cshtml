@@ -1,18 +1,21 @@
 @model List<Event>
-
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tee Bor</title>
-    <link rel="stylesheet" href="/css/index.css"></link>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="~/css/index.css">
+    </link>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
+
 <body>
     <div class="event-group event-ongoing">
         <div class="header">
@@ -20,28 +23,34 @@
             <a href="#">See more</a>
         </div>
         <div class="event-container">
-            <div class="event event-1">
-                <img class="event-image" src="https://secure.meetupstatic.com/photos/event/c/c/4/a/event_519172298.webp?w=384" alt="event-1 image">
-                <div class="content">
-                    <div class="event-name">Free online training session</div>
-                    <div class="host">Hosted by : someone who have lots of money</div>
-                    <div class="date">
-                        <span class="material-symbols-outlined">calendar_month</span>
-                        <p>MON, FEB 26 7:00 PM UCT</p>
+            @foreach (var ev in Model)
+            {
+                <div class="event event-1">
+                    <div class="event-img-container">
+                        <img class="event-image" src="@ev.EventImg" alt="event-1 image">
                     </div>
-                    <div class="event-footer">
-                        <div class="going">
-                            <span class="material-symbols-outlined">check_circle</span>
-                            <p>1 Going</p>
+                    <div class="content">
+                        <div class="event-name">@ev.EventName</div>
+                        <div class="host" style="color: red;">@ev.HostId change later</div>
+                        <div class="date">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <p>MON, FEB 26 7:00 PM UCT</p>
                         </div>
-                        <div class="price">
-                            <span class="material-symbols-outlined">confirmation_number</span>
-                            <p>Free</p>
+                        <div class="event-footer">
+                            <div class="going">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <p>1 Going</p>
+                            </div>
+                            <div class="price">
+                                <span class="material-symbols-outlined">confirmation_number</span>
+                                <p>Free</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </body>
+
 </html>

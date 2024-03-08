@@ -21,41 +21,11 @@ public class HomeController : BaseController
 
     public IActionResult Index(PresentCondition presentCondition)
     {
-        var jwtToken = HttpContext.Session.GetString("JwtToken");
-        var userId = JwtHelper.GetUserIdFromToken(jwtToken!);
-        var connectionUri = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
-        var settings = MongoClientSettings.FromConnectionString(connectionUri);
-        settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-        var client = new MongoClient(settings);
-        try
-        {
-            var result = client
-                .GetDatabase("admin")
-                .RunCommand<BsonDocument>(new BsonDocument("ping", 1));
-            Console.WriteLine("Pinged your deployment. You successfully connected to MongoDB!");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-        }
+        var userId = _SetUserDataInViewData();
 
         var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
-        DateTime dateTimeNow = DateTime.Now;
 
-        foreach (var e in events)
-        {  
-        Console.WriteLine(e.EndDate);
-        }
-        // if (DateTime.Compare(presentCondition.CurrentDate, dateTimeNow) < 0)
-        // {
-        //     Console.WriteLine(presentCondition.CurrentDate)
-        // }
-
-
-
-
-
-        return View();
+        return View(events);
     }
 
     public IActionResult Privacy()
