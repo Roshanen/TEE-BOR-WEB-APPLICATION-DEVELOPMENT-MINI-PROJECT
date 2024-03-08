@@ -21,7 +21,7 @@ public class HomeController : BaseController
 
     public IActionResult Index(PresentCondition presentCondition)
     {
-        var userId = _SetUserDataInViewData();
+        _SetUserDataInViewData();
 
         var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
 
