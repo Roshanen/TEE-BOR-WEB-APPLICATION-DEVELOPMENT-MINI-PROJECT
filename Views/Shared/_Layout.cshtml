@@ -67,8 +67,18 @@
                     </svg>
                     <p class="lang-text">English</p>
                 </a>
-                <a href="/" class="log-in">Log in</a>
-                <a href="/" class="sign-up">Sign up</a>
+                @if (@ViewData["UserId"] != null)
+                {
+                    <img class="img-profile" src='@ViewData["userProfile"]' height="35px" width="35px" alt="img">
+                    <p class="user-name">User : @ViewData["userName"]</p>
+                    <a href="/account/logout" class="log-out">Logout</a>
+                }
+                else
+                {
+                    <a href="/account/login" class="log-in">Log in</a>
+                    <a href="/account/signup" class="sign-up">Sign up</a>
+                }
+
             </div>
 
         </navbar>

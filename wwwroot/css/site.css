@@ -9,6 +9,7 @@ html {
   margin-top: 0.5rem;
   margin-right: 0.5rem;
   margin-bottom: 60px;
+  min-height: 90%;
 }
 
 a,

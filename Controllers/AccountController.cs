@@ -1,38 +1,138 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Text;
 using WebApp.Models;
 
-namespace WebApp.Controllers
+namespace WebApp.Controllers;
+
+public class AccountController : BaseController
 {
-    public class AccountController : Controller
+    private new readonly MongoContext _mongoContext;
+    private readonly string _jwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? "";
+    private readonly int _jwtExpirationDays = 1;
+
+    public AccountController(MongoContext mongoContext) : base(mongoContext)
     {
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(Login model)
+        _mongoContext = mongoContext;
+    }
+
+    public IActionResult SignUp()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> SignUp(User user)
+    {
+        try
         {
-            if (ModelState.IsValid)
+            var existingUser = await _mongoContext.GetCollection<User>("users").Find(u => u.Email == user.Email).FirstOrDefaultAsync();
+            if (existingUser != null)
             {
-                // Your authentication logic here
-                // For example, check if the provided credentials are valid
-                // If valid, redirect the user to the dashboard or home page
-                // Otherwise, return an error message
+                ViewData["error"] = "Email already exists.";
+                return View();
             }
 
-             // If the model state is invalid, return the view with validation errors
-            return View(model);
+            user.PasswordHash = HashPassword(user.PasswordHash);
+
+            await _mongoContext.GetCollection<User>("users").InsertOneAsync(user);
+
+            return RedirectToAction("Login");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(Signup model)
+        catch (Exception ex)
         {
-            if (ModelState.IsValid)
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Login(User user)
+    {
+        try
+        {
+            var existingUser = await _mongoContext.GetCollection<User>("users").Find(u => u.Email == user.Email).FirstOrDefaultAsync();
+            if (existingUser == null)
             {
-                // Your registration logic here
-                // For example, create a new user account with the provided information
-                // Redirect the user to the login page after successful registration
+                ViewData["error"] = "Invalid email or password.";
+                return View();
             }
 
-            return View(model);
-         }
+            if (!VerifyPassword(user.PasswordHash, existingUser.PasswordHash))
+            {
+                ViewData["error"] = "Invalid email or password.";
+                return View();
+            }
+
+            var token = GenerateJwtToken(existingUser.Id);
+
+            HttpContext.Session.SetString("JwtToken", token);
+
+            var jwtToken = HttpContext.Session.GetString("JwtToken");
+            var userId = JwtHelper.GetUserIdFromToken(jwtToken!);
+
+            ViewData["userId"] = userId ?? "Not logged in";
+
+            return RedirectToAction("Index", "Home");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    private string HashPassword(string password)
+    {
+        using (var sha256 = System.Security.Cryptography.SHA256.Create())
+        {
+            var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+        }
+    }
+
+    private bool VerifyPassword(string inputPassword, string hashedPassword)
+    {
+        var hashedInputPassword = HashPassword(inputPassword);
+        return hashedInputPassword == hashedPassword;
+    }
+
+    private string GenerateJwtToken(ObjectId userId)
+    {
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSecretKey));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
+
+        var token = new JwtSecurityToken(
+            issuer: "Chens",
+            audience: "DotnetWebApps",
+            claims: claims,
+            expires: DateTime.UtcNow.AddDays(_jwtExpirationDays),
+            signingCredentials: credentials
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index", "Home");
     }
 }

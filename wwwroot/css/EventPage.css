@@ -1,148 +1,165 @@
-*{
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+* {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
+
 nav {
-    list-style: none;
-    overflow: hidden;
-    background-color: #333;
-    margin: 0 ;
+  list-style: none;
+  overflow: hidden;
+  background-color: #333;
+  margin: 0;
 }
-body{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
 li {
-    display: inline;
-    float: left;
+  display: inline;
+  float: left;
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 li a:hover {
-    background-color: #111;
+  background-color: #111;
 }
 
 .header {
-    background-color: #ffffff;
-    padding-bottom: 20px;
-    border-bottom:1px solid #dedede;
+  background-color: #ffffff;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dedede;
 }
-.header div{
-    display: flex;
+
+.header div {
+  display: flex;
 }
-.header h1{
-    margin-left: 12%;
-    font-weight: bold;
+
+.header h1 {
+  margin-left: 12%;
+  font-weight: bold;
 }
-.header div img{
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin-left: 12%; 
+
+.header div img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: 12%;
 }
-.header div section{
-    display: block;
-    margin-left: 20px;
-    margin-top: 3px;
+
+.header div section {
+  display: block;
+  margin-left: 20px;
+  margin-top: 3px;
 }
-.header div section h4{
-    margin: 0;
+
+.header div section h4 {
+  margin: 0;
 }
+
 .content {
-    background-color: #F6F7F8;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+  background-color: #f6f7f8;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
-.content img{
-    width: 100%;
-    height: 100%;
-    max-width: 576px;
-    max-height: 576px;
+
+.content img {
+  width: 100%;
+  height: 100%;
+  max-width: 576px;
+  max-height: 576px;
 }
-.content div{
-    width: 100%;
-    margin-left: 13%;
-    margin-top: 50px;
-    width: 576px;
+
+.content div {
+  width: 100%;
+  margin-left: 13%;
+  margin-top: 50px;
+  width: 576px;
 }
-#content-details{
-    margin: 0;
-    display: block;
-    width: 576px;
+
+#content-details {
+  margin: 0;
+  display: block;
+  width: 576px;
 }
-.content #content-details{
-    width: 100%;
-    max-width: 576px;
+
+.content #content-details {
+  width: 100%;
+  max-width: 576px;
 }
+
 #tag {
-    margin-top: 30px;
-    display: flex;
-    width: 100%;
-    max-width: 576px;
-    flex-wrap: wrap;
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+  max-width: 576px;
+  flex-wrap: wrap;
 }
 
-#tag a{
-    margin-top: 5px;
-    text-decoration: none;
-    padding: 0.375rem;
-    border-radius: 10%;
-    background-color: rgb(219, 237, 240);
-    border: 1px solid rgb(219, 237, 240);
-    color: rgb(30, 30, 30);
-    font-weight:bold;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    margin-right: 5px;
-}
-#attendees{
-    margin-top: 50px;
-    margin-bottom: 300px;
-}
-#attendees-list{
-    width: 100%;
-    max-width: 576px;
-    overflow-x: auto;
-    margin: 0;
-    display: flex;
-    padding: 20px;
-    background-color: white;
+#tag a {
+  margin-top: 5px;
+  text-decoration: none;
+  padding: 0.375rem;
+  border-radius: 10%;
+  background-color: rgb(219, 237, 240);
+  border: 1px solid rgb(219, 237, 240);
+  color: rgb(30, 30, 30);
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  margin-right: 5px;
 }
 
-.attendee-profile{
-    margin-right: 5%;
-    height: 200px;
-    border-radius: 10%;
-    color: rgb(0, 0, 0);
-    border: 1px solid rgb(214, 214, 214);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    text-align: center;
+#attendees {
+  margin-top: 50px;
+  margin-bottom: 300px;
 }
-.attendee-profile div{
-    padding-top: 5px;
-    width: 150px;
-    margin: 0;
+
+#attendees-list {
+  width: 100%;
+  max-width: 576px;
+  overflow-x: auto;
+  margin: 0;
+  display: flex;
+  padding: 20px;
+  background-color: white;
 }
-.attendee-profile img{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0;
+
+.attendee-profile {
+  margin-right: 5%;
+  height: 200px;
+  border-radius: 10%;
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(214, 214, 214);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: center;
+}
+
+.attendee-profile div {
+  padding-top: 5px;
+  width: 150px;
+  margin: 0;
+}
+
+.attendee-profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0;
 }
 #details{
-    display: flex;
     padding: 15px;
     height: fit-content;
     border-top-left-radius: 5%;
@@ -153,74 +170,84 @@ li a:hover {
     flex-wrap: wrap;
     background-color: white;
 }
-#time-details{
-    display: flex;
+
+#time-details {
+  display: flex;
 }
-#time-details h3{
-    font-weight: lighter;
-    width: 80%;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    margin-left: 13px;
+
+#time-details h3 {
+  font-weight: lighter;
+  width: 80%;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-left: 13px;
 }
-#time-details img{
-    margin-top: 15px;
-    width: 25px;
-    height: 25px;
+
+#time-details img {
+  margin-top: 15px;
+  width: 25px;
+  height: 25px;
 }
-#attend{
-    position: fixed;
-    display: flex;
-    height: 100px;
-    bottom: 0;
-    align-items: center;
-    justify-content: space-between;
-    background-color: white;
-    width: 100%;
+
+#attend {
+  position: fixed;
+  display: flex;
+  height: 100px;
+  bottom: 0;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  width: 100%;
 }
+
 .dark-footer {
-    background-color: #333; 
-    color: #fff; 
-    padding: 20px 0; 
-    text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
 }
 
 .dark-footer .container {
-    max-width: 960px; 
-    margin: 0 auto;
-    height: 300px;
+  max-width: 960px;
+  margin: 0 auto;
+  height: 300px;
 }
 
-#attend-line{
-    border: 1px solid #F6F7F8;
-    clear: both;
+#attend-line {
+  border: 1px solid #f6f7f8;
+  clear: both;
 }
 
 #attend-details{
-    display: block;
-    margin-left: 13%;
-}
-
-#attend div{
     display: flex;
-    margin-right: 20%;
+    margin-left: 13%;
+    width: 80%;
+    text-align: center;
+    align-content: center;
 }
 
-#attend-btn{
-    padding:20px 30px;
-    background-color: #F65858;
-    color: white;
-    font-weight: 500;
-    font-size: 1rem;
-    border: 1px solid #F65858;
-    border-radius: 10%;
+#attend div {
+  display: flex;
+  margin-right: 20%;
 }
-#attend-btn:hover{
-    transition: 0.5s;
-    background-color: white;
-    color: #F65858;
+
+#attend-btn {
+  padding: 20px 30px;
+  background-color: #f65858;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid #f65858;
+  border-radius: 10%;
 }
-#cancle-btn{
+
+#attend-btn:hover {
+  transition: 0.5s;
+  background-color: white;
+  color: #f65858;
+}
+#cancel-btn{
+    
     padding:20px 30px;
     background-color: #7ea0ff;
     color: white;
@@ -229,13 +256,14 @@ li a:hover {
     border: 1px solid #7ea0ff;
     border-radius: 10%;
 }
-#cancle-btn:hover{
+#cancel-btn:hover{
     transition: 0.5s;
     background-color: white;
     color: #7ea0ff;
 }
 
 #share{
+    height: 50%;
     display: flex;
     padding: 20px 30px;
     background-color: white;
@@ -247,23 +275,36 @@ li a:hover {
     margin-right: 20%;  
     align-items: center;
 }
-#share:hover{
-    transition: 0.5s;
-    background-color: rgb(0, 126, 138);
-    color: white;
+
+#share:hover {
+  transition: 0.5s;
+  background-color: rgb(0, 126, 138);
+  color: white;
+}
+
+#short-time{
+    margin-bottom: 0;
+}
+
+#numberInput{
+    margin-top: 5px;
+    justify-content: center;
 }
 @media only screen and (max-width: 768px) {
-    .header h1{
-        margin-left: 0;
-    }
-    .header div img{
-        margin-left: 0;
-    }
-    .content div{
-        margin-left: 0;
-        padding-left: 5%;
-    }
-    #attend-details{
-        display: none;
-    }
+  .header h1 {
+    margin-left: 0;
+  }
+
+  .header div img {
+    margin-left: 0;
+  }
+
+  .content div {
+    margin-left: 0;
+    padding-left: 5%;
+  }
+
+  #attend-details {
+    display: none;
+  }
 }

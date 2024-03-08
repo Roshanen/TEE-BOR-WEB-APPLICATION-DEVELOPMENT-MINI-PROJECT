@@ -6,7 +6,7 @@ public class Event
 {
     public ObjectId Id { get; set; }
     public ObjectId PlaceId { get; set; }
-    public ObjectId TagId { get; set; }
+    public ObjectId CategoryId { get; set; }
     public ObjectId HostId { get; set; }
 
     public DateTime StartDate { get; set; }
@@ -19,4 +19,5 @@ public class Event
     public int? CurrentMember { get; set; }
     public int? MaxMember { get; set; }
     public float? Rating { get; set; }
+
 }

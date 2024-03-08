@@ -5,21 +5,22 @@ using WebApp.Models;
 
 namespace WebApp.Controllers;
 
-public class SearchController : Controller
+public class SearchController : BaseController
 {
-    private readonly MongoContext _mongoContext;
+    private new readonly MongoContext _mongoContext;
 
-    public SearchController(MongoContext mongoContext)
+    public SearchController(MongoContext mongoContext) : base(mongoContext)
     {
         _mongoContext = mongoContext;
+        
     }
 
     public IActionResult Index(Search search)
     {
+        _SetUserDataInViewData();
         try
         {
             var eventsCollection = _mongoContext.GetCollection<Event>("events");
-
             var filterBuilder = Builders<Event>.Filter;
             var filter = filterBuilder.Empty;
 
@@ -43,7 +44,7 @@ public class SearchController : Controller
                 }
             }
 
-            if (!string.IsNullOrEmpty(search.DateChoice))
+            if (!string.IsNullOrEmpty(search.DateChoice) && search.DateChoice != "any")
             {
                 DateTime currentDate = DateTime.UtcNow.Date;
                 switch (search.DateChoice.ToLower())
@@ -60,12 +61,12 @@ public class SearchController : Controller
                 }
             }
 
-            if (!string.IsNullOrEmpty(search.Type))
+            if (!string.IsNullOrEmpty(search.Type) && search.Type != "any")
             {
                 filter &= filterBuilder.Eq("EventType", search.Type);
             }
 
-            if (!string.IsNullOrEmpty(search.Category))
+            if (!string.IsNullOrEmpty(search.Category) && search.Category != "any")
             {
                 var tag =  _mongoContext.GetCollection<Category>("tags").Find(t => t.CategoryName == search.Category).FirstOrDefault();
 
