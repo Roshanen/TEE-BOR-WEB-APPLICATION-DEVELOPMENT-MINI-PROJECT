@@ -73,14 +73,14 @@ public class EventPageController : BaseController
             eventView.Status = "available";
         }
 
-        var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
-        ViewData["userID"] = userId;
+        var userId = _SetUserDataInViewData();
+ 
         if (userId != null)
         {
-            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
-            ViewData["userName"] = userName?.UserName;
-            ViewData["userProfile"] = userName?.ProfilePicture;
-            var existingJoinEvent = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(je => je.UserId == userName.Id && je.EventId == Event.Id).FirstOrDefault();
+            // var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            // ViewData["userName"] = userName?.UserName;
+            // ViewData["userProfile"] = userName?.ProfilePicture;
+            var existingJoinEvent = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(je => je.UserId == ObjectId.Parse(userId) && je.EventId == Event.Id).FirstOrDefault();
             
             if (existingJoinEvent != null)
             {
