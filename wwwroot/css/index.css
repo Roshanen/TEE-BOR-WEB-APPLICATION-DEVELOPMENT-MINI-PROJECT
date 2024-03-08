@@ -1,87 +1,109 @@
-:root{
-    --cyan-button: #00798A;
-    --red-search: #F65858;
-    --logo-color: #F64060;
-    --black-color: #212121;
-    --grey-color: #F6F7F8;
+:root {
+  --cyan-button: #00798a;
+  --red-search: #f65858;
+  --logo-color: #f64060;
+  --black-color: #212121;
+  --grey-color: #f6f7f8;
 }
 
 body {
-    font-family: Graphik Meetup,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-family: Graphik Meetup, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
 }
 
 .event-group > .header > a {
-    color: var(--cyan-button);
-    text-decoration: none;
-    font-weight: 800;
+  color: var(--cyan-button);
+  text-decoration: none;
+  font-weight: 800;
 }
 
 .event-ongoing > .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .event-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.event-img-container {
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  width: 300px;
+  height: 300px;
 }
 
 .event {
-    width: 45%;
-    max-width: 300px;
+  width: 45%;
+  max-width: 300px;
 }
 
 .event-image {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    overflow: hidden;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .event-name {
-    font-size: 1.5rem;
-    font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 800;
+  width: fit-content;
 }
 
-.event  .date, .event-footer, .event-footer > .going, .event-footer > .price {
-    display: flex;
-    align-items: center;
+.event .date,
+.event-footer,
+.event-footer > .going,
+.event-footer > .price {
+  display: flex;
+  align-items: center;
 }
 
 .event-footer {
-    gap:5%;
+  gap: 5%;
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 200,
-  'GRAD' 0,
-  'opsz'24
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
 }
 
 @media only screen and (max-width: 768px) {
-    body {
-        padding: 0 10px 0 10px;
-    }
-    .event-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+  body {
+    padding: 0 10px 0 10px;
+  }
+  .event-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-    .event {
-        width: 100%;
-        max-width: 100%;
-        padding: 5px;
-        display: flex;
-        flex-direction: row-reverse;
-    }
-    .event-image {
-        max-width: 90px;
-        max-height: 90px;
-        object-fit: cover;
-    }
+  .event-img-container {
+    background-color: transparent;
+    max-width: 90px;
+    max-height: 90px;
+  }
+
+  a {
+    max-width: 90px;
+    max-height: 90px;
+  }
+
+  .event {
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+  }
+  .event-image {
+    max-width: 90px;
+    max-height: 90px;
+    object-fit: cover;
+  }
 }

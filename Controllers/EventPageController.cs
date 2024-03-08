@@ -113,7 +113,7 @@ public class EventPageController : BaseController
             var userIdObj = ObjectId.Parse(userId);
             var eventIdObj = ObjectId.Parse(eventId);
 
-            // Check if user and event exist
+            // Check if user and event exist   
             var user = _mongoContext.GetCollection<User>("users").Find(u => u.Id == userIdObj).FirstOrDefault();
             var ev = _mongoContext.GetCollection<Event>("events").Find(e => e.Id == eventIdObj).FirstOrDefault();
 
