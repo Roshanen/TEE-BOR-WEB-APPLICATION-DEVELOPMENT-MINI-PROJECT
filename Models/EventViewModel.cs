@@ -11,7 +11,7 @@ namespace WebApp.Models
         public string? EventImg { get; set; }
         public string? EventDetails { get; set; }
         public string? Tags { get; set; }
-        public List<User>? Attendees { get; set; }
+        public List<dynamic>? Attendees { get; set; }
         public DateTime? Time { get; set; }
         public string? Place { get; set; }
         public string? MapUrl { get; set; }

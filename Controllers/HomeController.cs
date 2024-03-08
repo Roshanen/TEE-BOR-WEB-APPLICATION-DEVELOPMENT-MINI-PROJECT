@@ -22,10 +22,18 @@ public class HomeController : BaseController
     public IActionResult Index(PresentCondition presentCondition)
     {
         _SetUserDataInViewData();
+        DateTime dateTimeNow = DateTime.Now;
+        var events = _mongoContext.GetCollection<Event>("events").Find(e => true).ToList();
+        List<WebApp.Models.Event> names = new List<WebApp.Models.Event>();
+        foreach (var e in events){
+            if ((DateTime.Compare(e.EndDate, dateTimeNow )> 0) & (e.CurrentMember < e.MaxMember) ){
+                Console.WriteLine((e.EndDate));
+                names.Add(e);
+            }
+        }
 
-        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
 
-        return View(events);
+        return View(names);
     }
 
     public IActionResult Privacy()

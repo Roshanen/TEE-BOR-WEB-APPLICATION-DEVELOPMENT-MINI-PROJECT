@@ -10,8 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tee Bor</title>
-    <link rel="stylesheet" href="~/css/index.css">
-    </link>
+    <link rel="stylesheet" href="~/css/index.css"></link>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -26,20 +25,24 @@
             @foreach (var ev in Model)
             {
                 <div class="event event-1">
-                    <div class="event-img-container">
-                        <img class="event-image" src="@ev.EventImg" alt="event-1 image">
-                    </div>
+                    <a href="/eventpage/viewid/@ev.Id" >
+                        <div class="event-img-container">
+                            <img class="event-image" src="@ev.EventImg" alt="event-1 image">
+                        </div>
+                    </a>
                     <div class="content">
-                        <div class="event-name">@ev.EventName</div>
+                        <a href="/eventpage/viewid/@ev.Id" class="event-name">
+                            @ev.EventName
+                        </a>
                         <div class="host" style="color: red;">@ev.HostId change later</div>
                         <div class="date">
                             <span class="material-symbols-outlined">calendar_month</span>
-                            <p>MON, FEB 26 7:00 PM UCT</p>
+                            <p>End date:  @ev.EndDate</p>
                         </div>
                         <div class="event-footer">
                             <div class="going">
                                 <span class="material-symbols-outlined">check_circle</span>
-                                <p>1 Going</p>
+                                <p class="member">@ev.CurrentMember of @ev.MaxMember Going</p>
                             </div>
                             <div class="price">
                                 <span class="material-symbols-outlined">confirmation_number</span>
@@ -52,5 +55,4 @@
         </div>
     </div>
 </body>
-
 </html>
