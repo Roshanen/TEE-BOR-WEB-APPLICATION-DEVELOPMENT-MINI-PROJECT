@@ -148,9 +148,10 @@ body {
     z-index: -1;
     left: 4px;
     top: 4px;
-    width: calc(100% - 8px);
-    height: calc(100% - 8px);
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
     background: #008fa3;
+    border: solid white 1px;
     border-radius: 5px;
   }
 }
