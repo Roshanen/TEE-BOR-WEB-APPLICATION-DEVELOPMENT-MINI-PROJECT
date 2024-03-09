@@ -24,16 +24,15 @@ public class HomeController : BaseController
         _SetUserDataInViewData();
         DateTime dateTimeNow = DateTime.Now;
         var events = _mongoContext.GetCollection<Event>("events").Find(e => true).ToList();
-        List<WebApp.Models.Event> names = new List<WebApp.Models.Event>();
+        List<WebApp.Models.Event> activeEvents = new List<WebApp.Models.Event>();
         foreach (var e in events){
             if ((DateTime.Compare(e.EndDate, dateTimeNow )> 0) & (e.CurrentMember < e.MaxMember) ){
-                Console.WriteLine((e.EndDate));
-                names.Add(e);
+                activeEvents.Add(e);
             }
         }
 
 
-        return View(names);
+        return View(activeEvents);
     }
 
     public IActionResult Privacy()

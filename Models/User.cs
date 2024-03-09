@@ -5,8 +5,11 @@ namespace WebApp.Models;
 
 public class User
 {
+    [Required]
     public ObjectId Id { get; set; }
-    public string? UserName { get; set; }
+    [Required]
+    [StringLength(50, MinimumLength = 3)]
+    public string UserName { get; set; }
     [EmailAddress]
     [Required]
     public string? Email { get; set; }
