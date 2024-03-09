@@ -52,7 +52,7 @@ public class EventPageController : BaseController
         eventView.EventDetails = Event.EventDetails;
         eventView.Tags = Category.CategoryName;
         eventView.Attendees = Attendees;
-        eventView.Time = Event.EndDate;
+        eventView.EndDate = Event.EndDate;
         eventView.Place = Place.ActualPlace;
         eventView.MapUrl = Place.MapUrl;
         ViewBag.EventId = id;

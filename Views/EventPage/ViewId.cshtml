@@ -84,11 +84,58 @@
           referrerpolicy="no-referrer-when-downgrade" src=@Model.MapUrl></iframe>
       </section>
       <div class="rating-area">
-          <h3>Customer rating</h3>
-          <div class="rating action-area">
-          </div>
+          <h3>Attendees rating</h3>
           <div class="rating-display">
-            <progress max="5" value="3">
+            <div class="progress-label">
+              <span>5</span>
+              <span>4</span>
+              <span>3</span>
+              <span>2</span>
+              <span>1</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bg rating-1"><div class="progress-bar" style="width: 80%;"></div></div>
+              <div class="progress-bg rating-2"><div class="progress-bar" style="width: 80%;"></div></div>
+              <div class="progress-bg rating-3"><div class="progress-bar" style="width: 80%;"></div></div>
+              <div class="progress-bg rating-4"><div class="progress-bar" style="width: 80%;"></div></div>
+              <div class="progress-bg rating-5"><div class="progress-bar" style="width: 80%;"></div></div>
+            </div>
+          </div>
+          <h3>Some comments for you</h3>
+          <div class="comment-area">
+            <div class="comment-card">
+              <div class="comment-header">5 out of 5</div>
+              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
+              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">5 out of 5</div>
+              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
+              <div class="comment-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
+              </div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">5 out of 5</div>
+              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
+              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">5 out of 5</div>
+              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
+              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">5 out of 5</div>
+              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
+              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
+            </div>
           </div>
       </div>
     </div>
@@ -98,10 +145,10 @@
   <section id="attend">
     <section id="attend-details">
       <div class="short-time">
-        <h3 id="time">Start Time : @Model.StartDate</h3>
+        <h3 id="time">Start Date : @Model.StartDate</h3>
       </div>
       <div class="short-time">
-        <h3 id="time">End Time : @Model.Time</h3>
+        <h3 id="time">End Date : @Model.EndDate</h3>
       </div>
     </section>
     <div class="button-area">
