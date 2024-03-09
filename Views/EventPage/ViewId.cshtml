@@ -14,8 +14,9 @@
 <link rel="stylesheet" href="~/css/EventPage.css" />
 
 <body>
-  <div class="popup">
+  <div class="rating-popup" id="rating-popup">
     <form asp-controller="Rating" asp-action="Create" method="post">
+      <button type="button" id="close-button">close</button>
       <h3>Rating</h3>
       <input name="EventId" type="hidden" value=@ViewBag.EventId>
       <input name="Score" type="hidden" value="5">
@@ -50,9 +51,7 @@
       <div class="comment-area">
         <textarea name="Comment" placeholder="Give us some comment for this event"></textarea>
       </div>
-      <button type="submit">
-        Submit
-      </button>
+      <button type="submit">Submit</button>
     </form>
   </div>
   <div class="header">
@@ -120,7 +119,7 @@
         @Html.Raw(Model.MapUrl)
       </section>
       <div class="rating-area-display">
-          <h3>Attendees rating</h3>
+          <div class="rating-topic">Attendees rating</div>
           <div class="rating-display">
             <div class="progress-label">
               <span>5</span>
@@ -140,7 +139,8 @@
             }
             </div>
           </div>
-          <h3>Some comments for you</h3>
+          <button id="open-rating-popup-button">Give you opinion</button>
+          <div class="rating-topic">Some comments for you</div>
           <div class="comment-area-display">
           @for(int i = 0; i < @Model.Rating.Count(); i++){
             <div class="comment-card">
@@ -190,8 +190,19 @@
       }
     </div>
   </section>
-  <script src="~/js/EventPage.js"></script>
   <script>
+  let closeButton = document.getElementById("close-button");
+  let ratingPopup = document.getElementById("rating-popup");
+  closeButton.onclick = (e) => {
+    ratingPopup.style.display = "none";
+  }
+
+  let openButton = document.getElementById("open-rating-popup-button");
+  openButton.onclick = (e) => {
+    ratingPopup.style.display = "flex";
+  }
+
+
   let hiddenInput = document.querySelector('input[name="Score"]');
 
   function selectRating(rating) {
@@ -210,6 +221,7 @@
   }
   selectRating(5);
 </script>
+<script src="~/js/EventPage.js"></script>
 </body>
 
 </html>

@@ -20,13 +20,27 @@ public class RatingController : BaseController
     {
         String userIdString = _SetUserDataInViewData();
         if (userIdString is null) return RedirectToAction("login", "account");
+        
         var userId = new ObjectId(userIdString);
+        var eventId = rating.EventId;
 
-        rating.UserId = ObjectId.Parse(ViewBag.UserId);
-        rating.LastModifiedDate = DateTime.Now;
+        var ratingFound = _mongoContext.GetCollection<Rating>("ratings")
+            .Find(r => r.EventId == eventId && r.UserId == userId).FirstOrDefault();
+        
 
-        _mongoContext.GetCollection<Rating>("ratings").InsertOne(rating);
-        Console.WriteLine("ASDASDASD");
-        return RedirectToAction("index", "home");
+        if(ratingFound is null){
+            rating.UserId = userId;
+            rating.LastModifiedDate = DateTime.Now;
+            _mongoContext.GetCollection<Rating>("ratings").InsertOne(rating);
+        }
+        else {
+            Console.WriteLine(ratingFound.Id);
+            ratingFound.Score = rating.Score;
+            ratingFound.Comment = rating.Comment;
+            ratingFound.LastModifiedDate = DateTime.Now;
+            _mongoContext.GetCollection<Rating>("ratings").ReplaceOne(r => (r.Id == ratingFound.Id), rating);
+        }
+
+        return RedirectToAction("viewid", "eventpage");
     }
 }
