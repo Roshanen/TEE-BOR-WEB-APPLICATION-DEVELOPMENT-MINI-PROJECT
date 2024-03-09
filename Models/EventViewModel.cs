@@ -12,10 +12,12 @@ namespace WebApp.Models
         public string? EventDetails { get; set; }
         public string? Tags { get; set; }
         public List<dynamic>? Attendees { get; set; }
-        public DateTime? Time { get; set; }
+
         public string? Place { get; set; }
         public string? MapUrl { get; set; }
         public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public string? Status { get; set; }
+
     }
 }

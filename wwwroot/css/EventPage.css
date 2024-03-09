@@ -11,7 +11,7 @@ nav {
   margin: 0;
 }
 body {
-  margin: 0;
+  margin: 5px;
   padding: 0;
 }
 
@@ -73,7 +73,9 @@ li a:hover {
   background-color: #f6f7f8;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5%;
+  padding: 20px;
 }
 
 .content img {
@@ -83,17 +85,95 @@ li a:hover {
   max-height: 576px;
 }
 
-.content div {
+.left-area, .right-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-area {
+  display: flex;
+  max-width: 350px;
+  gap: 20px;
+  font-weight: 100;
+}
+
+.rating-area {
+  max-width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  gap: 15px;
+}
+
+.comment-area {
   width: 100%;
-  margin-left: 13%;
-  margin-top: 50px;
-  width: 576px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  overflow-y: scroll;
+}
+
+.comment-card {
+  max-width: 90%;
+  padding: 5px;
+  border: 1px solid rgb(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-weight: 400;
+}
+
+.rating-display {
+  height: 100px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px;
+}
+
+.progress-container, .progress-label {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.progress-bg {
+  width: 200px;
+  height: 11px;
+  background-color: #dedede;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: gold;
+}
+
+.rating .star {
+  filter: opacity(0.5) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow);
+}
+
+/* Style for star icons */
+.rating .star {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.rating .star:hover,
+.rating .star.active {
+  transform: scale(1.2);
 }
 
 #content-details {
   margin: 0;
   display: block;
-  width: 576px;
+  width: 100%;
 }
 
 .content #content-details {
@@ -168,11 +248,8 @@ li a:hover {
 #details {
   padding: 15px;
   height: fit-content;
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
-  margin-left: 13%;
-  margin-top: 30px;
-  max-width: 300px;
+  border-radius: 20px;
+  max-width: 100%;
   flex-wrap: wrap;
   background-color: white;
 }
@@ -201,7 +278,7 @@ li a:hover {
   height: 100px;
   bottom: 0;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   background-color: white;
   width: 100%;
 }
@@ -225,26 +302,28 @@ li a:hover {
 }
 
 #attend-details {
+  width: 65%;
   display: flex;
-  margin-left: 13%;
-  width: 80%;
   text-align: center;
+  align-items: center;
   align-content: center;
+  justify-content: space-evenly;
 }
 
 #attend div {
   display: flex;
-  margin-right: 20%;
+}
+
+.button-area {
+  display: flex;
+  justify-content: space-between;
+  width: 15%;
 }
 
 #attend-btn {
-  padding: 20px 30px;
   background-color: #f65858;
   color: white;
-  font-weight: 500;
-  font-size: 1rem;
   border: 1px solid #f65858;
-  border-radius: 10%;
 }
 
 #attend-btn:hover {
@@ -252,6 +331,7 @@ li a:hover {
   background-color: white;
   color: #f65858;
 }
+
 #cancel-btn {
   padding: 20px 30px;
   background-color: #7ea0ff;
@@ -271,25 +351,25 @@ li a:hover {
 #share {
   height: 50%;
   display: flex;
-  padding: 20px 30px;
   background-color: white;
   color: rgb(0, 126, 138);
   font-weight: 500;
-  font-size: 1rem;
   border: 1px solid rgb(0, 126, 138);
-  border-radius: 10%;
-  margin-right: 20%;
   align-items: center;
+}
+
+button {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 20px 30px;
+  border-radius: 10px;
+
 }
 
 #share:hover {
   transition: 0.5s;
   background-color: rgb(0, 126, 138);
   color: white;
-}
-
-#short-time {
-  margin-bottom: 0;
 }
 
 #numberInput {

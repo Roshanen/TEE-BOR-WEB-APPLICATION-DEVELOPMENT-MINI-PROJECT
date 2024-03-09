@@ -23,7 +23,6 @@ public class EventPageController : BaseController
 
         var Joins = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(j => j.EventId == ObjectId.Parse(id)).ToList();
         var Attendees = new List<object>();
-        var debug = new List<dynamic>();
         
         foreach (var join in Joins)
         {
@@ -41,10 +40,9 @@ public class EventPageController : BaseController
                 Attendees.Add(attendee);
             }
         }
-
-        Console.WriteLine(debug);
         EventViewModel eventView = new EventViewModel();
 
+        ViewData["CurrentMember"] = Event.CurrentMember;
         eventView.EventName = Event.EventName;
         eventView.HostImg = Host.ProfilePicture;
         eventView.HostName = Host.UserName;
@@ -52,7 +50,7 @@ public class EventPageController : BaseController
         eventView.EventDetails = Event.EventDetails;
         eventView.Tags = Category.CategoryName;
         eventView.Attendees = Attendees;
-        eventView.Time = Event.EndDate;
+        eventView.EndDate = Event.EndDate;
         eventView.Place = Place.ActualPlace;
         eventView.MapUrl = Place.MapUrl;
         ViewBag.EventId = id;
@@ -128,7 +126,6 @@ public class EventPageController : BaseController
             {
                 return BadRequest("User is already joined to the event.");
             }
-
             // Create JoinEvent document
             JoinEvent joinEvent = new JoinEvent();
             joinEvent.UserId = userIdObj;
