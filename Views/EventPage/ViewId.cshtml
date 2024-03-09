@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="content">
-    <div>
+    <div class="left-area">
       <img id="event-img" src=@Model.EventImg />
       <h2>Details</h2>
       <div id="content-details">@Model.EventDetails</div>
@@ -67,34 +67,44 @@
       </section>
 
     </div>
-    <section id="details">
-      <section id="time-details">
-        <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
-        <h3 id="time">@Model.Time</h3>
+    <div class="right-area">
+      <section id="details">
+        <section id="time-details">
+          <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
+          <h3 id="time">@Model.Time</h3>
+        </section>
+        <section id="time-details">
+          <img src="~/src/place.png" alt="" />
+          <h3 id="place">@Model.Place</h3>
+        </section>
+        <section id="time-details">
+          <h3>Status : @Model.Status</h3>
+        </section>
+        <iframe id="map" width="100%" style="border: 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" src=@Model.MapUrl></iframe>
       </section>
-      <section id="time-details">
-        <img src="~/src/place.png" alt="" />
-        <h3 id="place">@Model.Place</h3>
-      </section>
-      <section id="time-details">
-        <h3>Status : @Model.Status</h3>
-      </section>
-      <iframe id="map" width="100%" style="border: 0" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade" src=@Model.MapUrl></iframe>
-    </section>
+      <div class="rating-area">
+          <h3>Customer rating</h3>
+          <div class="rating action-area">
+          </div>
+          <div class="rating-display">
+            <progress max="5" value="3">
+          </div>
+      </div>
+    </div>
   </div>
   <div id="attend-line">
   </div>
   <section id="attend">
     <section id="attend-details">
-      <div id="short-time">
+      <div class="short-time">
         <h3 id="time">Start Time : @Model.StartDate</h3>
       </div>
-      <div id="short-time">
+      <div class="short-time">
         <h3 id="time">End Time : @Model.Time</h3>
       </div>
     </section>
-    <div>
+    <div class="button-area">
       <button id="share">
         Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
       </button>
