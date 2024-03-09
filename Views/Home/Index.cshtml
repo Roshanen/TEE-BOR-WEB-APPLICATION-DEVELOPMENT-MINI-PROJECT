@@ -10,7 +10,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tee Bor</title>
-    <link rel="stylesheet" href="~/css/index.css"></link>
+    <link rel="stylesheet" href="~/css/index.css">
+    </link>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -26,15 +27,15 @@
                 @foreach (var ev in Model)
                 {
                     <div class="event event-1">
-                        <a href="/eventpage/viewid/@ev.Id" >
+                        <a href="/eventpage/viewid/@ev.Id">
                             <div class="event-img-container">
                                 <img class="event-image" src="@ev.EventImg" alt="event-1 image">
                             </div>
                         </a>
                         <div class="content">
                             <p><a href="/eventpage/viewid/@ev.Id" class="event-name">
-                                @ev.EventName
-                            </a></p>
+                                    @ev.EventName
+                                </a></p>
                             <div class="host" style="color: red;">@ev.HostId change later</div>
                             <div class="date">
                                 <span class="material-symbols-outlined">calendar_month</span>
@@ -56,5 +57,9 @@
             </div>
         </div>
     </div>
+    <a href="/event/create" class="link-create">
+        <div class="div-create">Create Event</div>
+    </a>
 </body>
+
 </html>

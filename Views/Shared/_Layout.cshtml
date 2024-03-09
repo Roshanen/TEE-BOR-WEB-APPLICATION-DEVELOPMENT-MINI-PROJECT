@@ -70,7 +70,7 @@
                 @if (@ViewData["UserId"] != null)
                 {
                     <img class="img-profile" src='@ViewData["userProfile"]' height="35px" width="35px" alt="img">
-                    <p class="user-name">User : @ViewData["userName"]</p>
+                    <p class="user-name"> @ViewData["userName"]</p>
                     <a href="/account/logout" class="log-out">Logout</a>
                 }
                 else
