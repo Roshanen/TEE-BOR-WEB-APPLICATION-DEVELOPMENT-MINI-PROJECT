@@ -111,7 +111,7 @@ button {
   margin-left: 2.5rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1076px) {
   .search-form {
     display: none;
   }
@@ -183,7 +183,7 @@ button {
   margin-right: 0.5rem;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1076px) {
   .block-search {
     display: none;
   }
