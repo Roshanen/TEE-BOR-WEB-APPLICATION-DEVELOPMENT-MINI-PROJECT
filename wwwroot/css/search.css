@@ -45,10 +45,6 @@ nav a:hover {
   color: red;
 }
 
-.primary-navigation {
-  flex-wrap: wrap;
-}
-
 .dropdown {
   position: relative;
   min-width: fit-content;
@@ -98,4 +94,38 @@ nav a:hover {
 .inperson ul li {
   list-style-type: none;
   border-left: 2px solid gray;
+}
+
+.card{
+  display: flex;
+}
+
+.img{
+  max-width: 500px;
+  max-height: 500px;
+}
+
+
+
+@media only screen and (max-width: 768px){
+  .img{
+    max-width: 60%;
+  }
+
+  .primary-navigation{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .dropdown{
+    position: relative;
+  }
+
+  .dropdown-menu{
+  display: none;
+  
+  }
 }

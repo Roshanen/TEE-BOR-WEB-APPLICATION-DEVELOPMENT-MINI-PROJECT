@@ -1,13 +1,16 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
+
 namespace WebApp.Models;
 
 public class Event
 {
-    public ObjectId Id { get; set; }
-    public ObjectId PlaceId { get; set; }
-    public ObjectId CategoryId { get; set; }
-    public ObjectId HostId { get; set; }
+    public ObjectId? Id { get; set; }
+    public ObjectId? PlaceId { get; set; }
+    public ObjectId? CategoryId { get; set; }
+    public ObjectId? HostId { get; set; }
+
+    public ObjectId? AttendeeId {get; set;}
 
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
