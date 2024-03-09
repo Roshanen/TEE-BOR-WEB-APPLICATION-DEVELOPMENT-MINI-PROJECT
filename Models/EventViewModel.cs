@@ -19,5 +19,8 @@ namespace WebApp.Models
         public DateTime? EndDate { get; set; }
         public string? Status { get; set; }
 
+        public List<Rating>? Rating { get; set; }
+        public List<float>? RatingProb { get; set; }
+        public List<User>? RatingOwner { get; set; }
     }
 }
