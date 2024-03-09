@@ -33,7 +33,7 @@ public class EventController : BaseController
     [HttpPost]
     public IActionResult Create(CreateEvent createEvent)
     {
-        String userIdString = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+        String userIdString = _SetUserDataInViewData();
         if (userIdString is null) return RedirectToAction("login", "account");
         var userId = new ObjectId(userIdString);
 
@@ -51,7 +51,7 @@ public class EventController : BaseController
         eventModel.LastModifiedDate = today;
         eventModel.EventName = createEvent.EventName;
         eventModel.EventImg = createEvent.EventImg;
-        eventModel.EventDetails = createEvent.EventDetails.ToString();
+        eventModel.EventDetails = createEvent?.EventDetails.ToString();
         eventModel.MaxMember = createEvent.MaxMember;
         eventModel.Rating = defaultRating;
 
