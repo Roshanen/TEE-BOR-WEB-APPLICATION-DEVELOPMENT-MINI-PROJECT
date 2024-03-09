@@ -26,16 +26,11 @@ public class EventPageController : BaseController
         
         foreach (var join in Joins)
         {
-            var person = _mongoContext.GetCollection<User>("users").Find(u => u.Id == (join.UserId)).FirstOrDefault();
-            if (person == Host)
+            if (Event.HostId != join.UserId) 
             {
-                ViewData["host-friend"] = join.BringFriends;
-            }
-            else
-            {
-                var friend = join.BringFriends;
                 Attendee attendee = new Attendee();
-                attendee.user = person;
+                var friend = join.BringFriends;
+                attendee.user = _mongoContext.GetCollection<User>("users").Find(u => u.Id == (join.UserId)).FirstOrDefault();
                 attendee.friend = friend;
                 Attendees.Add(attendee);
             }
@@ -68,6 +63,7 @@ public class EventPageController : BaseController
         }
         List<float> ratingProbs = [0, 0, 0, 0, 0];
         for(int i = 0; i < ratingProbs.Count(); i++){
+            if(totalRating == 0) break;
             ratingProbs[i] = ratingFreq[i]/totalRating;
         }
         eventView.RatingProb = ratingProbs;
@@ -105,14 +101,14 @@ public class EventPageController : BaseController
             {
                 eventView.Status = "available";
                 ViewBag.IsAttending = true;
-            }
-            else
+            } 
+            else 
             {
                 ViewBag.IsAttending = false;
             }
 
-        }
-        else
+        } 
+        else 
         {
             ViewBag.IsAttending = false;
         }

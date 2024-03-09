@@ -26,9 +26,9 @@ public class HomeController : BaseController
         var events = _mongoContext.GetCollection<Event>("events").Find(e => true).ToList();
         List<WebApp.Models.Event> activeEvents = new List<WebApp.Models.Event>();
         foreach (var e in events){
-            if ((DateTime.Compare(e.EndDate, dateTimeNow )> 0) & (e.CurrentMember < e.MaxMember) ){
+            // if ((DateTime.Compare(e.EndDate, dateTimeNow )> 0) & (e.CurrentMember < e.MaxMember) ){
                 activeEvents.Add(e);
-            }
+            // }
         }
 
 
