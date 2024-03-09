@@ -53,6 +53,27 @@ public class EventPageController : BaseController
         eventView.EndDate = Event.EndDate;
         eventView.Place = Place.ActualPlace;
         eventView.MapUrl = Place.MapUrl;
+
+        // Get rating out
+        var ratingModel = _mongoContext.GetCollection<Rating>("ratings").Find(r => r.EventId == Event.Id).SortBy(r => r.Score).Limit(20).ToList();
+        List<User> ratingOwners = new List<User>();
+        eventView.Rating = ratingModel;
+        float totalRating = 0;
+        List<float> ratingFreq = [0, 0, 0, 0, 0];
+        foreach(Rating rating in ratingModel){
+            var ratingOwner = _mongoContext.GetCollection<User>("users").Find(u => rating.UserId == u.Id).FirstOrDefault();
+            totalRating += 1;
+            ratingFreq[rating.Score - 1] += 1;
+            ratingOwners.Add(ratingOwner);
+        }
+        List<float> ratingProbs = [0, 0, 0, 0, 0];
+        for(int i = 0; i < ratingProbs.Count(); i++){
+            ratingProbs[i] = ratingFreq[i]/totalRating;
+        }
+        eventView.RatingProb = ratingProbs;
+        eventView.RatingOwner = ratingOwners;
+        // finish with rating
+
         ViewBag.EventId = id;
         ViewBag.MaxCapacity = Event.MaxMember - Event.CurrentMember - 1;
         eventView.StartDate = Event.StartDate;

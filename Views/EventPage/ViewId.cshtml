@@ -94,48 +94,23 @@
               <span>1</span>
             </div>
             <div class="progress-container">
-              <div class="progress-bg rating-1"><div class="progress-bar" style="width: 80%;"></div></div>
-              <div class="progress-bg rating-2"><div class="progress-bar" style="width: 80%;"></div></div>
-              <div class="progress-bg rating-3"><div class="progress-bar" style="width: 80%;"></div></div>
-              <div class="progress-bg rating-4"><div class="progress-bar" style="width: 80%;"></div></div>
-              <div class="progress-bg rating-5"><div class="progress-bar" style="width: 80%;"></div></div>
+            @foreach(float prob in @Model.RatingProb){
+              String style = String.Concat("width:", (prob*100).ToString());
+              style = String.Concat(style, "%;");
+              Console.WriteLine(style);
+              <div class="progress-bg rating-1"><div class="progress-bar" style=@style></div></div>
+            }
             </div>
           </div>
           <h3>Some comments for you</h3>
           <div class="comment-area">
+          @for(int i = 0; i < @Model.Rating.Count(); i++){
             <div class="comment-card">
-              <div class="comment-header">5 out of 5</div>
-              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
-              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
+              <div class="comment-header">@Model.Rating[i].Score out of 5</div>
+              <div class="comment-owner" style="font-weight: 800;">@Model.RatingOwner[i].UserName</div>
+              <div class="comment-content">@Model.Rating[i].Comment</div>
             </div>
-            <div class="comment-card">
-              <div class="comment-header">5 out of 5</div>
-              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
-              <div class="comment-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.
-              </div>
-            </div>
-            <div class="comment-card">
-              <div class="comment-header">5 out of 5</div>
-              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
-              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
-            </div>
-            <div class="comment-card">
-              <div class="comment-header">5 out of 5</div>
-              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
-              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
-            </div>
-            <div class="comment-card">
-              <div class="comment-header">5 out of 5</div>
-              <div class="comment-owner" style="font-weight: 800;">Kittipan Onlay</div>
-              <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat sodales odio. Integer ultrices eleifend feugiat.</div>
-            </div>
+          }
           </div>
       </div>
     </div>
