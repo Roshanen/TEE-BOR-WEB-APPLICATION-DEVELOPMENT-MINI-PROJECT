@@ -69,7 +69,7 @@ public class EventController : BaseController
         eventModel.PlaceId = placeModel.Id;
 
         _mongoContext.GetCollection<Event>("events").InsertOne(eventModel);
-        // _mongoContext.GetCollection<JoinEvent>("joinEvents").InsertOne(new JoinEvent { UserId = userId, EventId = eventModel.Id });
+        _mongoContext.GetCollection<JoinEvent>("joinEvents").InsertOne(new JoinEvent { UserId = userId, EventId = eventModel.Id, JoinDate = DateTime.Now, BringFriends = 0 });
         return RedirectToAction("Index");
     }
 
