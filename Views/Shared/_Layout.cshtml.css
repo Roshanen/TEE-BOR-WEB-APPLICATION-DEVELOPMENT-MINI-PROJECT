@@ -111,7 +111,7 @@ button {
   margin-left: 2.5rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1076px) {
   .search-form {
     display: none;
   }
@@ -152,7 +152,8 @@ button {
   color: #f65858;
 }
 
-.right-navbar .sign-up, .log-out {
+.right-navbar .sign-up,
+.log-out {
   padding: 0.5rem 1rem;
   background-color: #00798a;
   border-radius: 0.5rem;
@@ -182,7 +183,7 @@ button {
   margin-right: 0.5rem;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1076px) {
   .block-search {
     display: none;
   }
@@ -227,8 +228,6 @@ button {
   display: inline;
   width: 2.5rem;
 }
-
-
 
 footer {
   padding-top: 2rem;

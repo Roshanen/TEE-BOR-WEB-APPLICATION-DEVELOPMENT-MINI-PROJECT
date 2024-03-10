@@ -24,7 +24,7 @@
                 </a>
 
                 <div class="search-form">
-                    <form action="/search">
+                    <form onsubmit="/search">
                         <div class="form-container">
 
                             <div class="search-name">
@@ -69,8 +69,10 @@
                 </a>
                 @if (@ViewData["UserId"] != null)
                 {
-                    <img class="img-profile" src='@ViewData["userProfile"]' height="35px" width="35px" alt="img">
-                    <p class="user-name">User : @ViewData["userName"]</p>
+                    <a href='/profile/viewid/@ViewData["userID"]'>
+                        <img class="img-profile" src='@ViewData["userProfile"]' height="35px" width="35px" alt="img">
+                    </a>
+                    <a href='/profile/viewid/@ViewData["userID"]' class="user-name"> @ViewData["userName"]</a>
                     <a href="/account/logout" class="log-out">Logout</a>
                 }
                 else
@@ -84,7 +86,7 @@
         </navbar>
 
         <div class="block-search">
-            <form action="/search">
+            <form onsubmit="search()">
                 <div class="block-form-container">
 
                     <div class="search-base">
@@ -139,6 +141,8 @@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/block-search.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
