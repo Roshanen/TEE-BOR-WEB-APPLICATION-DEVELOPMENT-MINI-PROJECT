@@ -24,7 +24,7 @@ public class HomeController : BaseController
     public IActionResult Index(PresentCondition presentCondition)
     {
         _SetUserDataInViewData();
-        var Events = _mongoContext.GetCollection<Event>("events").Find(j => j.EndDate <= DateTime.Now).ToList();
+        var Events = _mongoContext.GetCollection<Event>("events").Find(j => j.EndDate > DateTime.Now).ToList();
         Console.WriteLine(Events.Count);
         Console.WriteLine(DateTime.Now);
         List<EventViewModel> listEventview = new List<EventViewModel>();

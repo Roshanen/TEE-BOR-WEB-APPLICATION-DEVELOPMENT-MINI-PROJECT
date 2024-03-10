@@ -6,6 +6,50 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/profile.css" />
+
+    <style>
+        .rating-popup {
+            transform: translateY(-10vh);
+            position: fixed;
+            width: 100%;
+            height: 110vh;
+            z-index: 998;
+            background-color: rgb(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #close-button {
+            background-color: rgb(0, 0, 0, 0);
+            color: var(--red-search);
+            font-weight: 600;
+            font-size: large;
+            border: none;
+            width: 80%;
+        }
+
+        .rating-popup textarea {
+            width: 80%;
+            height: 60%;
+            resize: none;
+        }
+
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            z-index: 999;
+            width: 500px;
+            height: 400px;
+            background-color: white;
+            border-radius: 20px;
+            padding: 10px;
+        }
+    </style>
+
 </head>
 
 <body style="background-color: white">
@@ -28,31 +72,39 @@
         <a href="https://youtu.be/9MCiixIkzUk?si=GS2FAVwNzU8Nzr3q">API Guide</a>
         <a href="https://youtu.be/9MCiixIkzUk?si=GS2FAVwNzU8Nzr3q">Help</a>
     </div>
+    <form asp-action="Edit" asp-controller="Profile" method="post">
+        <div class="rating-popup" id="rating-popup">
+            <div class="input-area">
+                <h3>Profile Picture Link</h3>
+                <textarea type="text" name="ProfilePicture;"
+                    placeholder="Put in your profile picture link here">@Model.ProfilePicture</textarea>
+                <button type="button" id="close-button">close</button>
+            </div>
+        </div>
 
-    <div class="content">
-        <h1 style="
-          font-weight: 700;
-          margin-left: 25px;
-          margin-bottom: 0%;
-          padding-bottom: 0%;
-        ">
-            Edit profile
-        </h1>
-        <p style="
-          font-weight: 400;
-          margin-left: 25px;
-          margin-top: 10px;
-          margin-bottom: 10px;
-        ">
-            This information will appear on your public profile
-        </p>
-        <form asp-action="Edit" asp-controller="Profile" method="post">
+        <div class="content">
+            <h1 style="
+            font-weight: 700;
+            margin-left: 25px;
+            margin-bottom: 0%;
+            padding-bottom: 0%;
+            ">
+                Edit profile
+            </h1>
+            <p style="
+            font-weight: 400;
+            margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            ">
+                This information will appear on your public profile
+            </p>
             @Html.AntiForgeryToken()
             <div class="row" style="
-            justify-content: space-around;
-            grid-template-columns: 1.8fr 3fr 3fr;
-            width: 100%;
-            ">
+                justify-content: space-around;
+                grid-template-columns: 1.8fr 3fr 3fr;
+                width: 100%;
+                ">
                 <div class="column" style="margin-left: 15px; margin-right: 25px">
                     <div
                         class="flex w-full flex-col items-center space-x-0 space-y-3 md:flex-row md:space-x-6 md:space-y-0">
@@ -85,14 +137,14 @@
                     </div>
                 </div>
                 <div class="column" style="display: flex; justify-content: center; height: 13vh">
-                    <button onclick="openUploadPanel()" class="green-button">Upload New</button>
+                    <button id="open-rating-popup-button" type="button" class="green-button">Upload New</button>
                 </div>
                 <div class="column" style="
-                display: flex;
-                justify-content: center;
-                height: 13vh;
-                justify-self: right;
-            ">
+                    display: flex;
+                    justify-content: center;
+                    height: 13vh;
+                    justify-self: right;
+                ">
                     <a href="#" class="white-button">Choose from library</a>
                 </div>
             </div>
@@ -110,19 +162,19 @@
             <div style="display: flex; flex-direction: column; gap: 0px">
                 <div style="padding: 0px; margin: 16px">
                     <p style="
-                margin: 0px;
-                padding: 0px;
-                padding-bottom: 6px;
-                font-weight: 600;
-                ">
+                    margin: 0px;
+                    padding: 0px;
+                    padding-bottom: 6px;
+                    font-weight: 600;
+                    ">
                         Your Email Address
                     </p>
                     <p style="
-                margin: 0px;
-                padding: 0px;
-                padding-bottom: 6px;
-                color: #707070;
-                ">
+                    margin: 0px;
+                    padding: 0px;
+                    padding-bottom: 6px;
+                    color: #707070;
+                    ">
                         @Model.Email
                     </p>
                     <br />
@@ -155,18 +207,28 @@
                     <div class="input-container-social">
                         <textarea type="text" name="Contact" id="custom-name-ta" autocomplete="given-name"
                             maxlength="250" placeholder="Write a little bit of yourself here"
-                            style="text-align: left; line-break: auto; resize: none; height: 100px;">@Model.UserName</textarea>
+                            style="text-align: left; line-break: auto; resize: none; height: 100px;">@Model.Contact</textarea>
                         <span id="charCount"></span>
                     </div>
                 </div>
             </div>
-            <form asp-action="Edit" asp-controller="Profile" method="post">
-                <button type="submit" class="orange-button" style="margin: 15px;">Save Changes</button>
-            </form>
+            <button type="submit" class="orange-button" style="margin: 15px;">Save Changes</button>
+        </div>
+    </form>
 
-        </form>
-    </div>
-    </div>
+    <script>
+        let closeButton = document.getElementById("close-button");
+        let ratingPopup = document.getElementById("rating-popup");
+        closeButton.onclick = (e) => {
+            ratingPopup.style.display = "none";
+        }
+
+        let openButton = document.getElementById("open-rating-popup-button");
+        openButton.onclick = (e) => {
+            ratingPopup.style.display = "flex";
+        }
+
+    </script>
     <script>
         const inputField = document.getElementById("custom-name");
         const charCount = document.getElementById("charCount");
