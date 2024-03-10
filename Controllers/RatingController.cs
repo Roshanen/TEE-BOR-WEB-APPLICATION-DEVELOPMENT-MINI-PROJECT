@@ -29,18 +29,18 @@ public class RatingController : BaseController
         
 
         if(ratingFound is null){
+            Console.WriteLine("bp null");
             rating.UserId = userId;
             rating.LastModifiedDate = DateTime.Now;
             _mongoContext.GetCollection<Rating>("ratings").InsertOne(rating);
         }
         else {
-            Console.WriteLine(ratingFound.Id);
             ratingFound.Score = rating.Score;
             ratingFound.Comment = rating.Comment;
             ratingFound.LastModifiedDate = DateTime.Now;
-            _mongoContext.GetCollection<Rating>("ratings").ReplaceOne(r => (r.Id == ratingFound.Id), rating);
+            _mongoContext.GetCollection<Rating>("ratings").ReplaceOne(r => (r.Id == ratingFound.Id), ratingFound);
         }
 
-        return RedirectToAction("viewid", "eventpage");
+        return RedirectToAction("viewid", "eventpage", new {id = eventId});
     }
 }
