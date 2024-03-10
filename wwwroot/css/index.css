@@ -12,6 +12,7 @@ body {
     sans-serif;
 }
 
+
 .container {
   padding-left: 12%;
   padding-right: 12%;
@@ -40,6 +41,7 @@ body {
   height: 34.75rem;
   background-color: #f7f7f7;
   border-radius: 1rem;
+
 }
 
 .event-img-container {
@@ -160,6 +162,7 @@ body {
   .container {
     padding: 0;
   }
+  
   .event-container {
     display: flex;
     flex-direction: column;

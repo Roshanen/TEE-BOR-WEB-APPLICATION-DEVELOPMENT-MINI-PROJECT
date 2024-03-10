@@ -12,10 +12,13 @@ public class HomeController : BaseController
     private readonly ILogger<HomeController> _logger;
     private new readonly MongoContext _mongoContext;
 
+    private new readonly MongoContext _Context2;
+
     public HomeController(ILogger<HomeController> logger, MongoContext mongoContext) : base(mongoContext)
     {
         _logger = logger;
         _mongoContext = mongoContext;
+        _Context2 = mongoContext;
     }
 
 
@@ -23,16 +26,25 @@ public class HomeController : BaseController
     {
         _SetUserDataInViewData();
         DateTime dateTimeNow = DateTime.Now;
-        var events = _mongoContext.GetCollection<Event>("events").Find(e => true).ToList();
-        List<WebApp.Models.Event> activeEvents = new List<WebApp.Models.Event>();
-        foreach (var e in events){
-            if ((DateTime.Compare(e.EndDate, dateTimeNow )> 0) & (e.CurrentMember < e.MaxMember) ){
-                activeEvents.Add(e);
-            }
+        var Events = _Context2.GetCollection<JoinEvent>("joinEvents").Find(j => j.EventId == ObjectId.Parse("65e7f50923f62e18cc7dcc24")).ToList();
+        foreach (var e in Events){
+        Console.WriteLine("HIHIHIHIHIH");
+        Console.WriteLine(e.JoinDate);
         }
+        var events = _mongoContext.GetCollection<Event>("events");
+        var ongoingcheck = events.Find(e => true).ToList();
 
 
-        return View(activeEvents);
+        List<WebApp.Models.Event> names = new List<WebApp.Models.Event>();
+
+
+        foreach (var e in ongoingcheck){
+            if ((DateTime.Compare(e.EndDate, dateTimeNow )> 0) & (e.CurrentMember < e.MaxMember) ){
+                names.Add(e);
+            }
+
+        }
+        return View(names);
     }
 
     public IActionResult Privacy()

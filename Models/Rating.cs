@@ -12,5 +12,5 @@ public class Rating
     [Range(1, 5)]
     public int Score { get; set; }
     [StringLength(248, MinimumLength = 16)]
-    public String? Comment { get; set; }
+    public String Comment { get; set; }
 }

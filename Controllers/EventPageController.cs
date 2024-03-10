@@ -26,16 +26,11 @@ public class EventPageController : BaseController
         
         foreach (var join in Joins)
         {
-            var person = _mongoContext.GetCollection<User>("users").Find(u => u.Id == (join.UserId)).FirstOrDefault();
-            if (person == Host)
+            if (Event.HostId != join.UserId) 
             {
-                ViewData["host-friend"] = join.BringFriends;
-            }
-            else
-            {
-                var friend = join.BringFriends;
                 Attendee attendee = new Attendee();
-                attendee.user = person;
+                var friend = join.BringFriends;
+                attendee.user = _mongoContext.GetCollection<User>("users").Find(u => u.Id == (join.UserId)).FirstOrDefault();
                 attendee.friend = friend;
                 Attendees.Add(attendee);
             }
@@ -55,19 +50,21 @@ public class EventPageController : BaseController
         eventView.MapUrl = Place.MapUrl;
 
         // Get rating out
-        var ratingModel = _mongoContext.GetCollection<Rating>("ratings").Find(r => r.EventId == Event.Id).SortBy(r => r.Score).Limit(20).ToList();
+        var ratingModel = _mongoContext.GetCollection<Rating>("ratings").Find(r => r.EventId == Event.Id).ToList();
         List<User> ratingOwners = new List<User>();
         eventView.Rating = ratingModel;
         float totalRating = 0;
+        int MAXRATING = 5;
         List<float> ratingFreq = [0, 0, 0, 0, 0];
         foreach(Rating rating in ratingModel){
             var ratingOwner = _mongoContext.GetCollection<User>("users").Find(u => rating.UserId == u.Id).FirstOrDefault();
             totalRating += 1;
-            ratingFreq[rating.Score - 1] += 1;
+            ratingFreq[MAXRATING - rating.Score] += 1;
             ratingOwners.Add(ratingOwner);
         }
         List<float> ratingProbs = [0, 0, 0, 0, 0];
         for(int i = 0; i < ratingProbs.Count(); i++){
+            if(totalRating == 0) break;
             ratingProbs[i] = ratingFreq[i]/totalRating;
         }
         eventView.RatingProb = ratingProbs;
@@ -105,14 +102,14 @@ public class EventPageController : BaseController
             {
                 eventView.Status = "available";
                 ViewBag.IsAttending = true;
-            }
-            else
+            } 
+            else 
             {
                 ViewBag.IsAttending = false;
             }
 
-        }
-        else
+        } 
+        else 
         {
             ViewBag.IsAttending = false;
         }
