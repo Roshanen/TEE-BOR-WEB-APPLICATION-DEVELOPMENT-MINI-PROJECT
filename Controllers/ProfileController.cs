@@ -58,6 +58,9 @@ public class ProfileController : BaseController
     public async Task<ActionResult> Edit(string id)
     {
         var objectId = ObjectId.Parse(id);
+        var currentId = _SetUserDataInViewData();
+
+        if (currentId == null) return RedirectToAction("login", "account");
         var userProfile = await _mongoContext.GetCollection<User>("users")
                                          .Find(u => u.Id == objectId)
                                          .FirstOrDefaultAsync();
@@ -81,11 +84,12 @@ public class ProfileController : BaseController
                                    .Set(u => u.Bio, model.Bio)
                                    .Set(u => u.Contact, model.Contact);
 
-        if (model.UserName != null) update = update.Set(u => u.UserName, model.UserName);
-        if (model.ProfilePicture != null) update = update.Set(u => u.ProfilePicture, model.ProfilePicture);
-        if (model.Address != null) update = update.Set(u => u.Address, model.Address);
-        if (model.Bio != null) update = update.Set(u => u.Bio, model.Bio);
-        if (model.Contact != null) update = update.Set(u => u.Contact, model.Contact);
+        if (model.UserName != "" && model.UserName != null) update = update.Set(u => u.UserName, model.UserName);
+        if (model.ProfilePicture != "" && model.ProfilePicture != null) update = update.Set(u => u.ProfilePicture, model.ProfilePicture);
+        if (model.Address != "" && model.Address != null) update = update.Set(u => u.Address, model.Address);
+        if (model.Bio != "" && model.Bio != null) update = update.Set(u => u.Bio, model.Bio);
+        if (model.Contact != "" && model.Contact != null) update = update.Set(u => u.Contact, model.Contact);
+        Console.WriteLine(model.ProfilePicture);
 
         await _mongoContext.GetCollection<User>("users").UpdateOneAsync(filter, update);
 
