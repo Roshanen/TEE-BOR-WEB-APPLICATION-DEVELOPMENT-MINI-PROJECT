@@ -29,7 +29,6 @@ public class RatingController : BaseController
         
 
         if(ratingFound is null){
-            Console.WriteLine("bp null");
             rating.UserId = userId;
             rating.LastModifiedDate = DateTime.Now;
             _mongoContext.GetCollection<Rating>("ratings").InsertOne(rating);

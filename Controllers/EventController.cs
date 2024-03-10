@@ -94,7 +94,6 @@ public class EventController : BaseController
             return RedirectToAction("login", "account");
         }
 
-        // Console.WriteLine("Edit");
         CreateEvent createEvent = new CreateEvent();
         //Place
         var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
@@ -122,8 +121,6 @@ public class EventController : BaseController
     [HttpPost]
     public IActionResult Edit(string id, CreateEvent createEvent)
     {
-        // Console.WriteLine(updatedEvent);
-        // _mongoContext.GetCollection<Event>("events").ReplaceOne(ev => ev.Id == ObjectId.Parse(id), updatedEvent);
         var eventModel = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
         var placeModel = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == eventModel.PlaceId).FirstOrDefault();
         var categoryModel = _mongoContext.GetCollection<Category>("tags").Find(t => t.Id == eventModel.CategoryId).FirstOrDefault();
