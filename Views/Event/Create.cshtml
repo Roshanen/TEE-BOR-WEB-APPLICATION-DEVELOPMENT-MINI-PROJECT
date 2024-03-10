@@ -64,7 +64,7 @@
                         </div>
                         <div class="input-area">
                             <label>Choose from this</label>
-                            <select name="CategoryName" asp-items="@GetTags()"></select>
+                            <select name="CategoryName" asp-items="@GetTags()" value="Gaming"></select>
                             @functions {
                                 List<SelectListItem> GetTags()
                                 {
