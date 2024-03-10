@@ -1,0 +1,12 @@
+@model List<User>
+
+@foreach (var user in Model)
+{
+    <tr>
+        <td>@user.UserName</td>
+        <td>@user.Contact</td>
+        <td>
+            <a asp-action="ViewId" asp-route-id="@user.Id.ToString()">Edit</a> |
+        </td>
+    </tr> <br>
+}
