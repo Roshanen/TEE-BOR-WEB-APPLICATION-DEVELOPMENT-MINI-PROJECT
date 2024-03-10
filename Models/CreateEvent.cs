@@ -33,5 +33,5 @@ public class CreateEvent
     public string? EventDetails { get; set; }
     // member count
     [Required]
-    public int? MaxMember { get; set; }
+    public int MaxMember { get; set; }
 }
