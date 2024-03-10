@@ -39,3 +39,23 @@ class Dropdown {
 }
 
 document.addEventListener("DOMContentLoaded", () => new Dropdown());
+
+function qChangeDisplay() {
+  var options = document.querySelectorAll(".dropdown-menu a");
+  options.forEach((opt) => {
+    opt.addEventListener("click", (ev) => {
+      var selectedText = ev.target.innerHTML;
+      var selectedId = ev.target.id;
+      var dropdownTitle = ev.target.closest("*:has(span)");
+      var dropdownName = dropdownTitle.querySelector("span");
+
+      if (selectedId == "any") {
+        dropdownName.innerHTML = "Any " + dropdownName.id;
+      } else {
+        dropdownName.innerHTML = selectedText;
+      }
+    });
+  });
+}
+
+qChangeDisplay();
