@@ -17,22 +17,25 @@ namespace WebApp.Controllers
 
         public async Task<ActionResult> Index()
         {
+            string userIdString = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
+
+            if (userIdString == null) return RedirectToAction("login", "account");
+
+            var userId = new ObjectId(userIdString);
 
             var userProfile = await _context.GetCollection<User>("users")
-                                             .Find(u => u.UserName == "MiaMartin")
+                                             .Find(u => u.Id == userId)
                                              .FirstOrDefaultAsync();
-            if (userProfile == null)
-            {
-                return NotFound();
-            }
 
             return View(userProfile);
         }
+
 
         public async Task<ActionResult> Edit(string id)
         {
-            var userProfile = await _context.GetCollection<UserProfile>("UserProfiles")
-                                             .Find(u => u.Id == id)
+            var objectId = ObjectId.Parse(id);
+            var userProfile = await _context.GetCollection<User>("users")
+                                             .Find(u => u.Id == objectId)
                                              .FirstOrDefaultAsync();
             if (userProfile == null)
             {
@@ -42,27 +45,28 @@ namespace WebApp.Controllers
             return View(userProfile);
         }
 
-        // POST: Profile/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(UserProfile model)
+        public async Task<IActionResult> Edit(User model)
         {
-            if (ModelState.IsValid)
-            {
-                var update = Builders<UserProfile>.Update
-                    .Set(u => u.UserName, model.UserName)
-                    .Set(u => u.Email, model.Email)
-                    .Set(u => u.ProfilePicture, model.ProfilePicture)
-                    .Set(u => u.Address, model.Address)
-                    .Set(u => u.Bio, model.Bio)
-                    .Set(u => u.JoinDate, model.JoinDate);
+            var filter = Builders<User>.Filter.Eq(u => u.Id, model.Id);
+            var updateBuilder = Builders<User>.Update;
+            var update = updateBuilder.Set(u => u.UserName, model.UserName)
+                                       .Set(u => u.ProfilePicture, model.ProfilePicture)
+                                       .Set(u => u.Address, model.Address)
+                                       .Set(u => u.Bio, model.Bio)
+                                       .Set(u => u.Contact, model.Contact);
 
-                await _context.GetCollection<UserProfile>("UserProfiles")
-                              .UpdateOneAsync(u => u.Id == model.Id, update);
-                return RedirectToAction(nameof(Index));
-            }
+            if (model.UserName != null) update = update.Set(u => u.UserName, model.UserName);
+            if (model.ProfilePicture != null) update = update.Set(u => u.ProfilePicture, model.ProfilePicture);
+            if (model.Address != null) update = update.Set(u => u.Address, model.Address);
+            if (model.Bio != null) update = update.Set(u => u.Bio, model.Bio);
+            if (model.Contact != null) update = update.Set(u => u.Contact, model.Contact);
 
-            return View(model);
+            await _context.GetCollection<User>("users").UpdateOneAsync(filter, update);
+
+            return RedirectToAction("Index");
         }
+
     }
 }
