@@ -21,8 +21,12 @@
         </div>
         <nav role="primary navigation" class="primary-navigation">
             <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action" id="dateChoice">Any day <svg class="dropdown-icon"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <a href="#" onclick="return false;" class="dropdown-action" id="dateChoice">
+                    <span>
+                        Any day
+                    </span>
+                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24">
                         <title>chevron-down</title>
                         <g fill="none">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -42,7 +46,11 @@
             </div>
 
             <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action type" id="type">Any type
+                <a href="#" onclick="return false;" class="dropdown-action type">
+                    <span id="type">
+                        Any type
+                    </span>
+
                     <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <title>chevron-down</title>
@@ -53,8 +61,8 @@
                     </svg></a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="#" onclick="return false; id="any">Any type</a></li>
-                    <li><a href="#" onclick="return false; id="Online">Online</a></li>
+                    <li><a href="#" onclick="return false; id=" any">Any type</a></li>
+                    <li><a href="#" onclick="return false; id=" Online">Online</a></li>
                     <li>
                         <ul class="inperson">
                             <li>
@@ -93,7 +101,10 @@
             </div> *@
 
             <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action category" id="category">Any category
+                <a href="#" onclick="return false;" class="dropdown-action category">
+                    <span id="category">
+                        Any category
+                    </span>
                     <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <title>chevron-down</title>
@@ -130,7 +141,10 @@
             </div>
             <div class="dropdown">
                 <a href="#" onclick="return false;" class="dropdown-action">
-                    Sort by: Relevance
+                    Sort by:&nbsp;
+                    <span id="sort">
+                         Date
+                    </span>
                     <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <title>chevron-down</title>
@@ -162,7 +176,7 @@
                             <h3>@ev.EndDate</h3>
                         </div>
                         <div class="header">
-                            <a href="/eventpage/wiewid/@ev.Id">
+                            <a href="/eventpage/viewid/@ev.Id">
                                 <h2>@ev.EventName</h2>
                             </a>
                             <div class="sub-header">
