@@ -40,7 +40,7 @@ public class EventController : BaseController
         Event eventModel = new Event();
         Place placeModel = new Place();
 
-        float defaultRating = 5.0f;
+        float defaultRating = 0.0f;
         eventModel.CurrentMember = 1;
 
         // can be shared between edit and create
@@ -60,7 +60,7 @@ public class EventController : BaseController
         placeModel.District = createEvent.District;
         placeModel.SubDistrict = createEvent.SubDistrict;
 
-        eventModel.Category = createEvent.Category;
+        eventModel.CategoryName = createEvent.CategoryName;
         // end of sharing
 
         _mongoContext.GetCollection<Place>("places").InsertOne(placeModel);
@@ -127,7 +127,6 @@ public class EventController : BaseController
         eventModel.EventImg = createEvent.EventImg;
         eventModel.EventDetails = createEvent.EventDetails;
         eventModel.MaxMember = createEvent.MaxMember;
-        eventModel.Rating = createEvent.Rating;
         eventModel.CategoryName = createEvent.CategoryName;
 
         placeModel.MapUrl = createEvent.MapUrl;
