@@ -12,39 +12,37 @@ public class HomeController : BaseController
     private readonly ILogger<HomeController> _logger;
     private new readonly MongoContext _mongoContext;
 
-    private new readonly MongoContext _Context2;
 
     public HomeController(ILogger<HomeController> logger, MongoContext mongoContext) : base(mongoContext)
     {
         _logger = logger;
         _mongoContext = mongoContext;
-        _Context2 = mongoContext;
+        
     }
 
 
     public IActionResult Index(PresentCondition presentCondition)
     {
         _SetUserDataInViewData();
-        DateTime dateTimeNow = DateTime.Now;
-        var Events = _Context2.GetCollection<JoinEvent>("joinEvents").Find(j => j.EventId == ObjectId.Parse("65e7f50923f62e18cc7dcc24")).ToList();
+        var Events = _mongoContext.GetCollection<Event>("events").Find(j => j.EndDate <= DateTime.Now).ToList();
+        Console.WriteLine(Events.Count);
+        Console.WriteLine(DateTime.Now);
+        List<EventViewModel> listEventview = new List<EventViewModel>();
+
+
         foreach (var e in Events){
-        Console.WriteLine("HIHIHIHIHIH");
-        Console.WriteLine(e.JoinDate);
+            var Host = _mongoContext.GetCollection<User>("users").Find(u => u.Id == e.HostId).FirstOrDefault();
+            Console.WriteLine(e.EventName);
+            Console.WriteLine(Host.UserName);
+            EventViewModel eventView = new EventViewModel();
+            eventView.EventName = e.EventName;
+            eventView.HostName = Host.UserName;
+            eventView.EventImg = e.EventImg;
+            eventView.Tags = e.Id.ToString();
+            eventView.EndDate = e.EndDate;
+            listEventview.Add(eventView);
         }
-        var events = _mongoContext.GetCollection<Event>("events");
-        var ongoingcheck = events.Find(e => true).ToList();
-
-
-        List<WebApp.Models.Event> names = new List<WebApp.Models.Event>();
-
-
-        foreach (var e in ongoingcheck){
-            if ((DateTime.Compare(e.EndDate, dateTimeNow )> 0) & (e.CurrentMember < e.MaxMember) ){
-                names.Add(e);
-            }
-
-        }
-        return View(names);
+        return View(listEventview);
     }
 
     public IActionResult Privacy()
