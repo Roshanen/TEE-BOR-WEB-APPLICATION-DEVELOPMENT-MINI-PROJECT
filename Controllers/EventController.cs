@@ -127,7 +127,7 @@ public class EventController : BaseController
         eventModel.EventImg = createEvent.EventImg;
         eventModel.EventDetails = createEvent.EventDetails;
         eventModel.MaxMember = createEvent.MaxMember;
-        eventModel.Rating = createEvent.Rating;
+        //eventModel.Rating = createEvent.Rating;
         eventModel.CategoryName = createEvent.CategoryName;
 
         placeModel.MapUrl = createEvent.MapUrl;
