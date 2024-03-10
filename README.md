@@ -4,6 +4,7 @@ Web Application Development Mini Project using ASP.NET MVC.
 
 This app helps bring people together for events.
 
+<!-- Build -->
 ## Building a sample
 
 Build any .NET Core sample using the .NET Core CLI, which is installed with [the .NET Core SDK](https://www.microsoft.com/net/download). Then run
@@ -14,6 +15,7 @@ dotnet build
 dotnet run
 ```
 
+<!-- Dev -->
 ## Dev Mode
 
 In development process we could use `dotnet watch`.
@@ -22,3 +24,16 @@ The dotnet watch command is a file watcher. When it detects a change, it runs th
 ```console
 dotnet watch
 ```
+
+<!-- ENV -->
+## .env Setup
+
+Store your sensitive Data about Connections in .env file.
+
+```
+MONGODB_CONNECTION_STRING="your mongodb connection string"
+DATABASE_NAME="your database name"
+JWT_SECRET_KEY="your jwt secret key"
+```
+
+_Last thing is "this got me so sleepy"._

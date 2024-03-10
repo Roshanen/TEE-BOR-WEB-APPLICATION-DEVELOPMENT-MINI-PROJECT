@@ -4,16 +4,16 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
 
-namespace WebApp.Controllers
-{
-    public class ProfileController : Controller
-    {
-        private readonly MongoContext _context;
+namespace WebApp.Controllers;
 
-        public ProfileController(MongoContext context)
-        {
-            _context = context;
-        }
+public class ProfileController : BaseController
+{
+    private new readonly MongoContext _mongoContext;
+
+    public ProfileController(MongoContext mongoContext) : base(mongoContext)
+    {
+        _mongoContext = mongoContext;
+    }
 
         public async Task<ActionResult> Index()
         {
@@ -42,8 +42,8 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            return View(userProfile);
-        }
+        return View(userProfile);
+    }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

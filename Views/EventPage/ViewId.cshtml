@@ -14,6 +14,46 @@
 <link rel="stylesheet" href="~/css/EventPage.css" />
 
 <body>
+  <div class="rating-popup" id="rating-popup">
+    <form asp-controller="Rating" asp-action="Create" method="post">
+      <button type="button" id="close-button">close</button>
+      <h3>Rating</h3>
+      <input name="EventId" type="hidden" value=@ViewBag.EventId>
+      <input name="Score" type="hidden" value="5">
+      <div class="rating-area">
+          <div class="star-container rating-box-5" onclick="selectRating(5)">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+          </div>
+          <div class="star-container rating-box-4" onclick="selectRating(4)">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+          </div>
+          <div class="star-container rating-box-3" onclick="selectRating(3)">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+          </div>
+          <div class="star-container rating-box-2" onclick="selectRating(2)">
+              <img class="star" src="/src/star-icon.png">
+              <img class="star" src="/src/star-icon.png">
+          </div>
+          <div class="star-container rating-box-1" onclick="selectRating(1)">
+              <img class="star" src="/src/star-icon.png">
+          </div>
+      </div>
+      <h3>Comment</h3>
+      <div class="comment-area">
+        <textarea name="Comment" placeholder="Give us some comment for this event"></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
   <div class="header">
     <h1 id="event-name">@Model.EventName</h1>
     <div>
@@ -25,7 +65,7 @@
     </div>
   </div>
   <div class="content">
-    <div>
+    <div class="left-area">
       <img id="event-img" src=@Model.EventImg />
       <h2>Details</h2>
       <div id="content-details">@Model.EventDetails</div>
@@ -34,7 +74,7 @@
       </section>
 
       <section id="attendees">
-        <h2 id="num-attendees">Attendees</h2>
+        <h2 id="num-attendees">Attendees (@ViewData["CurrentMember"])</h2>
         <section id="attendees-list">
           <section class="attendee-profile">
             <img src=@Model.HostImg alt="" />
@@ -46,9 +86,16 @@
             @foreach (var Attendee in Model.Attendees)
             {
               <section class="attendee-profile">
-                <img src="@Attendee.ProfilePicture" alt="" />
-                <div>@Attendee.UserName</div>
+                <img src="@Attendee.user.ProfilePicture" alt="" />
+                <div>@Attendee.user.UserName</div>
                 <div>Member</div>
+                @if(@Attendee.friend!=0)
+                {
+                <div>
+                  <img src="~/src/friend.png"  style="width:15px;height:15px;display:inline"alt="">
+                  <div style="display: inline;">+@Attendee.friend</div>
+                </div>
+                }
               </section>
             }
           }
@@ -56,34 +103,66 @@
       </section>
 
     </div>
-    <section id="details">
-      <section id="time-details">
-        <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
-        <h3 id="time">@Model.Time</h3>
+    <div class="right-area">
+      <section id="details">
+        <section id="time-details">
+          <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
+          <h3 id="time">@Model.EndDate</h3>
+        </section>
+        <section id="time-details">
+          <img src="~/src/place.png" alt="" />
+          <h3 id="place">@Model.Place</h3>
+        </section>
+        <section id="time-details">
+          <h3>Status : @Model.Status</h3>
+        </section>
+        @Html.Raw(Model.MapUrl)
       </section>
-      <section id="time-details">
-        <img src="~/src/place.png" alt="" />
-        <h3 id="place">@Model.Place</h3>
-      </section>
-      <section id="time-details">
-        <h3>Status : @Model.Status</h3>
-      </section>
-      <iframe id="map" width="100%" style="border: 0" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade" src=@Model.MapUrl></iframe>
-    </section>
-  </div>
-  <div id="attend-line">
+      <div class="rating-area-display">
+          <div class="rating-topic">Attendees rating</div>
+          <div class="rating-display">
+            <div class="progress-label">
+              <span>5</span>
+              <span>4</span>
+              <span>3</span>
+              <span>2</span>
+              <span>1</span>
+            </div>
+            <div class="progress-container">
+            @foreach(float prob in @Model.RatingProb){
+              String style = String.Concat("width:", (prob*100).ToString());
+              style = String.Concat(style, "%;");
+              if(prob - 0 < 10e-6 && 0 - prob < -10e-6){
+                style = String.Concat(style, "display:none;");
+              }
+              <div class="progress-bg"><div class="progress-bar" style=@style></div></div>
+            }
+            </div>
+          </div>
+          <button id="open-rating-popup-button">Give you opinion</button>
+          <div class="rating-topic">Some comments for you</div>
+          <div class="comment-area-display">
+          @for(int i = 0; i < @Model.Rating.Count(); i++){
+            <div class="comment-card">
+              <div class="comment-header">@Model.Rating[i].Score out of 5</div>
+              <div class="comment-owner" style="font-weight: 800;">@Model.RatingOwner[i].UserName</div>
+              <div class="comment-content">@Model.Rating[i].Comment</div>
+            </div>
+          }
+          </div>
+      </div>
+    </div>
   </div>
   <section id="attend">
     <section id="attend-details">
-      <div id="short-time">
-        <h3 id="time">Start Time : @Model.StartDate</h3>
+      <div class="short-time">
+        <h3 id="time">Start Date : @Model.StartDate</h3>
       </div>
-      <div id="short-time">
-        <h3 id="time">End Time : @Model.Time</h3>
+      <div class="short-time">
+        <h3 id="time">End Date : @Model.EndDate</h3>
       </div>
     </section>
-    <div>
+    <div class="button-area">
       <button id="share">
         Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
       </button>
@@ -104,14 +183,45 @@
             <input type="hidden" id="friendInput" name="friend" />
             <div>
               <label for="numberInput" style="margin-top: 5px;margin-right:3px">friend:</label>
-              <input name="friend" id="numberInput" type="number" max=@ViewBag.MaxCapacity min=0>
+              <input name="friend" id="numberInput" type="number" value="0" max=@ViewBag.MaxCapacity min=0>
             </div>
           </form>
         }
       }
     </div>
   </section>
-  <script src="~/js/EventPage.js"></script>
+  <script>
+  let closeButton = document.getElementById("close-button");
+  let ratingPopup = document.getElementById("rating-popup");
+  closeButton.onclick = (e) => {
+    ratingPopup.style.display = "none";
+  }
+
+  let openButton = document.getElementById("open-rating-popup-button");
+  openButton.onclick = (e) => {
+    ratingPopup.style.display = "flex";
+  }
+
+
+  let hiddenInput = document.querySelector('input[name="Score"]');
+
+  function selectRating(rating) {
+      // Update the hidden input value
+      hiddenInput.value = rating;
+
+      // Remove the 'selected' class from the previously selected rating
+      let lastSelected = document.querySelector('.selected');
+      if (lastSelected) {
+          lastSelected.classList.remove('selected');
+      }
+
+      // Add the 'selected' class to the clicked star
+      let currentSelected = document.querySelector(`.rating-box-${rating}`);
+      currentSelected.classList.add('selected');
+  }
+  selectRating(5);
+</script>
+<script src="~/js/EventPage.js"></script>
 </body>
 
 </html>

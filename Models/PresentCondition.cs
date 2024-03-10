@@ -6,10 +6,10 @@ namespace WebApp.Models
 {
     public class PresentCondition
     {
-        public string? CurrentDate {get; set;}
-        public string? Member {get; set;}
+        public string CurrentDate {get; set;}
+        public string Member {get; set;}
 
-        public string? Canceled {get; set;}
+        public string Canceled {get; set;}
 
     }
 }

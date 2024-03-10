@@ -10,40 +10,45 @@
     <link rel="stylesheet" href="~/css/search.css" type="text/css" />
     <meta charset="UTF-8">
     <script src="https://kit.fontawesome.com/f907d90de1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/card.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <div class="TopPage">
-        <h1>Event near Bangkok, TH</h1>
-        <div class="select">
-            <a href="#" onclick="return false;">Events Groups</a>
-        </div>
-        <nav role="primary navigation">
-            <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action">Any day <svg class="dropdown-icon"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <title>chevron-down</title>
-                        <g fill="none">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M15.25 10.75L12 14.25l-3.25-3.5"></path>
-                        </g>
-                    </svg></a>
+    <div class="primary-container">
+        <div class="content-container">
+            <div class="TopPage">
+                <h1>Event near Bangkok, TH</h1>
+                <div class="select">
+                    <a href="#" onclick="return false;">Events Groups</a>
+                </div>
+                <nav role="primary navigation" class="primary-navigation">
+                    <div class="dropdown">
+                        <a href="#" onclick="return false;" class="dropdown-action" id="dateChoice">Any day <svg class="dropdown-icon"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <title>chevron-down</title>
+                                <g fill="none">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M15.25 10.75L12 14.25l-3.25-3.5"></path>
+                                </g>
+                            </svg></a>
 
-                <ul class="dropdown-menu">
-                    <li><a href="#" onclick="return false;" id="any"> Any day </a></li>
-                    @* <li><a href="#" onclick="return false;" id="Starting soon"> Starting soon </a></li> *@
-                    <li><a href="#" onclick="return false;" id="Today"> Today </a></li>
-                    @* <li><a href="#" onclick="return false;" id="Tomorrow"> Tomorrow </a></li> *@
-                    <li><a href="#" onclick="return false;" id="This week"> This week </a></li>
-                    @* <li><a href="#" onclick="return false;" id="This weekend"> This weekend </a></li> *@
-                    <li><a href="#" onclick="return false;" id="Next week"> Next week </a></li>
-                    @* <li><a href="#" onclick="return false;" id="Custom"> Custom </a></li> *@
-            </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" onclick="return false;" id="any"> Any day </a></li>
+                            @* <li><a href="#" onclick="return false;" id="Starting soon"> Starting soon </a></li> *@
+                            <li><a href="#" onclick="return false;" id="Today"> Today </a></li>
+                            @* <li><a href="#" onclick="return false;" id="Tomorrow"> Tomorrow </a></li> *@
+                            <li><a href="#" onclick="return false;" id="This week"> This week </a></li>
+                            @* <li><a href="#" onclick="return false;" id="This weekend"> This weekend </a></li> *@
+                            <li><a href="#" onclick="return false;" id="Next week"> Next week </a></li>
+                            @* <li><a href="#" onclick="return false;" id="Custom"> Custom </a></li> *@
+                    </div>
 
             <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action">Any type
+                <a href="#" onclick="return false;" class="dropdown-action type">
+                    <span id="type">
+                        Any type
+                    </span>
+
                     <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <title>chevron-down</title>
@@ -54,35 +59,35 @@
                     </svg></a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="#" onclick="return false;">Any type</a></li>
-                    <li><a href="#" onclick="return false;">Online</a></li>
+                    <li><a href="#" onclick="return false; id=" any">Any type</a></li>
+                    <li><a href="#" onclick="return false; id=" Online">Online</a></li>
                     <li>
                         <ul class="inperson">
                             <li>
-                                <a href="#" onclick="return false; id="Inperson">Inperson</a>
+                                <a href="#" onclick="return false; id=" Inperson">Inperson</a>
                             </li>
                             <ul>
-                                <li><a href="#" onclick="return false; id="Indoor">Indoor only</a></li>
-                                <li><a href="#" onclick="return false; id="Outdoor">Outdoor only</a></li>
+                                <li><a href="#" onclick="return false; id=" Indoor">Indoor only</a></li>
+                                <li><a href="#" onclick="return false; id=" Outdoor">Outdoor only</a></li>
                             </ul>
                         </ul>
                     </li>
-                    <li><a href="#" onclick="return false; id="Storytelling">Storytelling</a></li>
+                    <li><a href="#" onclick="return false; id=" Storytelling">Storytelling</a></li>
                 </ul>
             </div>
 
-            @* <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action">Any distance
+                    @* <div class="dropdown">
+                    <a href="#" onclick="return false;" class="dropdown-action">Any distance
                     <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24">
-                        <title>chevron-down</title>
-                        <g fill="none">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M15.25 10.75L12 14.25l-3.25-3.5"></path>
-                        </g>
+                    viewBox="0 0 24 24">
+                    <title>chevron-down</title>
+                    <g fill="none">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M15.25 10.75L12 14.25l-3.25-3.5"></path>
+                    </g>
                     </svg></a>
 
-                <ul class="dropdown-menu">
+                    <ul class="dropdown-menu">
                     <li><a href="#" onclick="return false;">Any distance</a></li>
                     <li><a href="#" onclick="return false;">2 miles</a></li>
                     <li><a href="#" onclick="return false;">5 miles</a></li>
@@ -90,11 +95,14 @@
                     <li><a href="#" onclick="return false;">25 miles</a></li>
                     <li><a href="#" onclick="return false;">50 miles</a></li>
                     <li><a href="#" onclick="return false;">100 miles</a></li>
-                </ul>
-            </div> *@
+                    </ul>
+                    </div> *@
 
             <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action">Any category
+                <a href="#" onclick="return false;" class="dropdown-action category">
+                    <span id="category">
+                        Any category
+                    </span>
                     <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <title>chevron-down</title>
@@ -108,7 +116,8 @@
                     <li><a href="#" onclick="return false;" id="any">Any category</a></li>
                     <li><a href="#" onclick="return false;" id="Art & Culture">Art & Culture</a></li>
                     <li><a href="#" onclick="return false;" id="Career & Business">Career & Business</a></li>
-                    <li><a href="#" onclick="return false;" id="Community & Environment">Community & Environment</a></li>
+                    <li><a href="#" onclick="return false;" id="Community & Environment">Community & Environment</a>
+                    </li>
                     <li><a href="#" onclick="return false;" id="Dancing">Dancing</a></li>
                     <li><a href="#" onclick="return false;" id="Games">Games</a></li>
                     <li><a href="#" onclick="return false;" id="Health & Wellbeing">Health & Wellbeing</a></li>
@@ -117,7 +126,8 @@
                     <li><a href="#" onclick="return false;" id="Music">Music</a></li>
                     <li><a href="#" onclick="return false;" id="Parents & Family">Parents & Family</a></li>
                     <li><a href="#" onclick="return false;" id="Pet & Animals">Pet & Animals</a></li>
-                    <li><a href="#" onclick="return false;" id="Religion & Spirituality">Religion & Spirituality</a></li>
+                    <li><a href="#" onclick="return false;" id="Religion & Spirituality">Religion & Spirituality</a>
+                    </li>
                     <li><a href="#" onclick="return false;" id="Science & Education">Science & Education </a></li>
                     <li><a href="#" onclick="return false;" id="Scial Activities">Scial Activities</a></li>
                     <li><a href="#" onclick="return false;" id="Sports & Fitness">Sports & Fitness</a></li>
@@ -129,7 +139,10 @@
             </div>
             <div class="dropdown">
                 <a href="#" onclick="return false;" class="dropdown-action">
-                    Sort by: Relevance
+                    Sort by:&nbsp;
+                    <span id="sort">
+                         Date
+                    </span>
                     <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <title>chevron-down</title>
@@ -147,29 +160,35 @@
         </nav>
     </div>
     <div class="display-paragraph">
-        <div class="left">
+        <div class="card-container">
             @foreach (var ev in Model)
             {
                 <div class="card">
-                    <div class="pics">
-                        <img class="img" src="@ev.EventImg" />
-                    </div>
+                    <a href="/eventpage/viewid/@ev.Id" class="image">
+                        <div class="pics">
+                            <img class="img" src="@ev.EventImg" alt="@ev.EventName" />
+                        </div>
+                    </a>
                     <div class="details">
                         <div class="date">
                             <h3>@ev.EndDate</h3>
                         </div>
                         <div class="header">
-                            <h2>@ev.EventName</h2>
+                            <a href="/eventpage/viewid/@ev.Id">
+                                <h2>@ev.EventName</h2>
+                            </a>
                             <div class="sub-header">
                                 <p>@ev.EventDetails</p>
-                                <div class="share"><i class="fa-solid fa-upload"></i></div>
-                                <div class="attendee">@ev.CurrentMember Attendees</div>
+                                <div class="share-attend">
+                                    <div class="attendee">@ev.CurrentMember Attendees</div>
+                                    <div class="share"><i class="fa-solid fa-upload"></i></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-        </div> 
+        </div>
         <div class="right">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d33638.91694318745!2d100.75255949943718!3d13.721249729251394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d664988a1bedf%3A0xcc678f180e221cd0!2sKing%20Mongkut&#39;s%20Institute%20of%20Technology%20Ladkrabang!5e0!3m2!1sen!2sth!4v1709287309577!5m2!1sen!2sth"

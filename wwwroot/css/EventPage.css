@@ -1,3 +1,11 @@
+:root{
+  --cyan-button: #00798A;
+  --red-search: #F65858;
+  --logo-color: #F64060;
+  --black-color: #212121;
+  --grey-color: #F6F7F8;
+}
+
 * {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
@@ -12,14 +20,24 @@ nav {
 }
 body {
   margin: 0;
+  /* margin: 5px 0 0 0; */
   padding: 0;
+}
+
+navbar {
+  margin-top: 0.5rem;
+  margin-inline: 0.5rem;
 }
 
 li {
   display: inline;
   float: left;
 }
-
+iframe {
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
+}
 li a {
   display: block;
   color: white;
@@ -64,11 +82,91 @@ li a:hover {
   margin: 0;
 }
 
+.rating-popup {
+  transform: translateY(-10vh);
+  position: fixed;
+  width: 100%;
+  height: 110vh;
+  z-index: 998;
+  background-color: rgb(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#close-button {
+  background-color: rgb(0, 0, 0, 0);
+  color: var(--red-search);
+  font-weight: 600;
+  font-size: large;
+  border: none;
+  align-self: flex-end;
+}
+
+#rating-button {
+border-radius: 15px;
+}
+
+.rating-popup form {
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px;
+}
+form button {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 10px;
+  align-self: flex-end;
+
+}
+.star {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.star-container {
+  width: fit-content;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.1s linear;
+}
+.star-container:hover {
+  border: 3px solid #00798A;
+  transition: all 0.1s linear;
+}
+
+.selected {
+  border: 3px solid #00798A;
+  transition: all 0.1s linear;
+}
+
+.rating-area-display {
+  width: calc(100% - 30px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 15px;
+}
+
 .content {
   background-color: #f6f7f8;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5%;
+  padding: 20px;
 }
 
 .content img {
@@ -78,17 +176,99 @@ li a:hover {
   max-height: 576px;
 }
 
-.content div {
-  width: 100%;
-  margin-left: 13%;
-  margin-top: 50px;
-  width: 576px;
+.left-area, .right-area {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.rating-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+textarea {
+  width: calc(100% - 5px);
+  height: 5rem;
+  resize: none;
+  padding: 5px 0 0 5px;
+  margin: 0;
+}
+
+.comment-area-display {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  overflow-y: scroll;
+}
+
+.comment-card {
+  width: calc(100% - 30px);
+  max-width: 100%;
+  padding: 5px;
+  border: 1px solid rgb(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-weight: 400;
+}
+
+.rating-topic {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.rating-display {
+  height: 100px;
+  margin: 10px 0 10px 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px;
+}
+
+.progress-container, .progress-label {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.progress-bg {
+  width: 200px;
+  height: 11px;
+  background-color: #dedede;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: gold;
+}
+
+.rating .star {
+  filter: opacity(0.5) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow);
+}
+
+/* Style for star icons */
+.rating .star {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.rating .star:hover,
+.rating .star.active {
+  transform: scale(1.2);
 }
 
 #content-details {
   margin: 0;
   display: block;
-  width: 576px;
+  width: 100%;
 }
 
 .content #content-details {
@@ -159,16 +339,15 @@ li a:hover {
   border-radius: 50%;
   margin: 0;
 }
-#details{
-    padding: 15px;
-    height: fit-content;
-    border-top-left-radius: 5%;
-    border-top-right-radius: 5%;
-    margin-left: 13%;
-    margin-top: 30px;
-    max-width: 300px;
-    flex-wrap: wrap;
-    background-color: white;
+
+#details {
+  border-radius: 20px;
+  padding: 15px;
+  width: calc(100% - 30px);
+  height: fit-content;
+  max-width: 300px;
+  flex-wrap: wrap;
+  background-color: white;
 }
 
 #time-details {
@@ -195,7 +374,7 @@ li a:hover {
   height: 100px;
   bottom: 0;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   background-color: white;
   width: 100%;
 }
@@ -218,27 +397,29 @@ li a:hover {
   clear: both;
 }
 
-#attend-details{
-    display: flex;
-    margin-left: 13%;
-    width: 80%;
-    text-align: center;
-    align-content: center;
+#attend-details {
+  width: 65%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
 }
 
 #attend div {
   display: flex;
-  margin-right: 20%;
+}
+
+.button-area {
+  display: flex;
+  justify-content: space-between;
+  width: 15%;
 }
 
 #attend-btn {
-  padding: 20px 30px;
   background-color: #f65858;
   color: white;
-  font-weight: 500;
-  font-size: 1rem;
   border: 1px solid #f65858;
-  border-radius: 10%;
 }
 
 #attend-btn:hover {
@@ -246,34 +427,39 @@ li a:hover {
   background-color: white;
   color: #f65858;
 }
-#cancel-btn{
-    
-    padding:20px 30px;
-    background-color: #7ea0ff;
-    color: white;
-    font-weight: 500;
-    font-size: 1rem;
-    border: 1px solid #7ea0ff;
-    border-radius: 10%;
-}
-#cancel-btn:hover{
-    transition: 0.5s;
-    background-color: white;
-    color: #7ea0ff;
+
+#cancel-btn {
+  padding: 20px 30px;
+  background-color: #7ea0ff;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid #7ea0ff;
+  border-radius: 10%;
 }
 
-#share{
-    height: 50%;
-    display: flex;
-    padding: 20px 30px;
-    background-color: white;
-    color: rgb(0, 126, 138);
-    font-weight: 500;
-    font-size: 1rem;
-    border: 1px solid rgb(0, 126, 138);
-    border-radius: 10%;
-    margin-right: 20%;  
-    align-items: center;
+#cancel-btn:hover {
+  transition: 0.5s;
+  background-color: white;
+  color: #7ea0ff;
+}
+
+#share {
+  height: 50%;
+  display: flex;
+  background-color: white;
+  color: rgb(0, 126, 138);
+  font-weight: 500;
+  border: 1px solid rgb(0, 126, 138);
+  align-items: center;
+}
+
+.button-area button {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 20px 30px;
+  border-radius: 10px;
+
 }
 
 #share:hover {
@@ -282,14 +468,11 @@ li a:hover {
   color: white;
 }
 
-#short-time{
-    margin-bottom: 0;
+#numberInput {
+  margin-top: 5px;
+  justify-content: center;
 }
 
-#numberInput{
-    margin-top: 5px;
-    justify-content: center;
-}
 @media only screen and (max-width: 768px) {
   .header h1 {
     margin-left: 0;
@@ -297,11 +480,6 @@ li a:hover {
 
   .header div img {
     margin-left: 0;
-  }
-
-  .content div {
-    margin-left: 0;
-    padding-left: 5%;
   }
 
   #attend-details {

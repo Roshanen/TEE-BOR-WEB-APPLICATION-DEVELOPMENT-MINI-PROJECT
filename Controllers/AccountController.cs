@@ -79,8 +79,7 @@ public class AccountController : BaseController
 
             HttpContext.Session.SetString("JwtToken", token);
 
-            var jwtToken = HttpContext.Session.GetString("JwtToken");
-            var userId = JwtHelper.GetUserIdFromToken(jwtToken!);
+            var userId = _SetUserDataInViewData();
 
             ViewData["userId"] = userId ?? "Not logged in";
 
