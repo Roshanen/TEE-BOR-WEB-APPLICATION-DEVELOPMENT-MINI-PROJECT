@@ -160,7 +160,7 @@
         </nav>
     </div>
     <div class="display-paragraph">
-        <div class="card-container">
+        <div class="card-container left">
             @foreach (var ev in Model)
             {
                 <div class="card">
@@ -175,10 +175,10 @@
                         </div>
                         <div class="header">
                             <a href="/eventpage/viewid/@ev.Id">
-                                <h2>@ev.EventName</h2>
+                                <div class="h2">@ev.EventName</div>
                             </a>
                             <div class="sub-header">
-                                <p>@ev.EventDetails</p>
+                                <div class="paragraph">@ev.EventDetails</div>
                                 <div class="share-attend">
                                     <div class="attendee">@ev.CurrentMember Attendees</div>
                                     <div class="share"><i class="fa-solid fa-upload"></i></div>
