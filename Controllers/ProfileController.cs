@@ -23,7 +23,7 @@ public class ProfileController : BaseController
 
             var userId = new ObjectId(userIdString);
 
-            var userProfile = await _context.GetCollection<User>("users")
+            var userProfile = await _mongoContext.GetCollection<User>("users")
                                              .Find(u => u.Id == userId)
                                              .FirstOrDefaultAsync();
 
@@ -34,7 +34,7 @@ public class ProfileController : BaseController
         public async Task<ActionResult> Edit(string id)
         {
             var objectId = ObjectId.Parse(id);
-            var userProfile = await _context.GetCollection<User>("users")
+            var userProfile = await _mongoContext.GetCollection<User>("users")
                                              .Find(u => u.Id == objectId)
                                              .FirstOrDefaultAsync();
             if (userProfile == null)
@@ -63,10 +63,10 @@ public class ProfileController : BaseController
             if (model.Bio != null) update = update.Set(u => u.Bio, model.Bio);
             if (model.Contact != null) update = update.Set(u => u.Contact, model.Contact);
 
-            await _context.GetCollection<User>("users").UpdateOneAsync(filter, update);
+            await _mongoContext.GetCollection<User>("users").UpdateOneAsync(filter, update);
 
             return RedirectToAction("Index");
         }
 
-    }
 }
+
