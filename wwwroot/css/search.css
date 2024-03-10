@@ -96,41 +96,6 @@ nav a:hover {
   border-left: 2px solid gray;
 }
 
-<<<<<<< HEAD
-.card{
-  display: flex;
-}
-
-.img{
-  max-width: 500px;
-  max-height: 500px;
-}
-
-
-
-@media only screen and (max-width: 768px){
-  .img{
-    max-width: 60%;
-  }
-
-  .primary-navigation{
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    white-space: nowrap;
-    width: 100%;
-  }
-
-  .dropdown{
-    position: relative;
-  }
-
-  .dropdown-menu{
-  display: none;
-  
-  }
-}
-=======
 @media only screen and (max-width: 768px) {
 
 .card {
@@ -266,4 +231,3 @@ nav a:hover {
   }
   
   }
->>>>>>> 90031d363d2c41a0ba1d60ae9773cf0714c35af0
