@@ -123,7 +123,7 @@ body {
     position: relative;
     /* Ensure positioning is relative to this container */
     border-radius: 20px;
-    margin: 30px;
+    /* margin: 30px; */
     /* margin-left: 14.5%; */
     /* width: 37%; */
     height: 555px;
@@ -162,7 +162,7 @@ body {
     background-size: cover;
     background-position: center center;
     overflow: hidden;
-    /* Ensures the pseudo-element does not spill outside the border-radius */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url('@(Model.ProfilePicture != null ? Model.ProfilePicture : Url.Content("~/src/image_.png"))');
 }
 
 .profile_image::after {
@@ -172,7 +172,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, transparent 50%, black 100%);
+    background: linear-gradient(to bottom, transparent 40%, black 100%);
     border-radius: 10px;
 }
 
@@ -199,6 +199,27 @@ body {
     bottom: 0;
     border-radius: 10px;
     justify-self: start;
+}
+
+textarea {
+    position: relative;
+    display: inline-block;
+    font-family: Graphik Meetup, -apple-system, BlinkMacSystemFont, Segoe UI,
+            Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+            Helvetica Neue, sans-serif;
+    font-weight: 500;
+    color: black;
+    outline: none;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #707070;
+    font-size: 15px;
+    /* border covering the input */
+    border-radius: 5px;
+    width: 526px;
+    /* increase input width */
+    box-sizing: border-box;
+    /* include padding and border in the width calculation */
 }
 
 .change-photo {
@@ -392,7 +413,7 @@ div.content {
     padding-left: 32px;
     padding-right: 32px;
     width: fit-content;
-    background-color: #00798A;
+    background-color: #01c986;
     color: white;
     text-align: center;
     text-decoration: none;
