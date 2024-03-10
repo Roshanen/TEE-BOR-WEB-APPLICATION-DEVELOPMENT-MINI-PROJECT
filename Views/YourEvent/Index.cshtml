@@ -9,43 +9,45 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <div class="your-event-container">
-        <div class="left">
-            <div class="header-small"><h1>Your Events</h1></div>
-            <div class="categories">
-                <label class="category-button" id="category-1">Attending</label>
-                <label class="category-button" id="category-2">Hosting</label>
-                <label class="category-button" id="category-3">Past</label>
-                
+    <div class="primary-container">
+        <div class="your-event-container">
+            <div class="left">
+                <div class="header-small"><h1>Your Events</h1></div>
+                <div class="categories">
+                    <label class="category-button" id="category-1">Attending</label>
+                    <label class="category-button" id="category-2">Hosting</label>
+                    <label class="category-button" id="category-3">Past</label>
+                    
+                </div>
+                <div class="calendar">
+                    <!-- Seriously -->
+                </div>
             </div>
-            <div class="calendar">
-                <!-- Seriously -->
-            </div>
-        </div>
-        <div class="right">
-            <div class="your-event-displayer">
-                <div class="header-large"><h1>Your Events</h1></div>
-                <div id="event-display">
+            <div class="right">
+                <div class="your-event-displayer">
+                    <div class="header-large"><h1>Your Events</h1></div>
+                    <div id="event-display">
 
-                @if(Model.AttendEvent.Count > 0)
-                {
-                    @foreach(var Event in Model.AttendEvent)
+                    @if(Model.AttendEvent.Count > 0)
                     {
-                    <div class="events-container">
-                        <div class="event">
-                            <a href= "@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-image">
-                                <img src="@Event.EventImg" alt="Event Image">
-                            </a>
-                            <div class="event-info">
-                                <a href= "@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-title" class="event-title">@Event.EventName</a>
-                                <div class="event-date">@Event.StartDate</div>
+                        @foreach(var Event in Model.AttendEvent)
+                        {
+                        <div class="events-container">
+                            <div class="event">
+                                <a href= "@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-image">
+                                    <img src="@Event.EventImg" alt="Event Image">
+                                </a>
+                                <div class="event-info">
+                                    <a href= "@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-title" class="event-title">@Event.EventName</a>
+                                    <div class="event-date">@Event.StartDate</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        }
                     }
-                }
+                    </div>
+    
                 </div>
-  
             </div>
         </div>
     </div>

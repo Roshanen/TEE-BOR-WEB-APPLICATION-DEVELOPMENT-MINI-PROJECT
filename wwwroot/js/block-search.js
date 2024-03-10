@@ -13,7 +13,7 @@ const bSubmits = document.querySelectorAll(
 
 bSubmits.forEach((b) =>
   b.addEventListener("click", () => {
-    search();
+    // search();
     console.log("se");
   })
 );
@@ -35,7 +35,7 @@ function search() {
 
   $.ajax({
     type: "POST",
-    url: "/search",
+    url: "http://localhost:5180/search",
     data: inputValues,
     success: function (data) {
       $("#searchResultsContainer").html(data);
