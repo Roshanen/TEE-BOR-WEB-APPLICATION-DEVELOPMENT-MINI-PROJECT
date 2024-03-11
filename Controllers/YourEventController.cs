@@ -38,14 +38,14 @@ public class YourEventController : BaseController
                 .FirstOrDefault();
             if (Event != null)
             {
+                if (Event.EndDate < DateTime.Now)
+                {
+                    pastevent.Add(Event);
+                    continue;
+                }
                 if (Event.HostId == ObjectId.Parse(userId))
                 {
                     hostevent.Add(Event);
-                    continue;
-                }
-                if (Event.StartDate < DateTime.Now)
-                {
-                    pastevent.Add(Event);
                     continue;
                 }
                 attendevent.Add(Event);

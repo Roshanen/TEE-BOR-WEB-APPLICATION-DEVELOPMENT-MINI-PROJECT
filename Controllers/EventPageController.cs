@@ -53,6 +53,7 @@ public class EventPageController : BaseController
         }
         EventViewModel eventView = new EventViewModel();
 
+        ViewData["HostId"] = Event.HostId;
         ViewData["CurrentMember"] = Event.CurrentMember;
         eventView.EventName = Event.EventName;
         eventView.HostImg = Host.ProfilePicture;
@@ -130,7 +131,7 @@ public class EventPageController : BaseController
                 .Find(je => je.UserId == ObjectId.Parse(userId) && je.EventId == Event.Id)
                 .FirstOrDefault();
 
-            if (existingJoinEvent != null)
+            if (existingJoinEvent != null && eventView.Status == "Full")
             {
                 eventView.Status = "Available";
                 ViewBag.IsAttending = true;

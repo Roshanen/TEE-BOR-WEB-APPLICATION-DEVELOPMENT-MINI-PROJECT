@@ -135,7 +135,7 @@ public class EventController : BaseController
         //MemberCount
         createEvent.MaxMember = Event.MaxMember;
 
-        return View(createEvent);
+        return View(createEvent);   
     }
 
     [HttpPost]

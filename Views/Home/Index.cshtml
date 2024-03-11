@@ -66,9 +66,11 @@
             </div>
         </div>
     </div>
+    @if (ViewData["userID"] != null){
     <a href="/event/create" class="link-create">
         <div class="div-create">Create Event</div>
     </a>
+    }
 </body>
 
 </html>

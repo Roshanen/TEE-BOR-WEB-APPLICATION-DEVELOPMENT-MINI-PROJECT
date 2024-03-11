@@ -20,5 +20,5 @@ public class Event
     public int CurrentMember { get; set; }
     public int MaxMember { get; set; }
     public float Rating { get; set; }
-    public bool Status { get; set; }
+    public bool Status { get; set; } = true;
 }
