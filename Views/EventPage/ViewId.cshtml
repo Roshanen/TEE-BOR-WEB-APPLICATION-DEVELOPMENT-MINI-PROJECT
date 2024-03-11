@@ -87,7 +87,7 @@
             {
               <section class="attendee-profile">
                 <img src="@Attendee.user.ProfilePicture" alt="" />
-                <div>@Attendee.user.UserName</div>
+                <a href="">@Attendee.user.UserName</a>
                 <div>Member</div>
                 @if(@Attendee.friend!=0)
                 {
@@ -179,7 +179,7 @@
       <button id="share">
         Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
       </button>
-      @if (Model.Status =="available")
+      @if (Model.Status =="Available")
       {
         @if (@ViewBag.IsAttending)
         {
