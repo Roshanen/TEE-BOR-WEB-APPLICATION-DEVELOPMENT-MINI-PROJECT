@@ -78,7 +78,7 @@
         <section id="attendees-list">
           <section class="attendee-profile">
             <img src=@Model.HostImg alt="" />
-            <div>@Model.HostName</div>
+            <a href="@Url.Action("ViewId", "Profile", new { Id = @ViewData["HostId"]})">@Model.HostName</a>
             <div>Host</div>
           </section>
           @if (Model.Attendees != null && Model.Attendees.Count > 0)
@@ -87,7 +87,7 @@
             {
               <section class="attendee-profile">
                 <img src="@Attendee.user.ProfilePicture" alt="" />
-                <a href="">@Attendee.user.UserName</a>
+                <a href="@Url.Action("ViewId", "Profile", new { Id = @Attendee.user.UserName})">@Attendee.user.UserName</a>
                 <div>Member</div>
                 @if(@Attendee.friend!=0)
                 {
