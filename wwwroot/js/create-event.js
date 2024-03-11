@@ -1,7 +1,6 @@
 let state = 1;
 var minProgress = 1;
 var maxProgress = 5;
-form = document.querySelector("form");
 formSteps = document.querySelectorAll(".step");
 backButtons = document.querySelectorAll(".back-button");
 nextButtons = document.querySelectorAll(".next-button");
@@ -41,20 +40,19 @@ function setProgress() {
 nextButtons.forEach((bt) => {
   bt.addEventListener("click", () => {
     var stepInputs = formSteps[state - 1].querySelectorAll("input");
-    var flag = 1;
-    stepInputs.forEach((inp) => {
+    var validFlag = 1;
+
+    for (let i = 0; i < stepInputs.length; i++) {
+      let inp = stepInputs[i];
+
       if (!inp.checkValidity()) {
-        form.reportValidity();
-        flag = 0;
+        inp.reportValidity();
+        validFlag = 0;
+        break;
       }
-      // formSteps.forEach((step, index) => {
-      //   const stepInputs = step.querySelectorAll("input");
-      //   stepInputs.forEach((inp) => {
-      //     console.log(inp.checkValidity());
-      //   });
-      // });
-    });
-    if (flag) {
+    }
+
+    if (validFlag) {
       state++;
       updateDisplay();
     }
