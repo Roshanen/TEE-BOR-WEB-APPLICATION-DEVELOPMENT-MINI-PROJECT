@@ -1,34 +1,34 @@
 let state = 1;
 var minProgress = 1;
 var maxProgress = 5;
+form = document.querySelector("form");
 formSteps = document.querySelectorAll(".step");
 backButtons = document.querySelectorAll(".back-button");
 nextButtons = document.querySelectorAll(".next-button");
 circles = document.querySelectorAll(".circle");
 
-function max(a, b){
-  if(a > b) return a;
+function max(a, b) {
+  if (a > b) return a;
   else return b;
 }
 
-function setButtonToSubmit(){
+function setButtonToSubmit() {
   let nextButton = document.getElementById("next-button");
-  if((state - 1).toString() >= maxProgress.toString()){
+  if ((state - 1).toString() >= maxProgress.toString()) {
     nextButton.type = "submit";
   }
-  if((state).toString() >= maxProgress.toString()){
+  if (state.toString() >= maxProgress.toString()) {
     nextButton.innerText = "Submit";
   } else {
     nextButton.type = "button";
     nextButton.innerText = "Next";
-  
   }
 }
 
-function setProgress(){
-  circles.forEach((circle, i)=>{
-    console.log(circle)
-    if(i < state){
+function setProgress() {
+  circles.forEach((circle, i) => {
+    // console.log(circle);
+    if (i < state) {
       circle.style.backgroundColor = "#00798A";
       circle.style.color = "#ffffff";
     } else {
@@ -38,11 +38,26 @@ function setProgress(){
   });
 }
 
-
 nextButtons.forEach((bt) => {
   bt.addEventListener("click", () => {
-    state++;
-    updateDisplay();
+    var stepInputs = formSteps[state - 1].querySelectorAll("input");
+    var flag = 1;
+    stepInputs.forEach((inp) => {
+      if (!inp.checkValidity()) {
+        form.reportValidity();
+        flag = 0;
+      }
+      // formSteps.forEach((step, index) => {
+      //   const stepInputs = step.querySelectorAll("input");
+      //   stepInputs.forEach((inp) => {
+      //     console.log(inp.checkValidity());
+      //   });
+      // });
+    });
+    if (flag) {
+      state++;
+      updateDisplay();
+    }
   });
 });
 
@@ -63,6 +78,5 @@ function updateDisplay() {
   setButtonToSubmit();
   setProgress();
 }
-
 
 updateDisplay();
