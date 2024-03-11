@@ -20,10 +20,14 @@ public class BaseController : Controller
 
         if (userId != null)
         {
-            var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
+            var userName = _mongoContext
+                .GetCollection<User>("users")
+                .Find(u => u.Id == ObjectId.Parse(userId))
+                .FirstOrDefault();
             ViewData["userName"] = userName?.UserName;
             ViewData["userProfile"] = userName?.ProfilePicture;
         }
+
         return userId;
     }
 }

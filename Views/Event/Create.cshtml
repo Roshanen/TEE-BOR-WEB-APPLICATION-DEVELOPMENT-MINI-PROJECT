@@ -12,6 +12,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
+
 <body>
     <div class="container">
         <div class="party-wrapper">
@@ -33,23 +34,24 @@
                     <div class="hyphen"></div>
                     <div class="circle">5</div>
                 </div>
-                <form asp-action="create" method="post">
+                <form asp-action="create" id="create-form" method="post">
                     <div class="step step-1">
                         <h2>First, set your location</h2>
                         <div class="tip-area">
                             <h3>Tip</h3>
-                            <p>Meetup groups meet locally, in person or online. The location helps us to connect with people
+                            <p>Meetup groups meet locally, in person or online. The location helps us to connect with
+                                people
                                 in your
                                 area.
                             </p>
                         </div>
                         <div class="input-area">
-                            <input type="text" name="ActualPlace" placeholder="สถานที่">
-                            <input type="text" name="Province" placeholder="จังหวัด">
-                            <input type="text" name="District" placeholder="อำเภอ">
-                            <input type="text" name="SubDistrict" placeholder="ตำบล">
+                            <input type="text" name="ActualPlace" placeholder="สถานที่" maxlength="50" required>
+                            <input type="text" name="Province" placeholder="จังหวัด" maxlength="50" required>
+                            <input type="text" name="District" placeholder="อำเภอ" maxlength="50" required>
+                            <input type="text" name="SubDistrict" placeholder="ตำบล" maxlength="50" required>
                             <div>หรือ</div>
-                            <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map">
+                            <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map" maxlength="300">
                         </div>
                     </div>
 
@@ -57,14 +59,15 @@
                         <h2>Choose a tag for your group</h2>
                         <div class="tip-area">
                             <h3>Tip</h3>
-                            <p>Be specific! This will help us promote your group to the right people. Try to select at least
+                            <p>Be specific! This will help us promote your group to the right people. Try to select at
+                                least
                                 3 topics
                                 before
                                 moving onto the next step.</p>
                         </div>
                         <div class="input-area">
                             <label>Choose from this</label>
-                            <select name="CategoryName" asp-items="@GetTags()"></select>
+                            <select name="CategoryName" asp-items="@GetTags()" value="Gaming"></select>
                             @functions {
                                 List<SelectListItem> GetTags()
                                 {
@@ -88,8 +91,8 @@
                             <p>You can edit this later if you change your mind.</p>
                         </div>
                         <div class="input-area">
-                            <input type="text" name="EventName" placeholder="ชื่อของ party">
-                            <input type="text" name="EventImg" placeholder="ลิงก์รูปของ party">
+                            <input type="text" name="EventName" placeholder="ชื่อของ party" maxlength="50" required>
+                            <input type="text" name="EventImg" placeholder="ลิงก์รูปของ party" maxlength="300">
                         </div>
                     </div>
 
@@ -99,14 +102,16 @@
                             <div class="date-group group">
                                 <span>Start date</span>
                                 <input type="datetime-local" name="StartDate" lang="th">
+                                @* //value = datetime now *@
                             </div>
                             <div class="date-group group">
                                 <span>End date</span>
                                 <input type="datetime-local" name="EndDate" lang="th">
+                                @* //minlength = datime now *@
                             </div>
-                            <div class="max-member-group group" >
+                            <div class="max-member-group group">
                                 <span>Max member</span>
-                                <input type="number" name="MaxMember">
+                                <input type="number" name="MaxMember" value="0">
                             </div>
                         </div>
                     </div>
@@ -129,11 +134,13 @@
                         </div>
                         <div class="example-area">
                             <h3>Examples</h3>
-                            <p>"Let's get together for affordable activities in our neighborhood, like going to storytime at
+                            <p>"Let's get together for affordable activities in our neighborhood, like going to
+                                storytime at
                                 the
                                 library, having picnics at McCarren Park, and play dates in our homes. We can also have
                                 events for just
-                                the ladies, like moms night- out, movies, dinner, and anything else that looks like fun."
+                                the ladies, like moms night- out, movies, dinner, and anything else that looks like
+                                fun."
                             </p>
                         </div>
                     </div>

@@ -1,13 +1,13 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Text;
 using WebApp.Models;
 
 namespace WebApp.Controllers;
@@ -15,16 +15,24 @@ namespace WebApp.Controllers;
 public class AccountController : BaseController
 {
     private new readonly MongoContext _mongoContext;
-    private readonly string _jwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? "";
+    private readonly string _jwtSecretKey =
+        Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? "";
     private readonly int _jwtExpirationDays = 1;
 
-    public AccountController(MongoContext mongoContext) : base(mongoContext)
+    public AccountController(MongoContext mongoContext)
+        : base(mongoContext)
     {
         _mongoContext = mongoContext;
     }
 
     public IActionResult SignUp()
     {
+        string userId = _SetUserDataInViewData();
+        if (userId != null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         return View();
     }
 
@@ -33,7 +41,10 @@ public class AccountController : BaseController
     {
         try
         {
-            var existingUser = await _mongoContext.GetCollection<User>("users").Find(u => u.Email == user.Email).FirstOrDefaultAsync();
+            var existingUser = await _mongoContext
+                .GetCollection<User>("users")
+                .Find(u => u.Email == user.Email)
+                .FirstOrDefaultAsync();
             if (existingUser != null)
             {
                 ViewData["error"] = "Email already exists.";
@@ -54,6 +65,12 @@ public class AccountController : BaseController
 
     public IActionResult Login()
     {
+        string userId = _SetUserDataInViewData();
+        if (userId != null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         return View();
     }
 
@@ -62,7 +79,10 @@ public class AccountController : BaseController
     {
         try
         {
-            var existingUser = await _mongoContext.GetCollection<User>("users").Find(u => u.Email == user.Email).FirstOrDefaultAsync();
+            var existingUser = await _mongoContext
+                .GetCollection<User>("users")
+                .Find(u => u.Email == user.Email)
+                .FirstOrDefaultAsync();
             if (existingUser == null)
             {
                 ViewData["error"] = "Invalid email or password.";
@@ -96,6 +116,7 @@ public class AccountController : BaseController
         using (var sha256 = System.Security.Cryptography.SHA256.Create())
         {
             var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
             return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
         }
     }
@@ -128,10 +149,10 @@ public class AccountController : BaseController
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-
     public IActionResult Logout()
     {
         HttpContext.Session.Clear();
+
         return RedirectToAction("Index", "Home");
     }
 }

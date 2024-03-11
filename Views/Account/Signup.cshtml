@@ -18,25 +18,28 @@
 
         <form action="" method="post">
             <div class="sign-up input-group">
-                <label for="UserName">Your name</label>
-                <input type="text" id="UserName" name="UserName" required placeholder="Enter your name">
-            </div>
-
-            <div class="sign-up input-group">
                 <label for="Email">Email address</label>
-                <input type="email" id="Email" name="Email" required placeholder="Enter your email">
+                <input type="email" id="Email" name="Email" required placeholder="Enter your email" maxlength="50">
             </div>
 
             <div class="sign-up input-group">
-                <label for="PasswordHash">Password</label>
-                <input type="password" id="PasswordHash" name="PasswordHash" required placeholder="Enter your password">
+                <label for="UserName">Your name</label>
+                <input type="text" id="UserName" name="UserName" required placeholder="Enter your name" maxlength="50"
+                    minlength="3">
             </div>
 
             <div class="sign-up input-group">
                 <label for="ProfilePicture">Profile Picture</label>
-                <input type="text" id="ProfilePicture" name="ProfilePicture" required
-                    placeholder="Enter your image URL">
+                <input type="text" id="ProfilePicture" name="ProfilePicture" placeholder="Enter your image URL"
+                    maxlength="300">
             </div>
+
+            <div class="sign-up input-group">
+                <label for="PasswordHash">Password</label>
+                <input type="password" id="PasswordHash" name="PasswordHash" required placeholder="Enter your password"
+                    minlength="3" maxlength="100">
+            </div>
+
 
             <label class="sign-up input-group.age">
                 <label for="age">Age Ⓡ</label><br>
@@ -51,10 +54,10 @@
             <button type="submit">Sign up</button>
         </form>
 
-        <div class="sign-up links">
-            <span class="sign-up privacy">Privacy</span>
-            <span class="sign-up terms">- Terms</span>
-        </div>
+        @* <div class="sign-up links">
+        <span class="sign-up privacy">Privacy</span>
+        <span class="sign-up terms">- Terms</span>
+        </div> *@
 
         <p class="sign-up Already a Member?">Already a Member?
             <a asp-controller="Account" asp-action="Login">Log in</a>
