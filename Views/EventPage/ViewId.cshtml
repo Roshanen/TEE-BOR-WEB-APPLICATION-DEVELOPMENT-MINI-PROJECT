@@ -116,11 +116,11 @@
         <section class="time-details">
           <div>Status : @Model.Status</div>
         </section>
+        
         @if(! string.IsNullOrEmpty(Model.MapUrl))
-          {
+        {
             if(Model.MapUrl[0] == '<')
-            {
-              @Html.Raw(Model.MapUrl);
+            {@Html.Raw(Model.MapUrl);
             }
             else if(Model.MapUrl[0] == 'h')
             {
@@ -129,8 +129,9 @@
                 <a href="@Model.MapUrl">Map : Click Here</a>
               </section>
             }
-          }
+        }
       </section>
+      <div>sdsadasd</div>
       <div class="rating-area-display">
           <div class="rating-topic">Attendees rating</div>
           <div class="rating-display">
@@ -203,6 +204,7 @@
       }
     </div>
   </section>
+  
   <script>
   let closeButton = document.getElementById("close-button");
   let ratingPopup = document.getElementById("rating-popup");
