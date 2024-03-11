@@ -116,7 +116,17 @@
         <section id="time-details">
           <h3>Status : @Model.Status</h3>
         </section>
-        @Html.Raw(Model.MapUrl)
+        @if(! string.IsNullOrEmpty(Model.MapUrl))
+          {
+            if(Model.MapUrl[0] == '<')
+            {
+              Html.Raw(Model.MapUrl);
+            }
+            else if(Model.MapUrl[0] == 'h')
+            {
+              <a href="@Model.MapUrl">Map</a>;
+            }
+          }
       </section>
       <div class="rating-area-display">
           <div class="rating-topic">Attendees rating</div>
