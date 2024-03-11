@@ -121,13 +121,6 @@ body {
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
 }
 
-.link-create {
-  /* position: sticky;
-  bottom: 5rem;
-  float: right;
-  margin-right: 5rem;
-  font-weight: bolder; */
-}
 
 @keyframes rotate {
   100% {
