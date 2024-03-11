@@ -22,12 +22,11 @@ public class HomeController : BaseController
     public IActionResult Index(PresentCondition presentCondition)
     {
         _SetUserDataInViewData();
-<<<<<<< HEAD
         var Events = _mongoContext
             .GetCollection<Event>("events")
             .Find(j => j.EndDate > DateTime.Now)
             .ToList();
-            List<EventViewModel> listEventview = new List<EventViewModel>();
+        List<EventViewModel> listEventview = new List<EventViewModel>();
 
         foreach (var e in Events)
         {
@@ -35,14 +34,6 @@ public class HomeController : BaseController
                 .GetCollection<User>("users")
                 .Find(u => u.Id == e.HostId)
                 .FirstOrDefault();
-=======
-        var Events = _mongoContext.GetCollection<Event>("events").Find(j => j.EndDate <= DateTime.Now).ToList();
-        List<EventViewModel> listEventview = new List<EventViewModel>();
-
-
-        foreach (var e in Events){
-            var Host = _mongoContext.GetCollection<User>("users").Find(u => u.Id == e.HostId).FirstOrDefault();
->>>>>>> bb3b121d13b8ca4f243fd93876cc7e7e1c137168
             EventViewModel eventView = new EventViewModel();
             eventView.EventName = e.EventName;
             eventView.HostName = Host.UserName;

@@ -34,7 +34,7 @@
                     <div class="hyphen"></div>
                     <div class="circle">5</div>
                 </div>
-                <form asp-action="create" method="post">
+                <form asp-action="create" id="create-form" method="post">
                     <div class="step step-1">
                         <h2>First, set your location</h2>
                         <div class="tip-area">
@@ -111,7 +111,7 @@
                             </div>
                             <div class="max-member-group group">
                                 <span>Max member</span>
-                                <input type="number" name="MaxMember">
+                                <input type="number" name="MaxMember" value="0">
                             </div>
                         </div>
                     </div>
