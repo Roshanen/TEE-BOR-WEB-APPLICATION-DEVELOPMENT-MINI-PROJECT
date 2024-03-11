@@ -1,11 +1,8 @@
-﻿/* :root {
-  --cyan-button: #00798a;
-  --red-search: #f65858;
-  --logo-color: #f64060;
-  --black-color: #212121;
-  --grey-color: #f6f7f8;
-  --border-color: #d9d9d9;
-} */
+﻿* {
+  font-family: Graphik Meetup, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+}
 
 navbar {
   display: flex;
