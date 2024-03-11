@@ -53,6 +53,7 @@ public class EventPageController : BaseController
         }
         EventViewModel eventView = new EventViewModel();
 
+        ViewData["HostId"] = Event.HostId;
         ViewData["CurrentMember"] = Event.CurrentMember;
         eventView.EventName = Event.EventName;
         eventView.HostImg = Host.ProfilePicture;
