@@ -102,21 +102,21 @@
 //   }
 // });
 
-document.addEventListener("DOMContentLoaded", function () {
-  var container = document.getElementById("attend-line");
-  var fixedElement = document.getElementById("attend");
-  var scrollThreshold = container.offsetTop - fixedElement.offsetTop;
+// document.addEventListener("DOMContentLoaded", function () {
+//   var container = document.getElementById("attend-line");
+//   var fixedElement = document.getElementById("attend");
+//   var scrollThreshold = container.offsetTop - fixedElement.offsetTop;
 
-  function handleScroll() {
-    if (window.pageYOffset >= scrollThreshold) {
-      fixedElement.style.position = "static";
-    } else {
-      fixedElement.style.position = "fixed";
-    }
-  }
+//   function handleScroll() {
+//     if (window.pageYOffset >= scrollThreshold) {
+//       fixedElement.style.position = "static";
+//     } else {
+//       fixedElement.style.position = "fixed";
+//     }
+//   }
 
-  window.addEventListener("scroll", handleScroll);
-});
+//   window.addEventListener("scroll", handleScroll);
+// });
 
 
 var cancelbtn = document.getElementById("cancel-btn");
