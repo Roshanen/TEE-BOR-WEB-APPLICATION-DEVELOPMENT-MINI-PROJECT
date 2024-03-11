@@ -50,7 +50,7 @@
             </div>
           </div>
           @if (ViewData["isProfileOwner"] == "true")
-            {
+          {
             <a class="change-photo" href="@Url.Action("Edit", "Profile" , new { id=Model.Id })">
               <svg class="info-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +65,7 @@
               </svg>
               <span class="change-text" style="color: white;">Change profile photo</span>
             </a>
-            }
+          }
         </div>
 
         <div class="profile_card profile-bottom">

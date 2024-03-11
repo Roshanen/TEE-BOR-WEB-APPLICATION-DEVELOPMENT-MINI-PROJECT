@@ -9,10 +9,10 @@ public class SearchController : BaseController
 {
     private new readonly MongoContext _mongoContext;
 
-    public SearchController(MongoContext mongoContext) : base(mongoContext)
+    public SearchController(MongoContext mongoContext)
+        : base(mongoContext)
     {
         _mongoContext = mongoContext;
-        
     }
 
     public IActionResult Index(Search search)
@@ -26,13 +26,18 @@ public class SearchController : BaseController
 
             if (!string.IsNullOrEmpty(search.Name))
             {
-                filter &= filterBuilder.Regex("EventName", new BsonRegularExpression(search.Name, "i"));
+                filter &= filterBuilder.Regex(
+                    "EventName",
+                    new BsonRegularExpression(search.Name, "i")
+                );
             }
 
             if (!string.IsNullOrEmpty(search.Place))
             {
                 var placesCollection = _mongoContext.GetCollection<Place>("places");
-                var place =  placesCollection.Find(p => p.ActualPlace == search.Place).FirstOrDefault();
+                var place = placesCollection
+                    .Find(p => p.ActualPlace == search.Place)
+                    .FirstOrDefault();
 
                 if (place != null)
                 {
@@ -50,13 +55,19 @@ public class SearchController : BaseController
                 switch (search.DateChoice.ToLower())
                 {
                     case "today":
-                        filter &= filterBuilder.Gte("EndDate", currentDate) & filterBuilder.Lt("EndDate", currentDate.AddDays(1));
+                        filter &=
+                            filterBuilder.Gte("EndDate", currentDate)
+                            & filterBuilder.Lt("EndDate", currentDate.AddDays(1));
                         break;
                     case "this week":
-                        filter &= filterBuilder.Gte("EndDate", currentDate) & filterBuilder.Lt("EndDate", currentDate.AddDays(7));
+                        filter &=
+                            filterBuilder.Gte("EndDate", currentDate)
+                            & filterBuilder.Lt("EndDate", currentDate.AddDays(7));
                         break;
                     case "next week":
-                        filter &= filterBuilder.Gte("EndDate", currentDate.AddDays(7)) & filterBuilder.Lt("EndDate", currentDate.AddDays(14));
+                        filter &=
+                            filterBuilder.Gte("EndDate", currentDate.AddDays(7))
+                            & filterBuilder.Lt("EndDate", currentDate.AddDays(14));
                         break;
                 }
             }
@@ -68,7 +79,10 @@ public class SearchController : BaseController
 
             if (!string.IsNullOrEmpty(search.Category) && search.Category != "any")
             {
-                var tag =  _mongoContext.GetCollection<Category>("tags").Find(t => t.CategoryName == search.Category).FirstOrDefault();
+                var tag = _mongoContext
+                    .GetCollection<Category>("tags")
+                    .Find(t => t.CategoryName == search.Category)
+                    .FirstOrDefault();
 
                 if (tag != null)
                 {
@@ -76,7 +90,7 @@ public class SearchController : BaseController
                 }
             }
 
-            var events =  eventsCollection.Find(filter).ToList();
+            var events = eventsCollection.Find(filter).ToList();
 
             return View(events);
         }

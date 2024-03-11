@@ -1,9 +1,9 @@
-:root{
-  --cyan-button: #00798A;
-  --red-search: #F65858;
-  --logo-color: #F64060;
+:root {
+  --cyan-button: #00798a;
+  --red-search: #f65858;
+  --logo-color: #f64060;
   --black-color: #212121;
-  --grey-color: #F6F7F8;
+  --grey-color: #f6f7f8;
 }
 
 * {
@@ -18,6 +18,7 @@ nav {
   background-color: #333;
   margin: 0;
 }
+
 body {
   margin: 0;
   /* margin: 5px 0 0 0; */
@@ -33,11 +34,13 @@ li {
   display: inline;
   float: left;
 }
+
 iframe {
   width: 100%;
   max-width: 300px;
   max-height: 300px;
 }
+
 li a {
   display: block;
   color: white;
@@ -104,7 +107,7 @@ li a:hover {
 }
 
 #rating-button {
-border-radius: 15px;
+  border-radius: 15px;
 }
 
 .rating-popup form {
@@ -117,14 +120,15 @@ border-radius: 15px;
   border-radius: 20px;
   padding: 10px;
 }
+
 form button {
   font-size: 1rem;
   font-weight: 500;
   padding: 10px 20px;
   border-radius: 10px;
   align-self: flex-end;
-
 }
+
 .star {
   width: 35px;
   height: 35px;
@@ -138,13 +142,14 @@ form button {
   padding: 5px;
   transition: all 0.1s linear;
 }
+
 .star-container:hover {
-  border: 3px solid #00798A;
+  border: 3px solid #00798a;
   transition: all 0.1s linear;
 }
 
 .selected {
-  border: 3px solid #00798A;
+  border: 3px solid #00798a;
   transition: all 0.1s linear;
 }
 
@@ -176,7 +181,8 @@ form button {
   max-height: 576px;
 }
 
-.left-area, .right-area {
+.left-area,
+.right-area {
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -228,7 +234,8 @@ textarea {
   gap: 5px;
 }
 
-.progress-container, .progress-label {
+.progress-container,
+.progress-label {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -249,7 +256,8 @@ textarea {
 }
 
 .rating .star {
-  filter: opacity(0.5) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow);
+  filter: opacity(0.5) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow)
+    drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow);
 }
 
 /* Style for star icons */
@@ -459,7 +467,6 @@ textarea {
   font-weight: 500;
   padding: 20px 30px;
   border-radius: 10px;
-
 }
 
 #share:hover {

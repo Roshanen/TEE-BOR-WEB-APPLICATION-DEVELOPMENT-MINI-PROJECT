@@ -1,8 +1,8 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using WebApp.Models;
-using System;
 
 namespace WebApp.Controllers;
 
@@ -11,7 +11,8 @@ public class EventController : BaseController
     private readonly ILogger<EventController> _logger;
     private new readonly MongoContext _mongoContext;
 
-    public EventController(ILogger<EventController> logger, MongoContext mongoContext) : base(mongoContext)
+    public EventController(ILogger<EventController> logger, MongoContext mongoContext)
+        : base(mongoContext)
     {
         _logger = logger;
         _mongoContext = mongoContext;
@@ -21,12 +22,14 @@ public class EventController : BaseController
     {
         _SetUserDataInViewData();
         var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
+
         return View(events);
     }
 
     public IActionResult Create()
     {
         _SetUserDataInViewData();
+
         return View();
     }
 
@@ -34,7 +37,12 @@ public class EventController : BaseController
     public IActionResult Create(CreateEvent createEvent)
     {
         String userIdString = _SetUserDataInViewData();
-        if (userIdString is null) return RedirectToAction("login", "account");
+
+        if (userIdString is null)
+        {
+            return RedirectToAction("login", "account");
+        }
+
         var userId = new ObjectId(userIdString);
 
         Event eventModel = new Event();
@@ -69,7 +77,18 @@ public class EventController : BaseController
         eventModel.PlaceId = placeModel.Id;
 
         _mongoContext.GetCollection<Event>("events").InsertOne(eventModel);
-        _mongoContext.GetCollection<JoinEvent>("joinEvents").InsertOne(new JoinEvent { UserId = userId, EventId = eventModel.Id, JoinDate = DateTime.Now, BringFriends = 0 });
+        _mongoContext
+            .GetCollection<JoinEvent>("joinEvents")
+            .InsertOne(
+                new JoinEvent
+                {
+                    UserId = userId,
+                    EventId = eventModel.Id,
+                    JoinDate = DateTime.Now,
+                    BringFriends = 0
+                }
+            );
+
         return RedirectToAction("Index");
     }
 
@@ -83,7 +102,10 @@ public class EventController : BaseController
             return RedirectToAction("login", "account");
         }
         // Handle user not the owner of event
-        var Event = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
+        var Event = _mongoContext
+            .GetCollection<Event>("events")
+            .Find(ev => ev.Id == ObjectId.Parse(id))
+            .FirstOrDefault();
         var userId = new ObjectId(userIdString);
         if (Event.HostId != userId)
         {
@@ -92,7 +114,10 @@ public class EventController : BaseController
 
         CreateEvent createEvent = new CreateEvent();
         //Place
-        var Place = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == (Event.PlaceId)).FirstOrDefault();
+        var Place = _mongoContext
+            .GetCollection<Place>("places")
+            .Find(p => p.Id == (Event.PlaceId))
+            .FirstOrDefault();
         createEvent.ActualPlace = Place.ActualPlace;
         createEvent.Province = Place.Province;
         createEvent.District = Place.District;
@@ -116,8 +141,14 @@ public class EventController : BaseController
     [HttpPost]
     public IActionResult Edit(string id, CreateEvent createEvent)
     {
-        var eventModel = _mongoContext.GetCollection<Event>("events").Find(ev => ev.Id == ObjectId.Parse(id)).FirstOrDefault();
-        var placeModel = _mongoContext.GetCollection<Place>("places").Find(p => p.Id == eventModel.PlaceId).FirstOrDefault();
+        var eventModel = _mongoContext
+            .GetCollection<Event>("events")
+            .Find(ev => ev.Id == ObjectId.Parse(id))
+            .FirstOrDefault();
+        var placeModel = _mongoContext
+            .GetCollection<Place>("places")
+            .Find(p => p.Id == eventModel.PlaceId)
+            .FirstOrDefault();
 
         DateTime today = DateTime.Today;
         eventModel.StartDate = createEvent.StartDate;
@@ -135,10 +166,13 @@ public class EventController : BaseController
         placeModel.District = createEvent.District;
         placeModel.SubDistrict = createEvent.SubDistrict;
 
-        _mongoContext.GetCollection<Event>("events").ReplaceOne(ev => ev.Id == eventModel.Id, eventModel);
-        _mongoContext.GetCollection<Place>("places").ReplaceOne(ev => ev.Id == placeModel.Id, placeModel);
+        _mongoContext
+            .GetCollection<Event>("events")
+            .ReplaceOne(ev => ev.Id == eventModel.Id, eventModel);
+        _mongoContext
+            .GetCollection<Place>("places")
+            .ReplaceOne(ev => ev.Id == placeModel.Id, placeModel);
 
         return RedirectToAction("Index");
     }
-
 }

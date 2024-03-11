@@ -9,7 +9,8 @@ public class YourEventController : BaseController
 {
     private new readonly MongoContext _mongoContext;
 
-    public YourEventController(MongoContext mongoContext) : base(mongoContext)
+    public YourEventController(MongoContext mongoContext)
+        : base(mongoContext)
     {
         _mongoContext = mongoContext;
     }
@@ -17,14 +18,24 @@ public class YourEventController : BaseController
     public IActionResult index()
     {
         var userId = _SetUserDataInViewData();
-        if (userId is null) return RedirectToAction("login", "account");
-        var Events = _mongoContext.GetCollection<JoinEvent>("joinEvents").Find(j => j.UserId == ObjectId.Parse(userId)).ToList();
-        List<Event> hostevent = new List<Event>{}; 
-        List<Event> pastevent = new List<Event>{}; 
-        List<Event> attendevent = new List<Event>{};
+        if (userId is null)
+        {
+            return RedirectToAction("login", "account");
+        }
+
+        var Events = _mongoContext
+            .GetCollection<JoinEvent>("joinEvents")
+            .Find(j => j.UserId == ObjectId.Parse(userId))
+            .ToList();
+        List<Event> hostevent = new List<Event> { };
+        List<Event> pastevent = new List<Event> { };
+        List<Event> attendevent = new List<Event> { };
         foreach (var e in Events)
         {
-            var Event = _mongoContext.GetCollection<Event>("events").Find(ei => ei.Id == e.EventId).FirstOrDefault();
+            var Event = _mongoContext
+                .GetCollection<Event>("events")
+                .Find(ei => ei.Id == e.EventId)
+                .FirstOrDefault();
             if (Event != null)
             {
                 if (Event.HostId == ObjectId.Parse(userId))
@@ -35,7 +46,7 @@ public class YourEventController : BaseController
                 if (Event.StartDate < DateTime.Now)
                 {
                     pastevent.Add(Event);
-                    continue;                   
+                    continue;
                 }
                 attendevent.Add(Event);
             }
@@ -47,6 +58,7 @@ public class YourEventController : BaseController
             PastEvent = pastevent,
             AttendEvent = attendevent
         };
+
         return View(events);
     }
 }
