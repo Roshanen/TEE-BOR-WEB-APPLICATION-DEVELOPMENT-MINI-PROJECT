@@ -194,6 +194,13 @@ body {
 
   .detail{
     display:none;
+    display: -webkit-box;
+    max-width: 400px;
+    color: #7d8687;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .event-img-container {
