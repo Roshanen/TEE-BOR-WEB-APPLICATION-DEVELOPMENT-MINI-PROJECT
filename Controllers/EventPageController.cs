@@ -53,6 +53,7 @@ public class EventPageController : BaseController
         }
         EventViewModel eventView = new EventViewModel();
 
+        ViewData["HostId"] = Event.HostId;
         ViewData["CurrentMember"] = Event.CurrentMember;
         eventView.EventName = Event.EventName;
         eventView.HostImg = Host.ProfilePicture;
@@ -101,17 +102,21 @@ public class EventPageController : BaseController
         eventView.StartDate = Event.StartDate;
 
         DateTime dateTimeNow = DateTime.Now;
-        if (DateTime.Compare(Event.EndDate, dateTimeNow) < 0)
+        if(!Event.Status)
         {
-            eventView.Status = "ended";
+            eventView.Status = "Cancelled";
+        }
+        else if (DateTime.Compare(Event.EndDate, dateTimeNow) < 0)
+        {
+            eventView.Status = "Ended";
         }
         else if (Event.CurrentMember >= Event.MaxMember)
         {
-            eventView.Status = "full";
+            eventView.Status = "Full";
         }
         else
         {
-            eventView.Status = "available";
+            eventView.Status = "Available";
         }
 
         var userId = _SetUserDataInViewData();
@@ -128,7 +133,7 @@ public class EventPageController : BaseController
 
             if (existingJoinEvent != null)
             {
-                eventView.Status = "available";
+                eventView.Status = "Available";
                 ViewBag.IsAttending = true;
             }
             else

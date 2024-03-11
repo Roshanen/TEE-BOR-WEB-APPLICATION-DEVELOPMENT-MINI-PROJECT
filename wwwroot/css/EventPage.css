@@ -12,22 +12,10 @@
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
-nav {
-  list-style: none;
-  overflow: hidden;
-  background-color: #333;
-  margin: 0;
-}
-
 body {
   margin: 0;
   /* margin: 5px 0 0 0; */
   padding: 0;
-}
-
-navbar {
-  margin-top: 0.5rem;
-  margin-inline: 0.5rem;
 }
 
 li {
@@ -53,35 +41,35 @@ li a:hover {
   background-color: #111;
 }
 
-.header {
+.head {
   background-color: #ffffff;
   padding-bottom: 20px;
   border-bottom: 1px solid #dedede;
 }
 
-.header div {
+.head div {
   display: flex;
 }
 
-.header h1 {
+.head h1 {
   margin-left: 12%;
   font-weight: bold;
 }
 
-.header div img {
+.head div img {
   width: 45px;
   height: 45px;
   border-radius: 50%;
   margin-left: 12%;
 }
 
-.header div section {
+.head div section {
   display: block;
   margin-left: 20px;
   margin-top: 3px;
 }
 
-.header div section h4 {
+.head div section h4 {
   margin: 0;
 }
 
@@ -171,7 +159,7 @@ form button {
   display: flex;
   justify-content: center;
   gap: 5%;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 .content img {
@@ -358,11 +346,22 @@ textarea {
   background-color: white;
 }
 
-#time-details {
+.time-details {
   display: flex;
+  align-items: center;
 }
 
-#time-details h3 {
+.time-details a{
+  margin-top: 10px;
+  margin-left: 13px;
+}
+.time-details div{
+  font-weight: lighter;
+  width: 80%;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.time-details h3 {
   font-weight: lighter;
   width: 80%;
   font-size: 0.875rem;
@@ -370,7 +369,7 @@ textarea {
   margin-left: 13px;
 }
 
-#time-details img {
+.time-details img {
   margin-top: 15px;
   width: 25px;
   height: 25px;
@@ -406,12 +405,14 @@ textarea {
 }
 
 #attend-details {
+  gap: 50px;
+  justify-self: flex-start;
   width: 65%;
   display: flex;
   text-align: center;
   align-items: center;
   align-content: center;
-  justify-content: space-evenly;
+
 }
 
 #attend div {
@@ -419,9 +420,9 @@ textarea {
 }
 
 .button-area {
+  gap: 10px;
   display: flex;
   justify-content: space-between;
-  width: 15%;
 }
 
 #attend-btn {
@@ -478,18 +479,46 @@ textarea {
 #numberInput {
   margin-top: 5px;
   justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  width: 50px;
+  height: 20px;
+}
+
+#attend-form{
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 @media only screen and (max-width: 768px) {
   .header h1 {
-    margin-left: 0;
+    margin-left: 2px;
   }
 
   .header div img {
-    margin-left: 0;
+    margin-left: 2px;
   }
 
   #attend-details {
     display: none;
+  }
+
+  .content{
+    flex-direction: column;
+  }
+
+  #attendees{
+    margin-bottom: 50px;
+  }
+  #details{
+    margin: auto;
+  }
+  #attend{
+    justify-content: flex-end;
+  }
+  .button-area{
+    margin-right: 5px;
   }
 }

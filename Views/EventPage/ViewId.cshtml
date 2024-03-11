@@ -54,7 +54,7 @@
       <button type="submit">Submit</button>
     </form>
   </div>
-  <div class="header">
+  <div class="head">
     <h1 id="event-name">@Model.EventName</h1>
     <div>
       <img id="host-img" src=@Model.HostImg />
@@ -78,7 +78,7 @@
         <section id="attendees-list">
           <section class="attendee-profile">
             <img src=@Model.HostImg alt="" />
-            <div>@Model.HostName</div>
+            <a href="@Url.Action("ViewId", "Profile", new { Id = @ViewData["HostId"]})">@Model.HostName</a>
             <div>Host</div>
           </section>
           @if (Model.Attendees != null && Model.Attendees.Count > 0)
@@ -87,7 +87,7 @@
             {
               <section class="attendee-profile">
                 <img src="@Attendee.user.ProfilePicture" alt="" />
-                <div>@Attendee.user.UserName</div>
+                <a href="@Url.Action("ViewId", "Profile", new { Id = @Attendee.user.UserName})">@Attendee.user.UserName</a>
                 <div>Member</div>
                 @if(@Attendee.friend!=0)
                 {
@@ -105,26 +105,29 @@
     </div>
     <div class="right-area">
       <section id="details">
-        <section id="time-details">
+        <section class="time-details">
           <img src="~/src/clock-icon-2048x2048-o0dud9zx.png" alt="" />
           <h3 id="time">@Model.EndDate</h3>
         </section>
-        <section id="time-details">
+        <section class="time-details">
           <img src="~/src/place.png" alt="" />
           <h3 id="place">@Model.Place</h3>
         </section>
-        <section id="time-details">
-          <h3>Status : @Model.Status</h3>
+        <section class="time-details">
+          <div>Status : @Model.Status</div>
         </section>
         @if(! string.IsNullOrEmpty(Model.MapUrl))
           {
             if(Model.MapUrl[0] == '<')
             {
-              Html.Raw(Model.MapUrl);
+              @Html.Raw(Model.MapUrl);
             }
             else if(Model.MapUrl[0] == 'h')
             {
-              <a href="@Model.MapUrl">Map</a>;
+              <section class="time-details">
+                <img src="~/src/map.png" alt="" />
+                <a href="@Model.MapUrl">Map : Click Here</a>
+              </section>
             }
           }
       </section>
@@ -176,7 +179,7 @@
       <button id="share">
         Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
       </button>
-      @if (Model.Status =="available")
+      @if (Model.Status =="Available")
       {
         @if (@ViewBag.IsAttending)
         {
@@ -191,8 +194,8 @@
             action="@Url.Action("Attend", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
             <button id="attend-btn" type="button">Attend</button>
             <input type="hidden" id="friendInput" name="friend" />
-            <div>
-              <label for="numberInput" style="margin-top: 5px;margin-right:3px">friend:</label>
+            <div style="align-items: center;">
+              <label for="numberInput" style="text-align: center;margin-top: 5px;margin-right:3px">friend :  </label>
               <input name="friend" id="numberInput" type="number" value="0" max=@ViewBag.MaxCapacity min=0>
             </div>
           </form>

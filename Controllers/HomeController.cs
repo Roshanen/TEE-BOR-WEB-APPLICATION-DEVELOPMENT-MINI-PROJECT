@@ -26,7 +26,7 @@ public class HomeController : BaseController
             .GetCollection<Event>("events")
             .Find(j => j.EndDate > DateTime.Now)
             .ToList();
-            List<EventViewModel> listEventview = new List<EventViewModel>();
+        List<EventViewModel> listEventview = new List<EventViewModel>();
 
         foreach (var e in Events)
         {
