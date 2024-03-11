@@ -140,6 +140,10 @@ button {
   margin: 0;
 }
 
+.img-profile {
+  border-radius: 50%;
+}
+
 .img-profile:hover {
   transition: all 0.2s;
   transform: scale(1.5);
