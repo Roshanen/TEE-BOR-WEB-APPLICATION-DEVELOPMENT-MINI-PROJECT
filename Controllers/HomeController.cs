@@ -25,15 +25,11 @@ public class HomeController : BaseController
     {
         _SetUserDataInViewData();
         var Events = _mongoContext.GetCollection<Event>("events").Find(j => j.EndDate <= DateTime.Now).ToList();
-        Console.WriteLine(Events.Count);
-        Console.WriteLine(DateTime.Now);
         List<EventViewModel> listEventview = new List<EventViewModel>();
 
 
         foreach (var e in Events){
             var Host = _mongoContext.GetCollection<User>("users").Find(u => u.Id == e.HostId).FirstOrDefault();
-            Console.WriteLine(e.EventName);
-            Console.WriteLine(Host.UserName);
             EventViewModel eventView = new EventViewModel();
             eventView.EventName = e.EventName;
             eventView.HostName = Host.UserName;
