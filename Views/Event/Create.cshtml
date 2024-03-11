@@ -101,17 +101,17 @@
                         <div class="input-area">
                             <div class="date-group group">
                                 <span>Start date</span>
-                                <input type="datetime-local" name="StartDate" lang="th">
+                                <input type="datetime-local" id="StartDate" name="StartDate" lang="th">
                                 @* //value = datetime now *@
                             </div>
                             <div class="date-group group">
                                 <span>End date</span>
-                                <input type="datetime-local" name="EndDate" lang="th">
+                                <input type="datetime-local" id="EndDate" name="EndDate" lang="th">
                                 @* //minlength = datime now *@
                             </div>
                             <div class="max-member-group group">
                                 <span>Max member</span>
-                                <input type="number" name="MaxMember" value="0">
+                                <input type="number" id="MaxMember" name="MaxMember" value="1" min="1">
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="input-area">
                             <label>Please, write at least 50 characters</label>
-                            <textarea id="party-name" name="EventDetails"></textarea>
+                            <textarea id="party-name" name="EventDetails" minlength="50" required></textarea>
                         </div>
                         <div class="example-area">
                             <h3>Examples</h3>
