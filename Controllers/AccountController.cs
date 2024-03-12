@@ -27,7 +27,7 @@ public class AccountController : BaseController
 
     public IActionResult SignUp()
     {
-        string userId = _SetUserDataInViewData();
+        string? userId = _SetUserDataInViewData();
         if (userId != null)
         {
             return RedirectToAction("Index", "Home");
@@ -65,7 +65,7 @@ public class AccountController : BaseController
 
     public IActionResult Login()
     {
-        string userId = _SetUserDataInViewData();
+        string? userId = _SetUserDataInViewData();
         if (userId != null)
         {
             return RedirectToAction("Index", "Home");
