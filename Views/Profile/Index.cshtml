@@ -49,21 +49,23 @@
               </div>
             </div>
           </div>
-
-          <a class="change-photo" href="@Url.Action("Edit", "Profile" , new { id=Model.Id })">
-            <svg class="info-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path opacity="0.15" d="M4 20H8L18 10L14 6L4 16V20Z" fill="#FFFFFF"></path>
-                <path d="M12 20H20.5M18 10L21 7L17 3L14 6M18 10L8 20H4V16L14 6M18 10L14 6" stroke="#FFFFFF"
-                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                </path>
-              </g>
-            </svg>
-            <span class="change-text" style="color: white;">Change profile photo</span>
-          </a>
+          @if (ViewData["isProfileOwner"] == "true")
+            {
+            <a class="change-photo" href="@Url.Action("Edit", "Profile" , new { id=Model.Id })">
+              <svg class="info-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path opacity="0.15" d="M4 20H8L18 10L14 6L4 16V20Z" fill="#FFFFFF"></path>
+                  <path d="M12 20H20.5M18 10L21 7L17 3L14 6M18 10L8 20H4V16L14 6M18 10L14 6" stroke="#FFFFFF"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  </path>
+                </g>
+              </svg>
+              <span class="change-text" style="color: white;">Change profile photo</span>
+            </a>
+            }
         </div>
 
         <div class="profile_card profile-bottom">
@@ -106,9 +108,12 @@
                   margin: 0%;
                 ">
               <div style="text-align: left">@Model.UserName</div>
-              <div style="text-align: left; color: rgb(250, 59, 6);">
-                <a href="@Url.Action("Edit", "Profile", new { id = Model.Id })">Edit profile</a>
-              </div>
+              @if (ViewData["isProfileOwner"] == "true")
+              {
+                <div style="text-align: left; color: rgb(250, 59, 6);">
+                  <a href="@Url.Action("Edit", "Profile", new { id = Model.Id })">Edit profile</a>
+                </div>
+              }
             </div>
             <div style="text-align: left"></div>
             <div style="text-align: left"></div>

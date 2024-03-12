@@ -17,6 +17,7 @@ class Dropdown {
     });
   }
 
+
   handleClick(dropdownAction) {
     this.dropdowns.forEach((dropdown) => {
       if (dropdown.classList.contains("active")) {
@@ -50,7 +51,7 @@ function qChangeDisplay() {
       var dropdownName = dropdownTitle.querySelector("span");
 
       if (selectedId == "any") {
-        dropdownName.innerHTML = "Any " + dropdownName.id;
+        dropdownName.innerHTML = "Any" + dropdownName.id;
       } else {
         dropdownName.innerHTML = selectedText;
       }
