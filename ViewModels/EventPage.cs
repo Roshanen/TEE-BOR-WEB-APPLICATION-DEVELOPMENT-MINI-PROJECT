@@ -16,4 +16,20 @@ public class EventPage
     public string Place {get; set;}
     public string MapUrl {get; set;}
     public bool IsAttending {get; set;}
+
+    public EventPage()
+    {
+        Id = new ObjectId();
+        HostImg = string.Empty;
+        HostName = string.Empty;
+        EventName = string.Empty;
+        EventImg = string.Empty;
+        EventDetails = string.Empty;
+        Tags = new List<string>();
+        Attendees = new List<User>();
+        Time = string.Empty;
+        Place = string.Empty;
+        MapUrl = string.Empty;
+        IsAttending = false;
+    }
 }

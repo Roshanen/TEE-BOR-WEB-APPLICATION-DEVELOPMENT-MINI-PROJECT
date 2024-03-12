@@ -13,6 +13,8 @@ builder.Services.AddSingleton<MongoContext>();
 
 var tkConf = builder.Configuration.GetSection("Jwt");
 
+var key = tkConf?["Key"] ?? "";
+
 var tokenValidationParameters = new TokenValidationParameters{
     ValidateIssuer = true,
     ValidateAudience = true,
@@ -20,7 +22,7 @@ var tokenValidationParameters = new TokenValidationParameters{
     ValidateIssuerSigningKey = true,
     ValidIssuer = tkConf!["Issuer"],
     ValidAudience = tkConf!["Audience"],
-    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tkConf!["Key"]))
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
 };
 
 builder.Services.AddSession();
