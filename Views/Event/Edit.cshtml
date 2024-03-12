@@ -42,12 +42,12 @@
                             </p>
                         </div>
                         <div class="input-area">
-                            <input type="text" name="ActualPlace" placeholder="สถานที่" value="@Model.ActualPlace">
-                            <input type="text" name="Province" placeholder="จังหวัด" value="@Model.Province">
-                            <input type="text" name="District" placeholder="อำเภอ" value="@Model.District">
-                            <input type="text" name="SubDistrict" placeholder="ตำบล" value="@Model.SubDistrict">
+                            <input type="text" name="ActualPlace" placeholder="สถานที่" value="@Model.ActualPlace" required>
+                            <input type="text" name="Province" placeholder="จังหวัด" value="@Model.Province" required>
+                            <input type="text" name="District" placeholder="อำเภอ" value="@Model.District" required>
+                            <input type="text" name="SubDistrict" placeholder="ตำบล" value="@Model.SubDistrict" required>
                             <div>หรือ</div>
-                            <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map" value="@Model.MapUrl">
+                            <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map" value="@Model.MapUrl" required>
                         </div>
                     </div>
             
@@ -86,8 +86,8 @@
                             <p>You can edit this later if you change your mind.</p>
                         </div>
                         <div class="input-area">
-                            <input type="text" name="EventName" placeholder="ชื่อของ party" value="@Model.EventName">
-                            <input type="text" name="EventImg" placeholder="ลิงก์รูปของ party" value="@Model.EventImg">
+                            <input type="text" name="EventName" placeholder="ชื่อของ party" value="@Model.EventName" required>
+                            <input type="text" name="EventImg" placeholder="ลิงก์รูปของ party" value="@Model.EventImg" required>
                         </div>
                     </div>
                     
@@ -96,20 +96,20 @@
                         <div class="input-area">
                             <div class="date-group group">
                                 <span>Start date</span>
-                                <input type="date" name="StartDate" value="@GetDateString(@Model.StartDate)">
+                                <input type="datetime-local" name="StartDate" value="@GetDateString(@Model.StartDate)" required>
                             </div>
                             <div class="date-group group">
                                 <span>End date</span>
-                                <input type="date" name="EndDate" value="@GetDateString(@Model.EndDate)">
+                                <input type="datetime-local" name="EndDate" value="@GetDateString(@Model.EndDate)" required>
                             </div>
                             @functions {
                                 String GetDateString(DateTime date){
-                                return date.ToString("yyyy-MM-dd").Replace("/", "-");
+                                return date.ToString("yyyy-MM-ddTHH:mm");
                                 }
                             }
                             <div class="max-member-group group">
                                 <span>Max member</span>
-                                <input type="number" name="MaxMember" value="@Model.MaxMember">
+                                <input type="number" name="MaxMember" value="@Model.MaxMember" required>
                             </div>
                         </div>
                     </div>

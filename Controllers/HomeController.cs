@@ -40,6 +40,8 @@ public class HomeController : BaseController
             eventView.EventImg = e.EventImg;
             eventView.Tags = e.Id.ToString();
             eventView.EndDate = e.EndDate;
+            eventView.EventDetails = e.EventDetails;
+
             listEventview.Add(eventView);
         }
 

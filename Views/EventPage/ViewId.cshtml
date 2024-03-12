@@ -78,7 +78,7 @@
         <section id="attendees-list">
           <section class="attendee-profile">
             <img src=@Model.HostImg alt="" />
-            <div>@Model.HostName</div>
+            <a href="@Url.Action("ViewId", "Profile", new { Id = @ViewData["HostId"]})">@Model.HostName</a>
             <div>Host</div>
           </section>
           @if (Model.Attendees != null && Model.Attendees.Count > 0)
@@ -87,7 +87,7 @@
             {
               <section class="attendee-profile">
                 <img src="@Attendee.user.ProfilePicture" alt="" />
-                <a href="">@Attendee.user.UserName</a>
+                <a href="@Url.Action("ViewId", "Profile", new { Id = @Attendee.user.UserName})">@Attendee.user.UserName</a>
                 <div>Member</div>
                 @if(@Attendee.friend!=0)
                 {
@@ -116,11 +116,16 @@
         <section class="time-details">
           <div>Status : @Model.Status</div>
         </section>
+        <section class="time-details">
+          <div>Current member : @ViewData["CurrentMember"]</div>
+        </section>
+        <section class="time-details">
+          <div>Max member : @ViewData["MaxMember"]</div>
+        </section>
         @if(! string.IsNullOrEmpty(Model.MapUrl))
-          {
+        {
             if(Model.MapUrl[0] == '<')
-            {
-              @Html.Raw(Model.MapUrl);
+            {@Html.Raw(Model.MapUrl);
             }
             else if(Model.MapUrl[0] == 'h')
             {
@@ -129,7 +134,7 @@
                 <a href="@Model.MapUrl">Map : Click Here</a>
               </section>
             }
-          }
+        }
       </section>
       <div class="rating-area-display">
           <div class="rating-topic">Attendees rating</div>
@@ -179,7 +184,7 @@
       <button id="share">
         Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
       </button>
-      @if (Model.Status =="Available")
+      @if ((Model.Status =="Available" || @ViewBag.IsAttending) && ViewBag.IsHost==false)
       {
         @if (@ViewBag.IsAttending)
         {
@@ -203,6 +208,7 @@
       }
     </div>
   </section>
+  
   <script>
   let closeButton = document.getElementById("close-button");
   let ratingPopup = document.getElementById("rating-popup");

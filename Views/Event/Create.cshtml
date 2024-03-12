@@ -114,20 +114,25 @@
                     <div class="step step-4">
                         <h2>Your party detail</h2>
                         <div class="input-area">
-                            <div class="date-group group">
-                                <span>Start date</span>
-                                <input type="datetime-local" id="StartDate" name="StartDate" lang="th">
-                                @* //value = datetime now *@
+                            <div class="date-input">
+                                <div class="date-group group">
+                                    <label><div>Start date</div>
+                                    <input type="datetime-local" id="StartDate" name="StartDate" lang="th">
+                                    </label>
+                                    @* //value = datetime now *@
+                                </div>
+                                <div class="date-group group">
+                                    <label><div>End date</div>
+                                    <input type="datetime-local" id="EndDate" name="EndDate" lang="th">
+                                    </label>
+                                    @* //minlength = datime now *@
+                                </div>
                             </div>
-                            <div class="date-group group">
-                                <span>End date</span>
-                                <input type="datetime-local" id="EndDate" name="EndDate" lang="th">
-                                @* //minlength = datime now *@
-                            </div>
-                            <div class="max-member-group group">
-                                <span>Max member</span>
-                                <input type="number" id="MaxMember" name="MaxMember" value="1" min="1">
-                            </div>
+                                <div class="max-member-group group">
+                                    <label><div>Max member</div>
+                                    <input type="number" name="MaxMember" value="1" min="1">
+                                    </label>
+                                </div>
                         </div>
                     </div>
 

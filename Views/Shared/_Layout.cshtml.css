@@ -142,6 +142,8 @@ button {
 
 .img-profile {
   border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.2s;
 }
 
 .img-profile:hover {

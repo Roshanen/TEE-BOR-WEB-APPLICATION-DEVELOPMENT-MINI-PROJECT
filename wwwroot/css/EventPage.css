@@ -12,11 +12,8 @@
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
-nav {
-  list-style: none;
-  overflow: hidden;
-  background-color: #333;
-  margin: 0;
+header{
+  margin-top: 15px;
 }
 
 body {
@@ -116,7 +113,7 @@ li a:hover {
   padding: 10px;
 }
 
-form button {
+.comment-area ~ button {
   font-size: 1rem;
   font-weight: 500;
   padding: 10px 20px;
@@ -166,7 +163,7 @@ form button {
   display: flex;
   justify-content: center;
   gap: 5%;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 .content img {
@@ -339,6 +336,7 @@ textarea {
 .attendee-profile img {
   width: 80px;
   height: 80px;
+  object-fit: cover;
   border-radius: 50%;
   margin: 0;
 }
@@ -510,5 +508,22 @@ textarea {
 
   #attend-details {
     display: none;
+  }
+
+  .content{
+    flex-direction: column;
+  }
+
+  #attendees{
+    margin-bottom: 50px;
+  }
+  #details{
+    margin: auto;
+  }
+  #attend{
+    justify-content: flex-end;
+  }
+  .button-area{
+    margin-right: 5px;
   }
 }

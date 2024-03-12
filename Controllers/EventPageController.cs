@@ -53,7 +53,9 @@ public class EventPageController : BaseController
         }
         EventViewModel eventView = new EventViewModel();
 
+        ViewData["HostId"] = Event.HostId;
         ViewData["CurrentMember"] = Event.CurrentMember;
+        ViewData["MaxMember"] = Event.MaxMember;
         eventView.EventName = Event.EventName;
         eventView.HostImg = Host.ProfilePicture;
         eventView.HostName = Host.UserName;
@@ -122,9 +124,14 @@ public class EventPageController : BaseController
 
         if (userId != null)
         {
-            // var userName = _mongoContext.GetCollection<User>("users").Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefault();
-            // ViewData["userName"] = userName?.UserName;
-            // ViewData["userProfile"] = userName?.ProfilePicture;
+            if(userId == Event.HostId.ToString())
+            {
+                ViewBag.IsHost = true;
+            }
+            else
+            {
+                ViewBag.IsHost = false;
+            }
             var existingJoinEvent = _mongoContext
                 .GetCollection<JoinEvent>("joinEvents")
                 .Find(je => je.UserId == ObjectId.Parse(userId) && je.EventId == Event.Id)
@@ -132,7 +139,6 @@ public class EventPageController : BaseController
 
             if (existingJoinEvent != null)
             {
-                eventView.Status = "Available";
                 ViewBag.IsAttending = true;
             }
             else
