@@ -18,9 +18,6 @@
         <div class="content-container">
             <div class="TopPage">
                 <h1>Event near Bangkok, TH</h1>
-                <div class="select">
-                    <a href="#" onclick="return false;">Events Groups</a>
-                </div>
                 <nav role="primary navigation" class="primary-navigation">
                     <div class="dropdown">
                         <a href="#" onclick="return false;" class="dropdown-action" id="dateChoice">Any day <svg class="dropdown-icon"
@@ -34,13 +31,9 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="#" onclick="return false;" id="any"> Any day </a></li>
-                            @* <li><a href="#" onclick="return false;" id="Starting soon"> Starting soon </a></li> *@
                             <li><a href="#" onclick="return false;" id="Today"> Today </a></li>
-                            @* <li><a href="#" onclick="return false;" id="Tomorrow"> Tomorrow </a></li> *@
                             <li><a href="#" onclick="return false;" id="This week"> This week </a></li>
-                            @* <li><a href="#" onclick="return false;" id="This weekend"> This weekend </a></li> *@
                             <li><a href="#" onclick="return false;" id="Next week"> Next week </a></li>
-                            @* <li><a href="#" onclick="return false;" id="Custom"> Custom </a></li> *@
                     </div>
 
             <div class="dropdown">
@@ -75,28 +68,6 @@
                     <li><a href="#" onclick="return false; id=" Storytelling">Storytelling</a></li>
                 </ul>
             </div>
-
-                    @* <div class="dropdown">
-                    <a href="#" onclick="return false;" class="dropdown-action">Any distance
-                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24">
-                    <title>chevron-down</title>
-                    <g fill="none">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                    d="M15.25 10.75L12 14.25l-3.25-3.5"></path>
-                    </g>
-                    </svg></a>
-
-                    <ul class="dropdown-menu">
-                    <li><a href="#" onclick="return false;">Any distance</a></li>
-                    <li><a href="#" onclick="return false;">2 miles</a></li>
-                    <li><a href="#" onclick="return false;">5 miles</a></li>
-                    <li><a href="#" onclick="return false;">10 miles</a></li>
-                    <li><a href="#" onclick="return false;">25 miles</a></li>
-                    <li><a href="#" onclick="return false;">50 miles</a></li>
-                    <li><a href="#" onclick="return false;">100 miles</a></li>
-                    </ul>
-                    </div> *@
 
             <div class="dropdown">
                 <a href="#" onclick="return false;" class="dropdown-action category">
@@ -169,16 +140,14 @@
                     </a>
                     <div class="details">
                         <div class="date">@ev.EndDate</div>
-                        <div class="header">
-                            <a href="/eventpage/viewid/@ev.Id">
-                                <div class="h2">@ev.EventName</div>
-                            </a>
-                            <div class="sub-header">
-                                <div class="paragraph">@ev.EventDetails</div>
-                                <div class="share-attend">
-                                    <div class="attendee">@ev.CurrentMember Attendees</div>
-                                    <div class="share"><i class="fa-solid fa-upload"></i></div>
-                                </div>
+                        <a href="/eventpage/viewid/@ev.Id">
+                            <div class="h2">@ev.EventName</div>
+                        </a>
+                        <div class="sub-header">
+                            <div class="paragraph">@ev.EventDetails</div>
+                            <div class="share-attend">
+                                <div class="attendee">@ev.CurrentMember Attendees</div>
+                                <div class="share"><i class="fa-solid fa-upload"></i></div>
                             </div>
                         </div>
                     </div>

@@ -42,7 +42,7 @@ button:hover {
     filter: drop-shadow(0px 0px 4px #9999);
 }
 
-form {
+.container form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -89,14 +89,23 @@ form {
 }
 
 .step-4 .input-area {
-    flex-direction: row;
-
+    flex-direction: column;
 }
 
 .step-4 .input-area .group {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.step-4 .date-input {
+    display: flex;
+    justify-content: left;
+    gap: 30px;
+}
+
+.step-4 input {
+    max-width: 220px;
 }
 
 .max-member-group input{
@@ -116,7 +125,7 @@ form {
     align-items: end;
 }
 
-button {
+.container button {
     position: relative;
     bottom: 0;
     width: 80px;
@@ -128,8 +137,17 @@ button {
 }
 
 @media only screen and (max-width: 768px) {
-    .create-party-container {
+    .container {
+        justify-content: flex-start;
+    }
+    .party-wrapper {
         width: 100%;
+    }
+    .container form, .container form input {
+        width: 100%;
+    }
+    .create-party-container {
+        filter: none;
     }
     .circle {
         width: calc(var(--circle-size) - 8px);
@@ -140,9 +158,24 @@ button {
     }
     .step-4 .input-area .group {
         display: grid;
-        grid-template-columns: 100px 100px;
     }
     .step-4 .input-area .group input {
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .hyphen {
+        display: none;
+    }
+    .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 0;
+    }
+    .step-4 .date-input {
+        /* height: 100px; */
+        flex-direction: column;
+        gap: 10px;
+    }
+} 
