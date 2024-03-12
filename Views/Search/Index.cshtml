@@ -32,7 +32,7 @@
                             </svg></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#" onclick="return false;" id="any"> Any day </a></li>
+                            <li><a href="#" onclick="return false;" id="Any"> Any day </a></li>
                             <li><a href="#" onclick="return false;" id="Today"> Today </a></li>
                             <li><a href="#" onclick="return false;" id="This week"> This week </a></li>
                             <li><a href="#" onclick="return false;" id="Next week"> Next week </a></li>
@@ -94,7 +94,7 @@
                             </svg></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#" onclick="return false;" id="any">Any category</a></li>
+                            <li><a href="#" onclick="return false;" id="Any">Any category</a></li>
                             <li><a href="#" onclick="return false;" id="Art & Culture">Art & Culture</a></li>
                             <li><a href="#" onclick="return false;" id="Career & Business">Career & Business</a></li>
                             <li><a href="#" onclick="return false;" id="Community & Environment">Community & Environment</a></li>
@@ -138,9 +138,8 @@
                 </nav>
             </div>
         </nav>
-    </div>
     <div class="display-paragraph">
-        <div class="card-container left">
+        <div class="card-container left" id="searchResultsContainer">
             @foreach (var ev in Model)
             {
             <div class="card">
@@ -172,8 +171,8 @@
                         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div> *@
-            </div>
-            }
+        </div>
+    </div>
             <script src="~/js/search.js"></script>
 </body>
 </html>

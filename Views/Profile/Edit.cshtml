@@ -172,10 +172,10 @@
                     <label class="font-medium text-primary" for="custom-name"
                         style="font-weight: 500; font-weight: 16px">Bio</label>
                     <div class="input-container-bio">
-                        <textarea type="text" name="Bio" id="custom-name-ta" autocomplete="given-name" maxlength="250"
+                        <textarea type="text" name="Bio" id="custom-name-ta" autocomplete="given-name" maxlength="100"
                             placeholder="Write a little bit of yourself here"
                             style="text-align: left; line-break: auto; resize: none; height: 150px;">@Model.Bio</textarea>
-                        <span id="charCount_textarea">250</span>
+                        <span id="charCount_textarea">100</span>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@
         const charCount_textarea = document.getElementById("charCount_textarea");
 
         textareaField.addEventListener("input", function () {
-            const remainingChars = 250 - this.value.length;
+            const remainingChars = 100 - this.value.length;
             charCount_textarea.textContent = remainingChars;
         });
 
