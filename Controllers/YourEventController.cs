@@ -34,7 +34,7 @@ public class YourEventController : BaseController
         {
             var Event = _mongoContext
                 .GetCollection<Event>("events")
-                .Find(ei => ei.Id == e.EventId)
+                .Find(ei => ei.Id == e.EventId && ei.Status == true)
                 .FirstOrDefault();
             if (Event != null)
             {
@@ -60,5 +60,38 @@ public class YourEventController : BaseController
         };
 
         return View(events);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Cancel(string eventId)
+    {
+        try
+        {
+            var eventIdObj = ObjectId.Parse(eventId);
+            var ev = await _mongoContext
+                .GetCollection<Event>("events")
+                .Find(e => e.Id == eventIdObj)
+                .FirstOrDefaultAsync();
+
+            if (ev == null)
+            {
+                return NotFound("User or event not found.");
+            }
+
+            // Check if the user is already joined to the event
+            // Remove JoinEvent document from the collection
+            await _mongoContext
+                .GetCollection<Event>("events")
+                .UpdateOneAsync(
+                    e => e.Id == eventIdObj,
+                    Builders<Event>.Update.Set(e => e.Status, false));
+
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString()); // Log the exception details
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 }
