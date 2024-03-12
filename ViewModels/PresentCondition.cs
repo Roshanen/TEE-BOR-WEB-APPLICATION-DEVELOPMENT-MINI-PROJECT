@@ -8,8 +8,6 @@ namespace WebApp.Models
     {
         public string CurrentDate {get; set;}
         public string Member {get; set;}
-
         public string Canceled {get; set;}
-
     }
 }
