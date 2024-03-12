@@ -12,6 +12,12 @@ body {
     sans-serif;
 }
 
+.link-create {
+  position: fixed;
+  bottom: 20px; 
+  right: 20px;
+}
+
 .detail p {
 margin: 0px;
 }
