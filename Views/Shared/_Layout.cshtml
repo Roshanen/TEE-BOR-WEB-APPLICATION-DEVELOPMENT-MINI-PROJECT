@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DotNet</title>
+    <title>@ViewData["Title"] - TeeBor</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
 </head>
@@ -24,7 +24,7 @@
                 </a>
 
                 <div class="search-form">
-                    <form action="/search">
+                    <form>
                         <div class="form-container">
 
                             <div class="search-name">
@@ -38,12 +38,12 @@
                                 <input type="text" name="name" id="name" placeholder="Search events">
                             </div>
 
-                            <div class="search-place">
+                            @* <div class="search-place">
                                 <input type="text" name="place" id="place" placeholder="Neighborhood, city or zip">
-                            </div>
+                            </div> *@
 
-                            <div class="submit-button">
-                                <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            <div class="submit-button" >
+                                <button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                         viewBox="0 0 24 24">
                                         <title>icon</title>
                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -86,7 +86,7 @@
         </navbar>
 
         <div class="block-search">
-            <form action="/search">
+            <form>
                 <div class="block-form-container">
 
                     <div class="search-base">
@@ -106,12 +106,12 @@
 
                     <div class="search-extend">
 
-                        <div class="block-search-place">
+                        @* <div class="block-search-place">
                             <input type="text" name="place" id="place" placeholder="Neighborhood, city or zip">
-                        </div>
+                        </div> *@
 
                         <div class="block-submit-button">
-                            <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            <button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24">
                                     <title>icon</title>
                                     <path fill-rule="evenodd" clip-rule="evenodd"
