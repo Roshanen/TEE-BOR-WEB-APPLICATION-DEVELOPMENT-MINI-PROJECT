@@ -100,7 +100,6 @@ public class SearchController : BaseController
             }
         }
 
-            Console.WriteLine(search.Type); 
         if (!string.IsNullOrEmpty(search.Type) && search.Type != "any")
         {
             filter &= filterBuilder.Eq("Type", search.Type);
@@ -121,6 +120,15 @@ public class SearchController : BaseController
             if (search.Status == "Full")
             {
                 events = events.Where(ev => ev.CurrentMember >= ev.MaxMember).ToList();
+            }
+        }
+
+        if (!string.IsNullOrEmpty(search.Sort)) {
+            if (search.Sort == "Newest"){
+                events = events.OrderByDescending(ev => ev.StartDate).ToList();
+            }
+            if (search.Sort == "Oldest"){
+                events = events.OrderBy(ev => ev.StartDate).ToList();
             }
         }
 
