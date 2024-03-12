@@ -32,13 +32,16 @@
                             </div>
                         </a>
                         <div class="content">
+                            <div class="left-card">
                             <p><a href="/eventpage/viewid/@ev.Tags" class="event-name">
                                     @ev.EventName
                                 </a></p>
-                            <div class="host" style="color: red;">@ev.HostName</div>
-                            <div class="date">
-                                <span class="material-symbols-outlined">calendar_month</span>
-                                <p>Until: @ev.EndDate</p>
+                            <div class="host" style="color: red;">Host: @ev.HostName</div>
+                            <div class="date-hide">
+                                
+                                <p><span class="material-symbols-outlined">calendar_month</span>Until: @ev.EndDate</p>
+                            </div>
+
                             </div>
                             <div class="event-footer">
                                 <div class="going">
@@ -49,6 +52,13 @@
                                     <span class="material-symbols-outlined">confirmation_number</span>
                                     <p>Free</p>
                                 </div>
+                            </div>
+                            <div class="detail"><p>Details:</p> @ev.EventDetails</div>
+                            </div>
+                            <div class="right-card">
+                                <div class="date">
+                                <span class="material-symbols-outlined">calendar_month</span>
+                                <p>Until: @ev.EndDate</p>
                             </div>
                         </div>
                     </div>
