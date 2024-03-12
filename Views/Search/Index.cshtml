@@ -144,15 +144,41 @@
                     </div>
                 </nav>
             </div>
-            <div class="display-paragraph">
-                <div id="searchResultsContainer" class="card-container left">
-                    @foreach (var ev in Model)
-                    {
-                        <div class="card">
-                            <a href="/eventpage/viewid/@ev.Id" class="image">
-                                <div class="pics">
-                                    <img class="img" src="@ev.EventImg" alt="@ev.EventName" />
-                                </div>
+            <div class="dropdown">
+                <a href="#" onclick="return false;" class="dropdown-action">
+                    Sort by:&nbsp;
+                    <span id="sort">
+                        Date
+                    </span>
+                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <title>chevron-down</title>
+                        <g fill="none">
+                            <path stroke-linecap="round" stroke-linejoin="round " stroke-width="1.5"
+                                d="M15.25 10.75L12 14.25l-3.25-3.5"></path>
+                        </g>
+                    </svg>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="return false;">Date</a></li>
+                    <li><a href="#" onclick="return false;">Relevance</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="display-paragraph">
+        <div class="card-container left">
+            @foreach (var ev in Model)
+            {
+                <div class="card">
+                    <a href="/eventpage/viewid/@ev.Id" class="image">
+                        <img class="img" src="@ev.EventImg" alt="@ev.EventName" />
+                    </a>
+                    <div class="details">
+                        <div class="date">@ev.EndDate</div>
+                        <div class="header">
+                            <a href="/eventpage/viewid/@ev.Id">
+                                <div class="h2">@ev.EventName</div>
                             </a>
                             <div class="details">
                                 <div class="date">
@@ -172,7 +198,6 @@
                                 </div>
                             </div>
                         </div>
-                    }
                 </div>
                 @* <div class="right">
                     <iframe
@@ -181,7 +206,7 @@
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div> *@
             </div>
+            }
             <script src="~/js/search.js"></script>
 </body>
-
 </html>
