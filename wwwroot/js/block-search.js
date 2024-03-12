@@ -15,8 +15,7 @@ bSubmits.forEach((b) => {
   b.addEventListener("click", () => {
     search();
   });
-}
-);
+});
 
 function checkElementAndAny(name) {
   var element = document.getElementById(name);
@@ -44,8 +43,7 @@ function search() {
   };
 
   if (!window.location.pathname.startsWith("/search")) {
-    window.location.href =
-      "/search?name=" + name;
+    window.location.href = "/search?name=" + name;
   } else {
     sendSearch(inputValues);
   }
@@ -56,18 +54,33 @@ function sendSearch(inputValues) {
   for (var key in inputValues) {
     formData.append(key, inputValues[key]);
   }
-
-  fetch("http://localhost:5180/search/viewresult", {
-    method: "POST",
-    body: formData,
-  })
-    .then(function (response) {
-      return response.text();
-    })
-    .then(function (data) {
-      document.getElementById("searchResultsContainer").innerHTML = data;
-    })
-    .catch(function (error) {
+  
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        document.getElementById("searchResultsContainer").innerHTML =
+          this.responseText;
+      }
+    };
+  
+    xhttp.onerror = function (error) {
       console.error(error);
-    });
+    };
+  
+    xhttp.open("POST", "http://localhost:5180/search/viewresult", true);
+    xhttp.send(formData);
+
+  // fetch("http://localhost:5180/search/viewresult", {
+  //   method: "POST",
+  //   body: formData,
+  // })
+  //   .then(function (response) {
+  //     return response.text();
+  //   })
+  //   .then(function (data) {
+  //     document.getElementById("searchResultsContainer").innerHTML = data;
+  //   })
+  //   .catch(function (error) {
+  //     console.error(error);
+  //   });
 }
