@@ -69,8 +69,13 @@
       <img id="event-img" src=@Model.EventImg />
       <h2>Details</h2>
       <div id="content-details">@Model.EventDetails</div>
+      <h2>Tags</h2>
       <section id="tag">
         <a href="" class="tag">@Model.Tags</a>
+      </section>
+      <h2>Type</h2>
+      <section id="tag">
+        <a href="" class="tag">@Model.Type</a>
       </section>
 
       <section id="attendees">
@@ -184,9 +189,9 @@
       <button id="share">
         Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
       </button>
-      @if ((Model.Status =="Available" || @ViewBag.IsAttending) && ViewBag.IsHost==false)
+      @if ((Model.Status =="Active" || @ViewBag.IsAttending) && ViewBag.IsHost==false)
       {
-        @if (@ViewBag.IsAttending)
+        if (@ViewBag.IsAttending)
         {
           <form id="cancel-form" method="post"
             action="@Url.Action("Cancel", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
@@ -203,6 +208,23 @@
               <label for="numberInput" style="text-align: center;margin-top: 5px;margin-right:3px">friend :  </label>
               <input name="friend" id="numberInput" type="number" value="0" max=@ViewBag.MaxCapacity min=0>
             </div>
+          </form>
+        }
+      }
+      @if(ViewBag.IsHost)
+      {
+        if(Model.Status == "Active")
+        {
+          <form id="close-form" method="post"
+            action="@Url.Action("Cancel", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
+            <button id="cancel-btn" type="button">Close</button>
+          </form>
+        }
+        else if(Model.Status == "Closed")
+        {
+          <form id="open-form" method="post"
+            action="@Url.Action("Open", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
+            <button id="cancel-btn" type="button">Close</button>
           </form>
         }
       }

@@ -34,7 +34,7 @@ public class YourEventController : BaseController
         {
             var Event = _mongoContext
                 .GetCollection<Event>("events")
-                .Find(ei => ei.Id == e.EventId && ei.Status == true)
+                .Find(ei => ei.Id == e.EventId && ei.Status == "Active")
                 .FirstOrDefault();
             if (Event != null)
             {
@@ -84,7 +84,7 @@ public class YourEventController : BaseController
                 .GetCollection<Event>("events")
                 .UpdateOneAsync(
                     e => e.Id == eventIdObj,
-                    Builders<Event>.Update.Set(e => e.Status, false));
+                    Builders<Event>.Update.Set(e => e.Status, "Cancelled"));
 
             return RedirectToAction("Index");
         }
