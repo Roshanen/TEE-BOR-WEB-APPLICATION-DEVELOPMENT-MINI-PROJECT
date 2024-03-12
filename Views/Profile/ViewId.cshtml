@@ -25,10 +25,6 @@
               </div>
             </div>
             <div class="profile-stats">
-              <div>
-                <div class="profile-statsh3">3</div>
-                <div class="profile-statp">Groups</div>
-              </div>
               <div style="
                     display: flexbox;
                     border: #e2e4e6;
@@ -40,12 +36,8 @@
                     padding-right: 48px;
                     height: fit-content;
                   ">
-                <div class="profile-statsh3">5</div>
-                <div class="profile-statp">Interests</div>
-              </div>
-              <div>
-                <div class="profile-statsh3">0</div>
-                <div class="profile-statp">RSVPs</div>
+                <div class="profile-statsh3">Bio</div>
+                <div class="profile-statp">@Model.Bio</div>
               </div>
             </div>
           </div>
@@ -137,7 +129,7 @@
                   font-size: 22px;
                   font-weight: 640;
                 ">
-              My interests
+              My Address
             </h3>
           </div>
           <div class="row" style="
@@ -149,29 +141,7 @@
                 margin-bottom: 1rem;
                 width: fit-content;
               ">
-            <div class="column">
-              <a class="mini-card" data-event-label="self_profile_interest_click" target="_blank"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Open Source</a>
-            </div>
-            <div class="column">
-              <a class="mini-card" data-event-label="self_profile_interest_click" target="_blank"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Data
-                Visualization</a>
-            </div>
-            <div class="column">
-              <a class="mini-card" data-event-label="self_profile_interest_click" target="_blank"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Technology
-                Startups</a>
-            </div>
-            <div class="column">
-              <a class="mini-card" data-event-label="self_profile_interest_click" target="_blank"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Big Data</a>
-            </div>
-            <div class="column">
-              <a class="mini-card" data-event-label="self_profile_interest_click" target="_blank"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUJcmljayByb2xs">Data
-                Analytics</a>
-            </div>
+            <h2>@Model.Address</h2>
           </div>
         </div>
         <div class="profile_card">
