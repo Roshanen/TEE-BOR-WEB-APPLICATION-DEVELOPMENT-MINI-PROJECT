@@ -144,7 +144,7 @@
   margin-right: 0.25em;
 }
 
-nav {
+.primary-navigation {
   width: 100%;
   display: flex;
   align-items: center;
@@ -153,15 +153,12 @@ nav {
   border-bottom: 1px solid #ddd;
 }
 
-nav a {
+.primary-navigation a {
     padding: 10px 16px;
     border-radius: 4px;
-    display: inline-block;
-    text-decoration: none;
-    color: green
 }
 
-nav a:hover {
+.primary-navigation a:hover {
   color: red;
 }
 
@@ -234,7 +231,10 @@ nav a:hover {
     border-top-right-radius: 0;
   }
 
-  
+  .primary-navigation {
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
 
   .attendee {
     font-size: 12px;
@@ -256,7 +256,7 @@ nav a:hover {
 }
 
 @media only screen and (max-width: 600px) {
-  /* .card > a {
-    display: none;
-  } */
+  .primary-container {
+    justify-content: flex-start;
+  }
 } 
