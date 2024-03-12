@@ -18,14 +18,6 @@ public class EventController : BaseController
         _mongoContext = mongoContext;
     }
 
-    public IActionResult Index()
-    {
-        _SetUserDataInViewData();
-        var events = _mongoContext.GetCollection<Event>("events").Find(ev => true).ToList();
-
-        return View(events);
-    }
-
     public IActionResult Create()
     {
         _SetUserDataInViewData();
@@ -89,7 +81,7 @@ public class EventController : BaseController
                 }
             );
 
-        return RedirectToAction("Index");
+        return RedirectToAction("viewid", "eventpage", new {id = eventModel.Id.ToString()});
     }
 
     public IActionResult Edit(string id)
