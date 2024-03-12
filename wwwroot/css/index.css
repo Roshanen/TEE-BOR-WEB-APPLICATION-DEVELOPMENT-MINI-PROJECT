@@ -12,6 +12,10 @@ body {
     sans-serif;
 }
 
+.detail p {
+margin: 0px;
+}
+
 .date-hide{
   display: none;
 }
@@ -39,6 +43,15 @@ body {
 .top-card{
   display: flex;
   justify-content: space-between;
+}
+
+.host{
+  display: -webkit-box;
+  color: #7d8687;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .container {
@@ -79,7 +92,7 @@ body {
   padding: 1px;
   text-align:center;
   border-radius: 1.25rem;
-  width: 300px;
+  width: 400px;
   height: 235px;
   display: flex;
   background-color: rgb(254, 249, 249);
@@ -181,6 +194,10 @@ body {
     padding: 0;
   }
   
+  .left-card{
+    max-height: fit-content;
+  }
+  
   .right-card .date {
     display: none;
   }
@@ -194,14 +211,9 @@ body {
 
   .detail{
     display:none;
-    display: -webkit-box;
-    max-width: 400px;
-    color: #7d8687;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
+
+
 
   .event-img-container {
     background-color: transparent;
