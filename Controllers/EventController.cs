@@ -20,7 +20,12 @@ public class EventController : BaseController
 
     public IActionResult Create()
     {
-        _SetUserDataInViewData();
+        String userIdString = _SetUserDataInViewData();
+
+        if (userIdString is null)
+        {
+            return RedirectToAction("login", "account");
+        }
 
         return View();
     }
@@ -133,6 +138,22 @@ public class EventController : BaseController
     [HttpPost]
     public IActionResult Edit(string id, CreateEvent createEvent)
     {
+        String userIdString = _SetUserDataInViewData();
+        if (userIdString is null)
+        {
+            return RedirectToAction("login", "account");
+        }
+        var Event = _mongoContext
+            .GetCollection<Event>("events")
+            .Find(ev => ev.Id == ObjectId.Parse(id))
+            .FirstOrDefault();
+        
+        var userId = new ObjectId(userIdString);
+        if (Event.HostId != userId)
+        {
+            return RedirectToAction("login", "account");
+        }
+
         var eventModel = _mongoContext
             .GetCollection<Event>("events")
             .Find(ev => ev.Id == ObjectId.Parse(id))
