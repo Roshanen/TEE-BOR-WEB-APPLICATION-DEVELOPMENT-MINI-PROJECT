@@ -25,15 +25,19 @@ margin: 0px;
 .date-hide{
   display: none;
 }
+
 .content{
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
 }
 
-.right-card{
-  width: 75%;
-  margin-top: 0.5rem;
-  margin-right: 2rem;
-  font-weight: 400;
+.party-name a{
+  color: #212121;
+  font-size: 1.5em; /* h2 size */
+  margin: 4px 0 4px 0;
 }
 
 .detail{
@@ -81,34 +85,31 @@ margin: 0px;
 .event-container {
   display: flex;
   justify-content: center;
-  flex-direction: column;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
 }
 
 .event {
   display: flex;
-  height: 15rem;
-  background-color: #f7f7f7;
-  border-radius: 1rem;
+  width: 250px;
+  /* height: 15rem; */
+  /* background-color: #f7f7f7; */
+  /* border-radius: 1rem; */
   column-gap: 2rem;
+  flex-direction: column;
+  margin-bottom: 50px;
 }
 
-.event-img-container {
-  padding: 1px;
-  text-align:center;
+.event-img-container {  
+  text-align: center;
   border-radius: 1.25rem;
-  width: 400px;
-  height: 235px;
+  width: 100%;
+  height: 135px;
   display: flex;
-  background-color: rgb(254, 249, 249);
-  border: 1px solid rgb(255, 158, 158);
 }
 
 .event-image {
-  object-fit:contain;
-  width: 100%;
-  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -123,7 +124,6 @@ margin: 0px;
   overflow: hidden;
 }
 
-.event .date,
 .event-footer,
 .event-footer > .going,
 .event-footer > .price {
@@ -131,15 +131,31 @@ margin: 0px;
   align-items: center;
 }
 
+.event a {
+  width: 100%;
+}
+
+.event-footer, .event .date {
+  color: var(--black-color);
+}
+
+.event .date {
+  display: flex;
+  font-weight: 400;
+}
 
 .event-footer {
   gap: 5%;
+  font-weight: 400;
 }
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
 }
 
+img {
+  width: 100%;
+}
 
 @keyframes rotate {
   100% {
@@ -200,40 +216,46 @@ margin: 0px;
     padding: 0;
   }
   
-  .left-card{
-    max-height: fit-content;
-  }
-  
-  .right-card .date {
+  .date, .right-card, .detail {
     display: none;
   }
 
-  .right-card{
-    display: none;
+  .date-hide div{
+    display: flex;
+    font-weight: 400;
+    align-items: center;
   }
-  .date-hide{
-    display: block;
-  }
-
-  .detail{
-    display:none;
-  }
-
-
 
   .event-img-container {
     background-color: transparent;
     margin-right: 0;
     border-top-right-radius: 0;
   }
-
-
+  
+  
   .event {
     max-width: 100%;
     padding: 5px;
     display: flex;
     justify-content: flex-start;
+    
+  }
+  
+}
+@media only screen and (max-width: 565px) {
+  .event {
+    width: 100%;
+    flex-direction: row;
+  }
 
+  .date {
+    display: none;
+  }
+
+  .date-hide div{
+    display: flex;
+    font-weight: 400;
+    align-items: center;
   }
 
 }
