@@ -52,7 +52,6 @@ public class EventPageController : BaseController
             }
         }
         EventViewModel eventView = new EventViewModel();
-
         ViewData["HostId"] = Event.HostId;
         ViewData["CurrentMember"] = Event.CurrentMember;
         ViewData["MaxMember"] = Event.MaxMember;
@@ -66,7 +65,7 @@ public class EventPageController : BaseController
         eventView.EndDate = Event.EndDate;
         eventView.Place = Place.ActualPlace;
         eventView.MapUrl = Place.MapUrl;
-
+        eventView.Type = Event.Type;
         // Get rating out
         var ratingModel = _mongoContext
             .GetCollection<Rating>("ratings")
@@ -103,9 +102,13 @@ public class EventPageController : BaseController
         eventView.StartDate = Event.StartDate;
 
         DateTime dateTimeNow = DateTime.Now;
-        if(!Event.Status)
+        if(Event.Status== "Cancelled")
         {
             eventView.Status = "Cancelled";
+        }
+        else if (Event.Status == "Close")
+        {
+            eventView.Status = "Close";
         }
         else if (DateTime.Compare(Event.EndDate, dateTimeNow) < 0)
         {
@@ -117,7 +120,7 @@ public class EventPageController : BaseController
         }
         else
         {
-            eventView.Status = "Available";
+            eventView.Status = "Active";
         }
 
         var userId = _SetUserDataInViewData();
@@ -127,10 +130,6 @@ public class EventPageController : BaseController
             if(userId == Event.HostId.ToString())
             {
                 ViewBag.IsHost = true;
-            }
-            else
-            {
-                ViewBag.IsHost = false;
             }
             var existingJoinEvent = _mongoContext
                 .GetCollection<JoinEvent>("joinEvents")
@@ -148,6 +147,7 @@ public class EventPageController : BaseController
         }
         else
         {
+            ViewBag.IsHost = false;
             ViewBag.IsAttending = false;
         }
 
@@ -256,6 +256,38 @@ public class EventPageController : BaseController
                     )
                 );
             return RedirectToAction("ViewId", new { id = eventId });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString()); // Log the exception details
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Close(string eventId)
+    {
+        try
+        {
+            var eventIdObj = ObjectId.Parse(eventId);
+            var ev = await _mongoContext
+                .GetCollection<Event>("events")
+                .Find(e => e.Id == eventIdObj)
+                .FirstOrDefaultAsync();
+
+            if (ev == null)
+            {
+                return NotFound("User or event not found.");
+            }
+
+            // Check if the user is already joined to the event
+            // Remove JoinEvent document from the collection
+            await _mongoContext
+                .GetCollection<Event>("events")
+                .UpdateOneAsync(
+                    e => e.Id == eventIdObj,
+                    Builders<Event>.Update.Set(e => e.Status, "Close"));
+            return RedirectToAction("Index");
         }
         catch (Exception ex)
         {

@@ -50,6 +50,7 @@ public class HomeController : BaseController
 
     public IActionResult Privacy()
     {
+        _SetUserDataInViewData();
         return View();
     }
 

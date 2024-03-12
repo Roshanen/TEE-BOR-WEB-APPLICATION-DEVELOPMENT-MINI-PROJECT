@@ -12,6 +12,7 @@ namespace WebApp.Models
         public string EventDetails { get; set; }
         public string Tags { get; set; }
         public List<dynamic> Attendees { get; set; }
+        public string Type { get; set; }
         public string Place { get; set; }
         public string MapUrl { get; set; }
         public DateTime StartDate { get; set; }

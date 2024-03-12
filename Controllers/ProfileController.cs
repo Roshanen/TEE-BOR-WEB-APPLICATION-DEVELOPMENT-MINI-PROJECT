@@ -64,12 +64,15 @@ public class ProfileController : BaseController
         var objectId = ObjectId.Parse(id);
         var currentId = _SetUserDataInViewData();
 
-        if (currentId == null)
+        if (currentId == null || objectId != ObjectId.Parse(currentId)){
             return RedirectToAction("login", "account");
+        }
+
         var userProfile = await _mongoContext
             .GetCollection<User>("users")
             .Find(u => u.Id == objectId)
             .FirstOrDefaultAsync();
+        
         if (userProfile == null)
         {
             return NotFound();
@@ -82,6 +85,12 @@ public class ProfileController : BaseController
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(User model)
     {
+        var currentId = _SetUserDataInViewData();
+
+        if (currentId == null || model.Id != ObjectId.Parse(currentId)){
+            return RedirectToAction("login", "account");
+        }
+
         var filter = Builders<User>.Filter.Eq(u => u.Id, model.Id);
         var updateBuilder = Builders<User>.Update;
         var update = updateBuilder

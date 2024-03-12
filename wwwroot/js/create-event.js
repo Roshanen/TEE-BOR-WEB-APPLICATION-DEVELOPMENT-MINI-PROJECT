@@ -13,7 +13,7 @@ function max(a, b) {
 
 function setButtonToSubmit() {
   let nextButton = document.getElementById("next-button");
-  if ((state - 1).toString() >= maxProgress.toString()) {
+  if ((state).toString() >= maxProgress.toString()) {
     nextButton.type = "submit";
   }
   if (state.toString() >= maxProgress.toString()) {
@@ -39,12 +39,11 @@ function setProgress() {
 
 nextButtons.forEach((bt) => {
   bt.addEventListener("click", () => {
-    var stepInputs = formSteps[state - 1].querySelectorAll("input");
+    var stepInputs = formSteps[state - 1].querySelectorAll("input, textarea");
     var validFlag = 1;
 
     for (let i = 0; i < stepInputs.length; i++) {
       let inp = stepInputs[i];
-
       if (!inp.checkValidity()) {
         inp.reportValidity();
         validFlag = 0;
@@ -53,7 +52,8 @@ nextButtons.forEach((bt) => {
     }
 
     if (validFlag) {
-      state++;
+      // state++;
+      state = state < 5 ? ++state : 5;
       updateDisplay();
     }
   });
