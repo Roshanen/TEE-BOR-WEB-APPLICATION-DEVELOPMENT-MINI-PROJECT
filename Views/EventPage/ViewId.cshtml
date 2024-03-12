@@ -116,7 +116,12 @@
         <section class="time-details">
           <div>Status : @Model.Status</div>
         </section>
-        
+        <section class="time-details">
+          <div>Current member : @ViewData["CurrentMember"]</div>
+        </section>
+        <section class="time-details">
+          <div>Max member : @ViewData["MaxMember"]</div>
+        </section>
         @if(! string.IsNullOrEmpty(Model.MapUrl))
         {
             if(Model.MapUrl[0] == '<')
@@ -131,7 +136,6 @@
             }
         }
       </section>
-      <div>sdsadasd</div>
       <div class="rating-area-display">
           <div class="rating-topic">Attendees rating</div>
           <div class="rating-display">
@@ -180,7 +184,7 @@
       <button id="share">
         Share<img style="margin-left: 5px; width: 15px; height: 15px" src="/src/share.png" />
       </button>
-      @if (Model.Status =="Available")
+      @if ((Model.Status =="Available" || @ViewBag.IsAttending) && ViewBag.IsHost==false)
       {
         @if (@ViewBag.IsAttending)
         {
