@@ -288,27 +288,28 @@ textarea {
 
 .profile-stats {
   width: 100%;
-  /* Ensure stats take full width */
   height: 0rem;
   display: flex;
   justify-content: space-around;
   padding: 10px;
-  padding-top: 30px;
+  padding-top: 25px;
   box-sizing: border-box;
-  /* Include padding in width calculation */
 }
 
 .profile-statsh3 {
   text-align: center;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 22px;
 }
 
 .profile-statp {
   text-align: center;
   font-style: normal;
   font-weight: normal;
+  width: fit-content;
   font-size: 16px;
+  height: fit-content;
+  line-height: 19px;
 }
 
 .profile-container {
