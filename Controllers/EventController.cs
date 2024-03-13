@@ -191,6 +191,6 @@ public class EventController : BaseController
             .GetCollection<Place>("places")
             .ReplaceOne(ev => ev.Id == placeModel.Id, placeModel);
 
-        return RedirectToAction("Index");
+        return RedirectToAction("viewid", "eventpage", new {id = eventModel.Id.ToString()});
     }
 }
