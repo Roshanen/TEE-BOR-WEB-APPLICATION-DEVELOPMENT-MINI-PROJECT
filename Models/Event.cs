@@ -22,4 +22,23 @@ public class Event
     public float Rating { get; set; }
     public string Type { get; set; } 
     public string Status { get; set; } = "Active";
+
+    public Event()
+    {
+        Id = new ObjectId();
+        PlaceId = new ObjectId();
+        HostId = new ObjectId();
+
+        StartDate = DateTime.Now;
+        EndDate = DateTime.Now;
+        LastModifiedDate = DateTime.Now;
+
+        CategoryName = string.Empty;
+        EventName = string.Empty;
+        EventImg = string.Empty;
+        EventDetails = string.Empty;
+
+        Type = string.Empty;
+        Status = "Active";
+    }
 }

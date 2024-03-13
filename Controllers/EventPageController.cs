@@ -55,17 +55,17 @@ public class EventPageController : BaseController
         ViewData["HostId"] = Event.HostId;
         ViewData["CurrentMember"] = Event.CurrentMember;
         ViewData["MaxMember"] = Event.MaxMember;
-        eventView.EventName = Event.EventName;
-        eventView.HostImg = Host.ProfilePicture;
-        eventView.HostName = Host.UserName;
-        eventView.EventImg = Event.EventImg;
-        eventView.EventDetails = Event.EventDetails;
-        eventView.Tags = Event.CategoryName;
+        eventView.EventName = Event.EventName ?? "";
+        eventView.HostImg = Host.ProfilePicture ?? "";
+        eventView.HostName = Host.UserName ?? "";
+        eventView.EventImg = Event.EventImg ?? "";
+        eventView.EventDetails = Event.EventDetails ?? "";
+        eventView.Tags = Event.CategoryName ?? "";
         eventView.Attendees = Attendees;
         eventView.EndDate = Event.EndDate;
-        eventView.Place = Place.ActualPlace;
-        eventView.MapUrl = Place.MapUrl;
-        eventView.Type = Event.Type;
+        eventView.Place = Place.ActualPlace ?? "";
+        eventView.MapUrl = Place.MapUrl ?? "";
+        eventView.Type = Event.Type ?? "";
         // Get rating out
         var ratingModel = _mongoContext
             .GetCollection<Rating>("ratings")

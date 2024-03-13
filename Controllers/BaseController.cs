@@ -13,7 +13,7 @@ public class BaseController : Controller
         _mongoContext = mongoContext;
     }
 
-    protected string _SetUserDataInViewData()
+    protected string? _SetUserDataInViewData()
     {
         var userId = JwtHelper.GetUserIdFromToken(HttpContext.Session.GetString("JwtToken")!);
         ViewData["userID"] = userId;
