@@ -436,9 +436,9 @@ textarea {
   padding: 0;
   width: 254px;
   background-color: #f1f1f1;
-  position: absolute;
   top: 65px;
   bottom: 0;
+  position: absolute;
   height: 100%;
   overflow-y: auto;
 }
@@ -499,8 +499,9 @@ div.content {
   display: flex;
   justify-content: center;
   padding: 3px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-left: 12px;
   width: fit-content;
   background-color: white;
   color: #707070;
@@ -634,7 +635,9 @@ input[type="checkbox"]:checked ~ .checkmark::after {
   .sidebar {
     width: 100%;
     height: auto;
+    top: 0;
     position: relative;
+    transform: translateY(-90px);
   }
 
   .sidebar a {
@@ -651,5 +654,14 @@ input[type="checkbox"]:checked ~ .checkmark::after {
   .sidebar a {
     text-align: center;
     float: none;
+  }
+  .sidebar {
+    top: 0;
+  }
+}
+
+@media only screen and (max-width: 1076px) {
+  .sidebar {
+    top: 100px;
   }
 }
