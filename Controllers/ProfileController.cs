@@ -30,8 +30,9 @@ public class ProfileController : BaseController
 
         ViewData["isProfileOwner"] = currentId == Id ? "true" : null;
 
-        if (currentId == null)
+        if (currentId == null){
             return RedirectToAction("login", "account");
+        }
 
         var user = _mongoContext
             .GetCollection<User>("users")
@@ -51,7 +52,6 @@ public class ProfileController : BaseController
             .ToList();
         List<Event> events = new List<Event>();
 
-        Console.WriteLine(joins.Count());
         foreach (var join in joins){
             events.Add(_mongoContext
             .GetCollection<Event>("events")

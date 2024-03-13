@@ -53,11 +53,11 @@ public class SearchController : BaseController
             if (search.Status == "Available")
             {
                 filter &= filterBuilder.Eq("Status", "Active")
-                    & filterBuilder.Gte("EndDate", currentDate);
+                    & filterBuilder.Gte("RecruitEndDate", currentDate);
             }
             if (search.Status == "Past")
             {
-                filter &= filterBuilder.Lt("EndDate", currentDate);
+                filter &= filterBuilder.Lt("RecruitEndDate", currentDate);
             }
             if (search.Status == "Cancelled")
             {
@@ -75,18 +75,18 @@ public class SearchController : BaseController
             {
                 case "today":
                     filter &=
-                        filterBuilder.Gte("EndDate", currentDate)
-                        & filterBuilder.Lt("EndDate", currentDate.AddDays(1));
+                        filterBuilder.Gte("RecruitEndDate", currentDate)
+                        & filterBuilder.Lt("RecruitEndDate", currentDate.AddDays(1));
                     break;
                 case "this week":
                     filter &=
-                        filterBuilder.Gte("EndDate", currentDate)
-                        & filterBuilder.Lt("EndDate", currentDate.AddDays(7));
+                        filterBuilder.Gte("RecruitEndDate", currentDate)
+                        & filterBuilder.Lt("RecruitEndDate", currentDate.AddDays(7));
                     break;
                 case "next week":
                     filter &=
-                        filterBuilder.Gte("EndDate", currentDate.AddDays(7))
-                        & filterBuilder.Lt("EndDate", currentDate.AddDays(14));
+                        filterBuilder.Gte("RecruitEndDate", currentDate.AddDays(7))
+                        & filterBuilder.Lt("RecruitEndDate", currentDate.AddDays(14));
                     break;
             }
         }

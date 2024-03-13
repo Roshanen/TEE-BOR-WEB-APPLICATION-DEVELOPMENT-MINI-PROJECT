@@ -133,7 +133,7 @@
                                 moving onto the next step.</p>
                         </div>
                         <div class="input-area">
-                            <label>Choose from this</label>
+                            <label>Choose your tag</label>
                             <select name="CategoryName" asp-items="@GetTags()" value="Gaming"></select>
                             @functions {
                                 List<SelectListItem> GetTags()
@@ -160,6 +160,20 @@
                                         new SelectListItem { Text = "Technology", Value = "Technology" },
                                         new SelectListItem { Text = "Travel & Outdoor", Value = "Travel & Outdoor" },
                                         new SelectListItem { Text = "Writing", Value = "Writing" },
+                                    };
+                                }
+                            }
+                            <label>Choose your type</label>
+                            <select name="Type" asp-items="@GetType()" value="Online"></select>
+                            @functions {
+                                List<SelectListItem> GetType()
+                                {
+                                    return new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "Online", Value = "Online" },
+                                        new SelectListItem { Text = "Indoor", Value = "Indoor" },
+                                        new SelectListItem { Text = "Outdoor", Value = "Outdoor" },
+                                        new SelectListItem { Text = "Storytelling", Value = "Storytelling" }
                                     };
                                 }
                             }

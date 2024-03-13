@@ -38,4 +38,6 @@ public class CreateEvent
     // member count
     [Required]
     public int MaxMember { get; set; }
+    [Required]
+    public string Type { get; set; }
 }
