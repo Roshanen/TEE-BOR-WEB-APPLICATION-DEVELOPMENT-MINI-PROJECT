@@ -184,19 +184,19 @@
                         <div class="input-area">
                             <div class="date-group group">
                                 <span>Event start date</span>
-                                <input type="datetime-local" name="EventStartDate" value="@GetDateString(@Model.EventStartDate)" required>
+                                <input type="datetime-local" name="EventStartDate" value="@GetDateString(@Model.EventStartDate)" lang="th" required>
                             </div>
                             <div class="date-group group">
                                 <span>Event end date</span>
-                                <input type="datetime-local" name="EventEndDate" value="@GetDateString(@Model.EventEndDate)" required>
+                                <input type="datetime-local" name="EventEndDate" value="@GetDateString(@Model.EventEndDate)" lang="th" required>
                             </div>
                             <div class="date-group group">
                                 <span>First recruit date</span>
-                                <input type="datetime-local" name="RecruitStartDate" value="@GetDateString(@Model.RecruitStartDate)" required>
+                                <input type="datetime-local" name="RecruitStartDate" value="@GetDateString(@Model.RecruitStartDate)" lang="th" required>
                             </div>
                             <div class="date-group group">
                                 <span>Last recruit date</span>
-                                <input type="datetime-local" name="RecruitEndDate" value="@GetDateString(@Model.RecruitEndDate)" required>
+                                <input type="datetime-local" name="RecruitEndDate" value="@GetDateString(@Model.RecruitEndDate)" lang="th" required>
                             </div>
                             @functions {
                                 String GetDateString(DateTime date){
