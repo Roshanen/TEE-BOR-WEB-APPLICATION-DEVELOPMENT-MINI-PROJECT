@@ -1,6 +1,7 @@
 let state = 1;
 var minProgress = 1;
 var maxProgress = 5;
+var detailBackup  = "";
 formSteps = document.querySelectorAll(".step");
 backButtons = document.querySelectorAll(".back-button");
 nextButtons = document.querySelectorAll(".next-button");
@@ -13,10 +14,11 @@ function max(a, b) {
 
 function setButtonToSubmit() {
   let nextButton = document.getElementById("next-button");
-  if ((state).toString() >= maxProgress.toString()) {
+  if ((state - 1) >= maxProgress) {
     nextButton.type = "submit";
+    document.getElementById("create-form").submit();
   }
-  if (state.toString() >= maxProgress.toString()) {
+  if (state >= maxProgress) {
     nextButton.innerText = "Submit";
   } else {
     nextButton.type = "button";
@@ -38,7 +40,8 @@ function setProgress() {
 }
 
 nextButtons.forEach((bt) => {
-  bt.addEventListener("click", () => {
+  bt.addEventListener("click", (event) => {
+    event.preventDefault();
     var stepInputs = formSteps[state - 1].querySelectorAll("input, textarea");
     var validFlag = 1;
 
@@ -50,10 +53,10 @@ nextButtons.forEach((bt) => {
         break;
       }
     }
-
+    
     if (validFlag) {
-      // state++;
-      state = state < 5 ? ++state : 5;
+      state++;
+      // state = state < 5 ? ++state : 5;
       updateDisplay();
     }
   });
@@ -75,6 +78,7 @@ function updateDisplay() {
   }); // end for each
   setButtonToSubmit();
   setProgress();
+  console.log(state);
 }
 
 updateDisplay();
