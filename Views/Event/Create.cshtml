@@ -53,6 +53,9 @@
                             <input type="text" name="SubDistrict" placeholder="ตำบล" maxlength="50" required>
                             <div>หรือ</div>
                             <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map" maxlength="300">
+                            <gmp-map center="13.727607727050781,100.77247619628906" zoom="14" map-id="DEMO_MAP_ID">
+                                <gmp-advanced-marker position="13.727607727050781,100.77247619628906" title="My location"></gmp-advanced-marker>
+                            </gmp-map>
                         </div>
                     </div>
 
@@ -179,6 +182,8 @@
         </div>
     </div>
     <script type="text/javascript" src="/js/create-event.js"></script>
+        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgHeH40rthu08qZAir-B7KT4qUJu1NO4E&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
 </body>
 
 </html>

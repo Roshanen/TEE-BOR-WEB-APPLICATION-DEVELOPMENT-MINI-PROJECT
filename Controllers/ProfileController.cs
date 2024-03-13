@@ -28,7 +28,7 @@ public class ProfileController : BaseController
     {
         var currentId = _SetUserDataInViewData();
 
-        ViewData["isProfileOwner"] = currentId == Id ? "true" : "false";
+        ViewData["isProfileOwner"] = currentId == Id ? "true" : null;
 
         if (currentId == null)
             return RedirectToAction("login", "account");

@@ -20,7 +20,7 @@ public class EventController : BaseController
 
     public IActionResult Create()
     {
-        String userIdString = _SetUserDataInViewData();
+        String? userIdString = _SetUserDataInViewData();
 
         if (userIdString is null)
         {
@@ -33,7 +33,7 @@ public class EventController : BaseController
     [HttpPost]
     public IActionResult Create(CreateEvent createEvent)
     {
-        String userIdString = _SetUserDataInViewData();
+        String? userIdString = _SetUserDataInViewData();
 
         if (userIdString is null)
         {
@@ -53,19 +53,19 @@ public class EventController : BaseController
         eventModel.StartDate = createEvent.StartDate;
         eventModel.EndDate = createEvent.EndDate;
         eventModel.LastModifiedDate = today;
-        eventModel.EventName = createEvent.EventName;
-        eventModel.EventImg = createEvent.EventImg;
-        eventModel.EventDetails = createEvent?.EventDetails.ToString();
-        eventModel.MaxMember = createEvent.MaxMember;
+        eventModel.EventName = createEvent.EventName ?? "";
+        eventModel.EventImg = createEvent.EventImg ?? "";
+        eventModel.EventDetails = createEvent?.EventDetails?.ToString() ?? "";
+        eventModel.MaxMember = createEvent?.MaxMember ?? 1;
         eventModel.Rating = defaultRating;
 
-        placeModel.MapUrl = createEvent.MapUrl;
-        placeModel.ActualPlace = createEvent.ActualPlace;
-        placeModel.Province = createEvent.Province;
-        placeModel.District = createEvent.District;
-        placeModel.SubDistrict = createEvent.SubDistrict;
+        placeModel.MapUrl = createEvent?.MapUrl ?? "";
+        placeModel.ActualPlace = createEvent?.ActualPlace ?? "";
+        placeModel.Province = createEvent?.Province ?? "";
+        placeModel.District = createEvent?.District ?? "";
+        placeModel.SubDistrict = createEvent?.SubDistrict ?? "";
 
-        eventModel.CategoryName = createEvent.CategoryName;
+        eventModel.CategoryName = createEvent?.CategoryName ?? "";
         // end of sharing
 
         _mongoContext.GetCollection<Place>("places").InsertOne(placeModel);
@@ -91,9 +91,8 @@ public class EventController : BaseController
 
     public IActionResult Edit(string id)
     {
-        _SetUserDataInViewData();
         // Handle user not login
-        String userIdString = _SetUserDataInViewData();
+        String? userIdString = _SetUserDataInViewData();
         if (userIdString is null)
         {
             return RedirectToAction("login", "account");
@@ -138,7 +137,7 @@ public class EventController : BaseController
     [HttpPost]
     public IActionResult Edit(string id, CreateEvent createEvent)
     {
-        String userIdString = _SetUserDataInViewData();
+        String? userIdString = _SetUserDataInViewData();
         if (userIdString is null)
         {
             return RedirectToAction("login", "account");
@@ -167,17 +166,17 @@ public class EventController : BaseController
         eventModel.StartDate = createEvent.StartDate;
         eventModel.EndDate = createEvent.EndDate;
         eventModel.LastModifiedDate = today;
-        eventModel.EventName = createEvent.EventName;
-        eventModel.EventImg = createEvent.EventImg;
-        eventModel.EventDetails = createEvent.EventDetails;
+        eventModel.EventName = createEvent.EventName ?? "";
+        eventModel.EventImg = createEvent.EventImg ?? "";
+        eventModel.EventDetails = createEvent.EventDetails ?? "";
         eventModel.MaxMember = createEvent.MaxMember;
-        eventModel.CategoryName = createEvent.CategoryName;
+        eventModel.CategoryName = createEvent.CategoryName ?? "";
 
-        placeModel.MapUrl = createEvent.MapUrl;
-        placeModel.ActualPlace = createEvent.ActualPlace;
-        placeModel.Province = createEvent.Province;
-        placeModel.District = createEvent.District;
-        placeModel.SubDistrict = createEvent.SubDistrict;
+        placeModel.MapUrl = createEvent.MapUrl ?? "";
+        placeModel.ActualPlace = createEvent.ActualPlace ?? "";
+        placeModel.Province = createEvent.Province ?? "";
+        placeModel.District = createEvent.District ?? "";
+        placeModel.SubDistrict = createEvent.SubDistrict ?? "";
 
         _mongoContext
             .GetCollection<Event>("events")

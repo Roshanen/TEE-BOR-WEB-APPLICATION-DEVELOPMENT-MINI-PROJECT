@@ -11,5 +11,16 @@ namespace WebApp.Models
         public string DateChoice { get; set; }
         public string Type { get; set; }
         public string Category { get; set; }
+        public string Sort { get; set; }
+
+        public Search()
+        {
+            Name = string.Empty;
+            Status = string.Empty;
+            DateChoice = string.Empty;
+            Type = string.Empty;
+            Category = string.Empty;
+            Sort = string.Empty;
+        }
     }
 }

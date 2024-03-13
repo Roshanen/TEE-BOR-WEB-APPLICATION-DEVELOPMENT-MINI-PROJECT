@@ -13,4 +13,14 @@ public class Rating
     public int Score { get; set; }
     [StringLength(248, MinimumLength = 16)]
     public String Comment { get; set; }
+
+    public Rating()
+    {
+        Id = new ObjectId();
+        EventId = new ObjectId();
+        UserId = new ObjectId();
+        LastModifiedDate = DateTime.Now;
+        Score = 0;
+        Comment = string.Empty;
+    }
 }

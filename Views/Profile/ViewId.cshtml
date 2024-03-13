@@ -43,7 +43,7 @@
               </div>
             </div>
           </div>
-          @if (ViewData["isProfileOwner"] == "true")
+          @if (ViewData["isProfileOwner"] != null)
           {
             <a class="change-photo" href="@Url.Action("Edit", "Profile" , new { id=Model.User.Id })">
               <svg class="info-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
