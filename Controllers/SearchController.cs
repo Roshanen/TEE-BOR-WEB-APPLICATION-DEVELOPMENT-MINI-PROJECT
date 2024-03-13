@@ -53,7 +53,8 @@ public class SearchController : BaseController
             if (search.Status == "Available")
             {
                 filter &= filterBuilder.Eq("Status", "Active")
-                    & filterBuilder.Gte("RecruitEndDate", currentDate);
+                    & filterBuilder.Gte("RecruitEndDate", currentDate)
+                    & filterBuilder.Eq("Status", "Active");
             }
             if (search.Status == "Past")
             {
