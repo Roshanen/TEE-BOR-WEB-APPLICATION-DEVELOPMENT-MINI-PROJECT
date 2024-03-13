@@ -1,0 +1,122 @@
+
+<style>
+    #container {
+        display: flex;
+        height: 400px;
+    }
+
+    #leftColumn {
+        flex: 1;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    #rightColumn {
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #placeInput {
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+    }
+
+    #imagePreview {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #embedCode {
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+    }
+
+    #embedContainer {
+        text-align: center;
+    }
+
+    #mapContainer {
+        height: 100%;
+        width: 100%;
+    }
+</style>
+<div id="container">
+    <div id="leftColumn">
+        <label for="placeInput">Search for a place:</label>
+        <input type="text" id="placeInput" placeholder="Enter a place">
+        <button onclick="searchPlace()">Search</button>
+
+        <div id="embedContainer">
+            <img id="imagePreview" alt="Preview" style="display: none;">
+        </div>
+        <input type="text" name="MapUrl" id="MapUrl" placeholder="ลิงก์จาก Google Map" maxlength="300" disabled>
+        <!-- <button onclick="copyEmbedCode()">Select this location</button> -->
+    </div>
+
+    <div id="rightColumn">
+        <div id="mapContainer"></div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgHeH40rthu08qZAir-B7KT4qUJu1NO4E&libraries=places&callback=initMap" async defer></script>
+<script>
+    let map;
+    let placeMarker;
+    let autocomplete;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('mapContainer'), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8
+        });
+
+        placeMarker = new google.maps.Marker({
+            map: map,
+            draggable: true
+        });
+
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('placeInput'));
+        autocomplete.setFields(['geometry', 'name', 'photos']);
+
+        autocomplete.addListener('place_changed', function () {
+            const place = autocomplete.getPlace();
+            if (place.geometry) {
+                map.setCenter(place.geometry.location);
+                placeMarker.setPosition(place.geometry.location);
+                placeMarker.setTitle(place.name);
+                placeMarker.setLabel(place.name);
+
+                const imagePreview = document.getElementById('imagePreview');
+                const embedCode = document.getElementById('MapUrl');
+                if (place.photos && place.photos.length > 0) {
+                    const photoUrl = place.photos[0].getUrl({ maxWidth: 300, maxHeight: 300 });
+                    imagePreview.src = photoUrl;
+                    imagePreview.style.display = 'block';
+
+                    embedCode.value = `<iframe src="https://www.google.com/maps/embed/v1/view?zoom=14&center=${placeMarker.getPosition().lat()},${placeMarker.getPosition().lng()}&key=YOUR_API_KEY" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+                } else {
+                    imagePreview.style.display = 'none';
+                    embedCode.innerText = '';
+                }
+            } else {
+                alert('Place not found');
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            map.setCenter(placeMarker.getPosition());
+        });
+    }
+
+    function copyEmbedCode() {
+        const embedCode = document.getElementById('MapUrl');
+        const range = document.createRange();
+        range.selectNode(embedCode);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Embed code copied to clipboard!');
+    }
+</script>
