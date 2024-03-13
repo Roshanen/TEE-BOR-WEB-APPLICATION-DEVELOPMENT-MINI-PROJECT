@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Event</title>
+    <title>Edit Event</title>
     <link rel="stylesheet" href="/css/createEvent.css"/>
     <link rel="stylesheet" href="/css/createEventMap.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -33,15 +33,9 @@
                     <div class="hyphen"></div>
                     <div class="circle">5</div>
                 </div>
-                <form action="" method="post">
+                <form action="" method="post" id="create-form">
                     <div class="step step-1">
                         <h2>First, set your location</h2>
-                        <div class="tip-area">
-                            <h3>Tip</h3>
-                            <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
-                                area.
-                            </p>
-                        </div>
                         <div class="input-area">
                             <input type="text" name="ActualPlace" placeholder="สถานที่" value="@Model.ActualPlace" required>
                             <input type="text" name="Province" placeholder="จังหวัด" value="@Model.Province" required>
@@ -134,9 +128,8 @@
                                 moving onto the next step.</p>
                         </div>
                         <div class="input-area">
-                            <label>Choose your tag</label>
-                            <select name="Category" asp-items="@GetTags()" value="@Model.CategoryName"></select>
-                        </div>
+                            <label>Choose from this</label>
+                            <select name="CategoryName" asp-items="@GetTags()" value="@Model.CategoryName"></select>
                             @functions {
                                 List<SelectListItem> GetTags()
                                 {
@@ -166,7 +159,7 @@
                                 }
                             }
                             <label>Choose your type</label>
-                            <select name="Type" asp-items="@GetType()" value="Online"></select>
+                            <select name="Type" asp-items="@GetType()" value="@Model.Type"></select> 
                             @functions {
                                 List<SelectListItem> GetType()
                                 {
@@ -179,8 +172,8 @@
                                     };
                                 }
                             }
+                        </div>
                     </div>
-
                     <div class="step step-3">
                         <h2>Name your party</h2>
                         <div class="tip-area">
@@ -238,9 +231,7 @@
                         </div>
                         <div class="input-area">
                             <label>Please, write at least 50 characters</label>
-                            <textarea type="text" id="party-name" name="EventDetails">
-                                @Model.EventDetails
-                            </textarea>
+                            <textarea type="text" id="party-name" name="EventDetails">@Model.EventDetails</textarea>
                         </div>
                         <div class="example-area">
                             <h3>Examples</h3>

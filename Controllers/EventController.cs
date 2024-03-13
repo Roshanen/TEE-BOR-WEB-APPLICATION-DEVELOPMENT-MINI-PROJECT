@@ -178,6 +178,7 @@ public class EventController : BaseController
         eventModel.EventDetails = createEvent.EventDetails ?? "";
         eventModel.MaxMember = createEvent.MaxMember;
         eventModel.CategoryName = createEvent.CategoryName ?? "";
+        eventModel.Type = createEvent.Type ?? "";
 
         placeModel.MapUrl = createEvent.MapUrl ?? "";
         placeModel.ActualPlace = createEvent.ActualPlace ?? "";
