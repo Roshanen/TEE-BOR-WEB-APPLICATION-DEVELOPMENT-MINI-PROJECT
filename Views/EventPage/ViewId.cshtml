@@ -82,7 +82,7 @@
         <h2 id="num-attendees">Attendees (@ViewData["CurrentMember"])</h2>
         <section id="attendees-list">
           <section class="attendee-profile">
-            <img src=@Model.HostImg/>
+            <img src=@Model.HostImg>
             <a href="@Url.Action("ViewId", "Profile", new { Id = @ViewData["HostId"]})">@Model.HostName</a>
             <div>Host</div>
           </section>
@@ -91,7 +91,7 @@
             @foreach (var Attendee in Model.Attendees)
             {
               <section class="attendee-profile">
-                <img src="@Attendee.user.ProfilePicture" alt="" />
+                <img src="@Attendee.user.ProfilePicture" alt="">
                 <a href="@Url.Action("ViewId", "Profile", new { Id = @Attendee.user.UserName})">@Attendee.user.UserName</a>
                 <div>Member</div>
                 @if(@Attendee.friend!=0)
