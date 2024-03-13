@@ -63,7 +63,7 @@ public class SearchController : BaseController
             {
                 filter &= filterBuilder.Eq("Status", "Cancelled");
             }
-            else if (search.Status == "Close")
+            else if (search.Status == "Closed")
             {
                 filter &= filterBuilder.Eq("Status", "Close");
             }
