@@ -171,24 +171,27 @@
             </div>
           </div>
         </div>
-        <div class="profile_card">
-          <a href="@Url.Action("Index", "YourEvent")" style="text-decoration: underline; color: inherit;">
+        <div class="profile_card"
+          style=" display: flex; flex-direction: column;">
+          <a href="@Url.Action("Index", "YourEvent")"
+            style="text-decoration: underline; color: inherit; width: fit-content; position: sticky; top: 0; left: 0;">
             <h3 style="
-                padding-left: 1.5rem;
-                padding-top: 0.25rem;
-                margin-bottom: 0.8rem;
-                font-size: 22px;
-                font-weight: 640;
-                color: rgb(0, 0, 0);
-                background-color: #ff7b0080;
-                padding-bottom: 6px;
-                padding-right: 10px;
-                line-height: 24px;
-                box-shadow: 3px 4px rgb(255, 202, 202);
-            ">
+                    padding-left: 1.5rem;
+                    padding-top: 0.25rem;
+                    margin-bottom: 0.8rem;
+                    font-size: 22px;
+                    font-weight: 640;
+                    color: rgb(0, 0, 0);
+                    background-color: #ff7b0080;
+                    padding-bottom: 6px;
+                    padding-right: 10px;
+                    line-height: 24px;
+                    box-shadow: 3px 4px rgb(255, 202, 202);
+                ">
               Event
             </h3>
           </a>
+
           <div class="profile-container" data-testid="groups-container" style="position: relative;">
             <div class="your-event-displayer">
               <div id="event-display">
@@ -196,7 +199,6 @@
                 {
                   @foreach (var Event in Model.AttendEvent)
                   {
-                    <div class="events-container">
                       <div class="event">
                         <a href="@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-image">
                           <img src="@Event.EventImg" alt="Event Image">
@@ -207,7 +209,6 @@
                           <div class="event-date">@Event.StartDate</div>
                         </div>
                       </div>
-                    </div>
                   }
                 }
               </div>

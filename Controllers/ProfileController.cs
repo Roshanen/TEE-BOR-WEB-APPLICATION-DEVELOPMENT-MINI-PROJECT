@@ -45,12 +45,13 @@ public class ProfileController : BaseController
         Profile profile = new Profile();
         profile.User = user;
 
-        List<JoinEvent> joins = _mongoContext
-            .GetCollection<JoinEvent>("joins")
+        var joins = _mongoContext
+            .GetCollection<JoinEvent>("joinEvents")
             .Find(j => j.UserId == ObjectId.Parse(Id))
             .ToList();
         List<Event> events = new List<Event>();
 
+        Console.WriteLine(joins.Count());
         foreach (var join in joins){
             events.Add(_mongoContext
             .GetCollection<Event>("events")
