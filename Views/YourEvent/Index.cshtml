@@ -51,7 +51,7 @@
                                         <div class="event-info">
                                             <a href="@Url.Action("ViewId", "EventPage", new { id = @Event.Id })"
                                                 class="event-title" class="event-title">@Event.EventName</a>
-                                            <div class="event-date">@Event.StartDate</div>
+                                            <div class="event-date">@Event.EventStartDate</div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                                             </a>
                                                             <div class="event-info">
                                                                 <a href= "@Url.Action("ViewId", "EventPage", new { id = @Event.Id })"  class="event-title">@Event.EventName</a>
-                                                                <div class="event-date">@Event.StartDate</div>
+                                                                <div class="event-date">@Event.EventStartDate</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -107,7 +107,7 @@
                                                             <form id="@Event.Id" class="cancel-from" method="post"
                                                             action="@Url.Action("Cancel", "YourEvent",new {eventId=Event.Id})">
                                                                 <a href= "@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-title">@Event.EventName</a>
-                                                                <div class="event-date">@Event.StartDate</div>
+                                                                <div class="event-date">@Event.EventStartDate</div>
                                                                 <div class="button-container">
                                                                     <button type="button" onclick="window.location.href = '@Url.Action("Edit", "Event", new { id = @Event.Id })'" class="edit-btn">Edit</button>
                                                                     <button value="@Event.Id" type="button" id="cancel-btn" class="cancel-btn">Cancle</button>
@@ -148,7 +148,7 @@
                                                             </a>
                                                             <div class="event-info">
                                                                 <a href= "@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-title">@Event.EventName</a>
-                                                                <div class="event-date">@Event.StartDate</div>
+                                                                <div class="event-date">@Event.EventStartDate</div>
                                                             </div>
                                                         </div>
                                                     </div>

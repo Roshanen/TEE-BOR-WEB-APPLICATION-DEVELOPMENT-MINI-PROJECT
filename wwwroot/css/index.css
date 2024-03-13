@@ -109,6 +109,7 @@ margin: 0px;
 }
 
 .event-image {
+  width: 100%;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -151,10 +152,6 @@ margin: 0px;
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
-}
-
-img {
-  width: 100%;
 }
 
 @keyframes rotate {

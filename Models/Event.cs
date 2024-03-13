@@ -9,8 +9,10 @@ public class Event
     public ObjectId PlaceId { get; set; }
     public ObjectId HostId { get; set; }
 
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public DateTime EventStartDate { get; set; }
+    public DateTime EventEndDate { get; set; }
+    public DateTime RecruitStartDate { get; set; }
+    public DateTime RecruitEndDate { get; set; }
     public DateTime LastModifiedDate { get; set; }
 
     public string CategoryName { get; set; }
@@ -29,8 +31,10 @@ public class Event
         PlaceId = new ObjectId();
         HostId = new ObjectId();
 
-        StartDate = DateTime.Now;
-        EndDate = DateTime.Now;
+        EventStartDate = DateTime.Now;
+        EventEndDate = DateTime.Now;
+        RecruitStartDate = DateTime.Now;
+        RecruitEndDate = DateTime.Now;
         LastModifiedDate = DateTime.Now;
 
         CategoryName = string.Empty;

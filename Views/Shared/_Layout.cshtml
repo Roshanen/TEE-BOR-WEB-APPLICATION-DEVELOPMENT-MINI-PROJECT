@@ -24,7 +24,7 @@
                 </a>
 
                 <div class="search-form">
-                    <form>
+                    <form onsubmit="redirectToSearch(); return false;">
                         <div class="form-container">
 
                             <div class="search-name">
@@ -85,9 +85,8 @@
 
         </navbar>
 
+            <form onsubmit="redirectToSearch(); return false;">
         <div class="block-search">
-            <form>
-                <div class="block-form-container">
 
                     <div class="search-base">
 
@@ -122,9 +121,8 @@
 
                     </div>
 
-                </div>
-            </form>
         </div>
+            </form>
 
     </header>
 

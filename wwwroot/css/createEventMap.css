@@ -1,0 +1,49 @@
+#container {
+    display: flex;
+    height: 400px;
+}
+
+#leftColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#leftColumn * {
+    margin-bottom: 10px;
+}
+
+#rightColumn {
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+}
+
+#placeInput {
+    width: calc(100% - 20px);
+}
+
+#imagePreview {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#embedCode {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+}
+
+#embedContainer {
+    text-align: center;
+}
+
+#mapContainer {
+    height: 100%;
+    width: 100%;
+}
+#MapUrl {
+    width: calc(100% - 20px);
+}

@@ -38,7 +38,7 @@ public class YourEventController : BaseController
                 .FirstOrDefault();
             if (Event != null)
             {
-                if (Event.EndDate < DateTime.Now)
+                if (Event.EventEndDate < DateTime.Now)
                 {
                     pastevent.Add(Event);
                     continue;

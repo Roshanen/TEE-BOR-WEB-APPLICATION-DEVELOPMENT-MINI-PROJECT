@@ -178,4 +178,10 @@ button:hover {
         flex-direction: column;
         gap: 10px;
     }
+    #container {
+        flex-direction: column;
+    }
+    #embedContainer {
+        display: none;
+    }
 } 

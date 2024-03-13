@@ -15,8 +15,10 @@ namespace WebApp.Models
         public string Place { get; set; }
         public string MapUrl { get; set; }
         public string Status { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime EventStartDate { get; set; }
+        public DateTime EventEndDate { get; set; }
+        public DateTime RecruitStartDate { get; set; }
+        public DateTime RecruitEndDate { get; set; }
 
         public List<dynamic> Attendees { get; set; }
         public List<Rating> Rating { get; set; }
@@ -35,8 +37,10 @@ namespace WebApp.Models
             Place = string.Empty;
             MapUrl = string.Empty;
             Status = string.Empty;
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now;
+            EventStartDate = DateTime.Now;
+            EventEndDate = DateTime.Now;
+            RecruitStartDate = DateTime.Now;
+            RecruitEndDate = DateTime.Now;
             Attendees = new List<dynamic>();
             Rating = new List<Rating>();
             RatingProb = new List<float>();
