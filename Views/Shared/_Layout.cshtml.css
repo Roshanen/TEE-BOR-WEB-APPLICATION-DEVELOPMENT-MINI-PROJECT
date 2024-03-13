@@ -186,6 +186,7 @@ button {
   flex-direction: row;
   margin-left: 1rem;
   margin-right: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 1076px) {

@@ -45,7 +45,7 @@ public class SearchController : BaseController
 
         if (!string.IsNullOrEmpty(search.Name))
         {
-            filter &= filterBuilder.Regex("EventName",new BsonRegularExpression(search.Name, "i"));
+            filter &= filterBuilder.Regex("EventName", new BsonRegularExpression(search.Name, "i"));
         }
 
         if (!string.IsNullOrEmpty(search.Status) && search.Status != "any")
@@ -55,15 +55,15 @@ public class SearchController : BaseController
                 filter &= filterBuilder.Eq("Status", "Active")
                     & filterBuilder.Gte("RecruitEndDate", currentDate);
             }
-            if (search.Status == "Past")
+            else if (search.Status == "Past")
             {
                 filter &= filterBuilder.Lt("RecruitEndDate", currentDate);
             }
-            if (search.Status == "Cancelled")
+            else if (search.Status == "Cancelled")
             {
                 filter &= filterBuilder.Eq("Status", "Cancelled");
             }
-            if (search.Status == "Close")
+            else if (search.Status == "Close")
             {
                 filter &= filterBuilder.Eq("Status", "Close");
             }
@@ -103,7 +103,8 @@ public class SearchController : BaseController
 
         var events = _mongoContext.GetCollection<Event>("events").Find(filter).ToList();
 
-        if (!string.IsNullOrEmpty(search.Status) && search.Status != "any"){
+        if (!string.IsNullOrEmpty(search.Status) && search.Status != "any")
+        {
             if (search.Status == "Available")
             {
                 events = events.Where(ev => ev.CurrentMember < ev.MaxMember).ToList();
@@ -114,11 +115,14 @@ public class SearchController : BaseController
             }
         }
 
-        if (!string.IsNullOrEmpty(search.Sort)) {
-            if (search.Sort == "Newest"){
+        if (!string.IsNullOrEmpty(search.Sort))
+        {
+            if (search.Sort == "Newest")
+            {
                 events = events.OrderByDescending(ev => ev.EventStartDate).ToList();
             }
-            if (search.Sort == "Oldest"){
+            if (search.Sort == "Oldest")
+            {
                 events = events.OrderBy(ev => ev.EventStartDate).ToList();
             }
         }

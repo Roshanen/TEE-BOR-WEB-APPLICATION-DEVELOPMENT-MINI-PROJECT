@@ -134,6 +134,8 @@
                                 moving onto the next step.</p>
                         </div>
                         <div class="input-area">
+                            <label>Choose your tag</label>
+                            <select name="Category" asp-items="@GetTags()" value="@Model.CategoryName"></select>
                             <label>Choose from this</label>
                             <select name="CategoryName" asp-items="@GetTags()" value="@Model.CategoryName"></select>
                         </div>

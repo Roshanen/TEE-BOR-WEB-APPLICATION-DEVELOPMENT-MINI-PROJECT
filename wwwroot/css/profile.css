@@ -37,7 +37,6 @@ body {
   display: grid;
   grid-template-columns: auto auto auto auto;
   gap: 10px;
-  /* padding: 10px; */
   width: 100%;
 }
 
@@ -45,7 +44,6 @@ body {
   text-align: center;
   padding: 1px;
   font-size: 16px;
-  /* border: 1px solid black; */
 }
 
 .topnav {
@@ -119,11 +117,7 @@ body {
 .profile_card {
   display: flex;
   position: relative;
-  /* Ensure positioning is relative to this container */
   border-radius: 20px;
-  /* margin: 30px; */
-  /* margin-left: 14.5%; */
-  /* width: 37%; */
   height: 555px;
   background-color: #fff;
   overflow: hidden;
@@ -190,7 +184,6 @@ body {
   background-size: cover;
   background-position: center center;
   overflow: hidden;
-  /* Ensures the pseudo-element does not spill outside the border-radius */
 }
 
 .edit_profile_image {
@@ -217,12 +210,9 @@ textarea {
   margin-top: 4px;
   border: 1px solid #707070;
   font-size: 15px;
-  /* border covering the input */
   border-radius: 5px;
   width: 526px;
-  /* increase input width */
   box-sizing: border-box;
-  /* include padding and border in the width calculation */
 }
 
 .change-photo {
@@ -276,7 +266,7 @@ textarea {
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
   z-index: 2;
-  /* make it's above the gradient */
+
 }
 
 .content_wrapper {
@@ -368,15 +358,6 @@ textarea {
   justify-content: center;
 }
 
-/* .events-container {
-  flex: 1 1 200px;
-  max-width: 300px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-} */
-
 .event {
   padding: 20px;
   width: 200px;
@@ -436,9 +417,9 @@ textarea {
   padding: 0;
   width: 254px;
   background-color: #f1f1f1;
-  position: absolute;
   top: 65px;
   bottom: 0;
+  position: absolute;
   height: 100%;
   overflow-y: auto;
 }
@@ -499,8 +480,9 @@ div.content {
   display: flex;
   justify-content: center;
   padding: 3px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-left: 12px;
   width: fit-content;
   background-color: white;
   color: #707070;
@@ -523,12 +505,9 @@ div.content {
   margin-top: 4px;
   border: 1px solid #707070;
   font-size: 15px;
-  /* border covering the input */
   border-radius: 5px;
   width: 526px;
-  /* increase input width */
   box-sizing: border-box;
-  /* include padding and border in the width calculation */
 }
 
 .input-container span {
@@ -629,12 +608,32 @@ input[type="checkbox"]:checked ~ .checkmark::after {
   background-color: darkorange;
 }
 
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
+.eventLink {
+  padding-left: 1.5rem;
+  padding-top: 0.25rem;
+  margin-bottom: 0.8rem;
+  font-size: 22px;
+  font-weight: 640;
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+  background-color: #ff7b0080;
+  padding-bottom: 6px;
+  padding-right: 10px;
+  line-height: 24px;
+  box-shadow: 3px 4px rgb(255, 202, 202);
+}
+
+.eventLink:hover {
+  background-color: #de8a1c;
+}
+
 @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;
     height: auto;
+    top: 0;
     position: relative;
+    transform: translateY(-90px);
   }
 
   .sidebar a {
@@ -651,5 +650,14 @@ input[type="checkbox"]:checked ~ .checkmark::after {
   .sidebar a {
     text-align: center;
     float: none;
+  }
+  .sidebar {
+    top: 0;
+  }
+}
+
+@media only screen and (max-width: 1076px) {
+  .sidebar {
+    top: 100px;
   }
 }
