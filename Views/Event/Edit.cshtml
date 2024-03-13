@@ -36,12 +36,6 @@
                 <form action="" method="post" id="create-form">
                     <div class="step step-1">
                         <h2>First, set your location</h2>
-                        <div class="tip-area">
-                            <h3>Tip</h3>
-                            <p>Meetup groups meet locally, in person or online. The location helps us to connect with people in your
-                                area.
-                            </p>
-                        </div>
                         <div class="input-area">
                             <input type="text" name="ActualPlace" placeholder="สถานที่" value="@Model.ActualPlace" required>
                             <input type="text" name="Province" placeholder="จังหวัด" value="@Model.Province" required>
@@ -134,11 +128,8 @@
                                 moving onto the next step.</p>
                         </div>
                         <div class="input-area">
-                            <label>Choose your tag</label>
-                            <select name="Category" asp-items="@GetTags()" value="@Model.CategoryName"></select>
                             <label>Choose from this</label>
                             <select name="CategoryName" asp-items="@GetTags()" value="@Model.CategoryName"></select>
-                        </div>
                             @functions {
                                 List<SelectListItem> GetTags()
                                 {
@@ -181,8 +172,8 @@
                                     };
                                 }
                             }
+                        </div>
                     </div>
-
                     <div class="step step-3">
                         <h2>Name your party</h2>
                         <div class="tip-area">
