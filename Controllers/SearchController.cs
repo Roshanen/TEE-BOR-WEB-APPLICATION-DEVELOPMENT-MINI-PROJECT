@@ -18,21 +18,12 @@ public class SearchController : BaseController
     public IActionResult Index(Search search)
     {
         _SetUserDataInViewData();
-        try
-        {
-            List<Event> events = searchFilters(search);
 
-            return View(events);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
+        return View();
     }
 
     public IActionResult ViewResult(Search search)
     {
-        _SetUserDataInViewData();
         try
         {
             List<Event> events = searchFilters(search);
