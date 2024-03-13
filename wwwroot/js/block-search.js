@@ -7,6 +7,8 @@ inputBaseBlock.addEventListener("focus", () => {
   extendBlock.style.display = "flex";
 });
 
+extendBlock.style.display = "flex";
+
 const bSubmits = document.querySelectorAll(
   ".submit-button, .block-submit-button"
 );
@@ -17,7 +19,16 @@ bSubmits.forEach((b) => {
   });
 });
 
+const blockInput = document.querySelector(".block-search-name #name");
+const navInput = document.querySelector(".search-name #name");
 
+navInput.addEventListener("change", () => {
+  blockInput.value = navInput.value;
+})
+
+blockInput.addEventListener("change", () => {
+  navInput.value = blockInput.value;
+})
 
 function redirectToSearch(){
   var searchNameText = document.getElementById("name").value;

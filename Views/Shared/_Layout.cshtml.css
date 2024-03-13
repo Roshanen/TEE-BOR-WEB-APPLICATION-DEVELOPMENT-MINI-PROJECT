@@ -181,7 +181,9 @@ button {
 
 .block-search {
   display: flex;
-  flex-direction: column;
+  width: auto;
+  height: 2rem;
+  flex-direction: row;
   margin-left: 1rem;
   margin-right: 0.5rem;
 }
@@ -195,6 +197,10 @@ button {
 .search-base,
 .search-extend {
   margin-bottom: 0.5rem;
+}
+
+.search-base {
+  width: calc(100% - 2.5rem);
 }
 
 .search-extend {
@@ -213,9 +219,10 @@ button {
 }
 
 .block-search-name {
-  width: calc(100% - 0.5rem);
   border: 1px solid #d9d9d9;
   border-radius: 0.5rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   padding-right: 0;
 }
 
@@ -228,7 +235,6 @@ button {
 }
 
 .block-submit-button {
-  display: inline;
   width: 2.5rem;
 }
 
