@@ -100,6 +100,7 @@ button:hover {
 
 .step-4 .date-input {
     display: flex;
+    flex-direction: column;
     justify-content: left;
     gap: 30px;
 }

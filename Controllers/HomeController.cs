@@ -24,7 +24,7 @@ public class HomeController : BaseController
         _SetUserDataInViewData();
         var Events = _mongoContext
             .GetCollection<Event>("events")
-            .Find(j => j.RecruitEndDate > DateTime.Now | true)
+            .Find(ev => ev.RecruitEndDate > DateTime.Now && ev.Status == "Active")
             .ToList();
         List<EventViewModel> listEventview = new List<EventViewModel>();
 
