@@ -124,10 +124,12 @@ public class SearchController : BaseController
         }
 
         if (!string.IsNullOrEmpty(search.Sort)) {
-            if (search.Sort == "Newest"){
+            if (search.Sort == "Newest")
+            {
                 events = events.OrderByDescending(ev => ev.StartDate).ToList();
             }
-            if (search.Sort == "Oldest"){
+            if (search.Sort == "Oldest")
+            {
                 events = events.OrderBy(ev => ev.StartDate).ToList();
             }
         }
