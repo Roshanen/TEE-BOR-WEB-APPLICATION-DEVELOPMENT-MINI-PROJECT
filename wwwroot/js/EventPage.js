@@ -118,13 +118,33 @@
 //   window.addEventListener("scroll", handleScroll);
 // });
 
-
 var cancelbtn = document.getElementById("cancel-btn");
 if (cancelbtn != null) {
   cancelbtn.addEventListener("click", function () {
     var confirmation = confirm("Are you sure you want to cancel?");
     if (confirmation) {
       document.getElementById("cancel-form").submit();
+    }
+  });
+}
+
+var closebtn = document.getElementById("close-btn");
+if (closebtn != null) {
+  console.log("closebtn");
+  closebtn.addEventListener("click", function () {
+    var confirmation = confirm("Are you sure you want to close?");
+    if (confirmation) {
+      document.getElementById("close-form").submit();
+    }
+  });
+}
+
+var openbtn = document.getElementById("open-btn");
+if (openbtn != null) {
+  openbtn.addEventListener("click", function () {
+    var confirmation = confirm("Are you sure you want to Open?");
+    if (confirmation) {
+      document.getElementById("open-form").submit();
     }
   });
 }
