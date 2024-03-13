@@ -24,7 +24,7 @@ public class HomeController : BaseController
         _SetUserDataInViewData();
         var Events = _mongoContext
             .GetCollection<Event>("events")
-            .Find(j => j.EndDate > DateTime.Now)
+            .Find(j => j.RecruitEndDate > DateTime.Now | true)
             .ToList();
         List<EventViewModel> listEventview = new List<EventViewModel>();
 
@@ -39,7 +39,7 @@ public class HomeController : BaseController
             eventView.HostName = Host.UserName;
             eventView.EventImg = e.EventImg;
             eventView.Tags = e.Id.ToString();
-            eventView.EndDate = e.EndDate;
+            eventView.EventEndDate = e.EventEndDate;
             eventView.EventDetails = e.EventDetails;
 
             listEventview.Add(eventView);

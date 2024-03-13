@@ -62,7 +62,10 @@ public class EventPageController : BaseController
         eventView.EventDetails = Event.EventDetails ?? "";
         eventView.Tags = Event.CategoryName ?? "";
         eventView.Attendees = Attendees;
-        eventView.EndDate = Event.EndDate;
+        eventView.EventEndDate = Event.EventEndDate;
+        eventView.EventStartDate = Event.EventStartDate;
+        eventView.RecruitEndDate = Event.RecruitEndDate;
+        eventView.RecruitStartDate = Event.RecruitStartDate;
         eventView.Place = Place.ActualPlace ?? "";
         eventView.MapUrl = Place.MapUrl ?? "";
         eventView.Type = Event.Type ?? "";
@@ -99,7 +102,7 @@ public class EventPageController : BaseController
 
         ViewBag.EventId = id;
         ViewBag.MaxCapacity = Event.MaxMember - Event.CurrentMember - 1;
-        eventView.StartDate = Event.StartDate;
+        eventView.EventStartDate = Event.EventStartDate;
 
         DateTime dateTimeNow = DateTime.Now;
         if(Event.Status== "Cancelled")
@@ -110,7 +113,7 @@ public class EventPageController : BaseController
         {
             eventView.Status = "Closed";
         }
-        else if (DateTime.Compare(Event.EndDate, dateTimeNow) < 0)
+        else if (DateTime.Compare(Event.EventEndDate, dateTimeNow) < 0)
         {
             eventView.Status = "Ended";
         }

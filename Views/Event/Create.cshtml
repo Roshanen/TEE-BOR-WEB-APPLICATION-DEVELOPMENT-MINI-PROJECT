@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
     <link rel="stylesheet" href="/css/createEvent.css" />
+    <link rel="stylesheet" href="/css/createEventMap.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -38,24 +39,86 @@
                 <form asp-action="create" id="create-form" method="post">
                     <div class="step step-1">
                         <h2>First, set your location</h2>
-                        <div class="tip-area">
-                            <h3>Tip</h3>
-                            <p>Meetup groups meet locally, in person or online. The location helps us to connect with
-                                people
-                                in your
-                                area.
-                            </p>
-                        </div>
                         <div class="input-area">
                             <input type="text" name="ActualPlace" placeholder="สถานที่" maxlength="50" required>
                             <input type="text" name="Province" placeholder="จังหวัด" maxlength="50" required>
                             <input type="text" name="District" placeholder="อำเภอ" maxlength="50" required>
                             <input type="text" name="SubDistrict" placeholder="ตำบล" maxlength="50" required>
-                            <div>หรือ</div>
-                            <input type="text" name="MapUrl" placeholder="ลิงก์จาก Google Map" maxlength="300">
-                            <gmp-map center="13.727607727050781,100.77247619628906" zoom="14" map-id="DEMO_MAP_ID">
-                                <gmp-advanced-marker position="13.727607727050781,100.77247619628906" title="My location"></gmp-advanced-marker>
-                            </gmp-map>
+                            <div id="container">
+                                <div id="leftColumn">
+                                    <label for="placeInput">หรือ ค้นหาสถานที่ :</label>
+                                    <input type="text" id="placeInput" placeholder="ชื่อสถานที่">
+                                    <div id="embedContainer"><img id="imagePreview" alt="Preview" style="display: none;"></div>
+                                    <input type="text" name="MapUrl" id="MapUrl" placeholder="ลิงก์จาก Google Map" maxlength="300" disabled>
+                                    <button onclick="searchPlace()">Search</button>
+                                    <!-- <button onclick="copyEmbedCode()">Select this location</button> -->
+                                </div>
+
+                                <div id="rightColumn">
+                                    <div id="mapContainer"></div>
+                                </div>
+                            </div>
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgHeH40rthu08qZAir-B7KT4qUJu1NO4E&libraries=places&callback=initMap" async defer></script>
+                            <script>
+                                let map;
+                                let placeMarker;
+                                let autocomplete;
+
+                                function initMap() {
+                                    map = new google.maps.Map(document.getElementById('mapContainer'), {
+                                        center: { lat: -34.397, lng: 150.644 },
+                                        zoom: 8
+                                    });
+
+                                    placeMarker = new google.maps.Marker({
+                                        map: map,
+                                        draggable: true
+                                    });
+
+                                    autocomplete = new google.maps.places.Autocomplete(document.getElementById('placeInput'));
+                                    autocomplete.setFields(['geometry', 'name', 'photos']);
+
+                                    autocomplete.addListener('place_changed', function () {
+                                        const place = autocomplete.getPlace();
+                                        if (place.geometry) {
+                                            map.setCenter(place.geometry.location);
+                                            placeMarker.setPosition(place.geometry.location);
+                                            placeMarker.setTitle(place.name);
+                                            placeMarker.setLabel(place.name);
+
+                                            const imagePreview = document.getElementById('imagePreview');
+                                            const embedCode = document.getElementById('MapUrl');
+                                            if (place.photos && place.photos.length > 0) {
+                                                const photoUrl = place.photos[0].getUrl({ maxWidth: 300, maxHeight: 300 });
+                                                imagePreview.src = photoUrl;
+                                                imagePreview.style.display = 'block';
+
+                                                embedCode.value = `<iframe src="https://www.google.com/maps/embed/v1/view?zoom=14&center=${placeMarker.getPosition().lat()},${placeMarker.getPosition().lng()}&key=YOUR_API_KEY" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+                                            } else {
+                                                imagePreview.style.display = 'none';
+                                                embedCode.innerText = '';
+                                            }
+                                        } else {
+                                            alert('Place not found');
+                                        }
+                                    });
+
+                                    window.addEventListener('resize', function () {
+                                        map.setCenter(placeMarker.getPosition());
+                                    });
+                                }
+
+                                function copyEmbedCode() {
+                                    const embedCode = document.getElementById('MapUrl');
+                                    const range = document.createRange();
+                                    range.selectNode(embedCode);
+                                    window.getSelection().removeAllRanges();
+                                    window.getSelection().addRange(range);
+                                    document.execCommand('copy');
+                                    window.getSelection().removeAllRanges();
+                                    alert('Embed code copied to clipboard!');
+                                }
+                            </script>
                         </div>
                     </div>
 
@@ -120,13 +183,25 @@
                             <div class="date-input">
                                 <div class="date-group group">
                                     <label><div>Start date</div>
-                                    <input type="datetime-local" id="StartDate" name="StartDate" lang="th">
+                                    <input type="datetime-local" id="EventStartDate" name="EventStartDate" lang="th">
                                     </label>
                                     @* //value = datetime now *@
                                 </div>
                                 <div class="date-group group">
                                     <label><div>End date</div>
-                                    <input type="datetime-local" id="EndDate" name="EndDate" lang="th">
+                                    <input type="datetime-local" id="EventEndDate" name="EventEndDate" lang="th">
+                                    </label>
+                                    @* //minlength = datime now *@
+                                </div>
+                                <div class="date-group group">
+                                    <label><div>Start date</div>
+                                    <input type="datetime-local" id="RecruitStartDate" name="RecruitStartDate" lang="th">
+                                    </label>
+                                    @* //value = datetime now *@
+                                </div>
+                                <div class="date-group group">
+                                    <label><div>End date</div>
+                                    <input type="datetime-local" id="RecruitEndDate" name="RecruitEndDate" lang="th">
                                     </label>
                                     @* //minlength = datime now *@
                                 </div>
@@ -182,8 +257,6 @@
         </div>
     </div>
     <script type="text/javascript" src="/js/create-event.js"></script>
-        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgHeH40rthu08qZAir-B7KT4qUJu1NO4E&callback=console.debug&libraries=maps,marker&v=beta">
-    </script>
 </body>
 
 </html>

@@ -50,8 +50,10 @@ public class EventController : BaseController
 
         // can be shared between edit and create
         DateTime today = DateTime.Today;
-        eventModel.StartDate = createEvent.StartDate;
-        eventModel.EndDate = createEvent.EndDate;
+        eventModel.EventStartDate = createEvent.EventStartDate;
+        eventModel.EventEndDate = createEvent.EventEndDate;
+        eventModel.RecruitStartDate = createEvent.RecruitStartDate;
+        eventModel.RecruitEndDate = createEvent.RecruitEndDate;
         eventModel.LastModifiedDate = today;
         eventModel.EventName = createEvent.EventName ?? "";
         eventModel.EventImg = createEvent.EventImg ?? "";
@@ -122,8 +124,10 @@ public class EventController : BaseController
         //Tag
         createEvent.CategoryName = Event.CategoryName;
         //DateTime
-        createEvent.StartDate = Event.StartDate;
-        createEvent.EndDate = Event.EndDate;
+        createEvent.EventStartDate = Event.EventStartDate;
+        createEvent.EventEndDate = Event.EventEndDate;
+        createEvent.RecruitStartDate = Event.RecruitStartDate;
+        createEvent.RecruitEndDate = Event.RecruitEndDate;
         //Event
         createEvent.EventName = Event.EventName;
         createEvent.EventImg = Event.EventImg;
@@ -163,8 +167,10 @@ public class EventController : BaseController
             .FirstOrDefault();
 
         DateTime today = DateTime.Today;
-        eventModel.StartDate = createEvent.StartDate;
-        eventModel.EndDate = createEvent.EndDate;
+        eventModel.EventStartDate = createEvent.EventStartDate;
+        eventModel.EventEndDate = createEvent.EventEndDate;
+        eventModel.RecruitStartDate = createEvent.RecruitStartDate;
+        eventModel.RecruitEndDate = createEvent.RecruitEndDate;
         eventModel.LastModifiedDate = today;
         eventModel.EventName = createEvent.EventName ?? "";
         eventModel.EventImg = createEvent.EventImg ?? "";
@@ -185,6 +191,6 @@ public class EventController : BaseController
             .GetCollection<Place>("places")
             .ReplaceOne(ev => ev.Id == placeModel.Id, placeModel);
 
-        return RedirectToAction("Index");
+        return RedirectToAction("viewid", "eventpage", new {id = eventModel.Id.ToString()});
     }
 }

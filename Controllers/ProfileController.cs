@@ -24,20 +24,6 @@ public class ProfileController : BaseController
         return View(users);
     }
 
-    // public async Task<ActionResult> Index()
-    // {
-    //     var currentId = _SetUserDataInViewData();
-
-    //     if (currentId == null) return RedirectToAction("login", "account");
-
-
-    //     var userProfile = await _mongoContext.GetCollection<User>("users")
-    //                                         .Find(u => u.Id == ObjectId.Parse(currentId))
-    //                                         .FirstOrDefaultAsync();
-
-    //     return View(userProfile);
-    // }
-
     public IActionResult ViewId(string Id)
     {
         var currentId = _SetUserDataInViewData();
@@ -47,16 +33,34 @@ public class ProfileController : BaseController
         if (currentId == null)
             return RedirectToAction("login", "account");
 
-        var userProfile = _mongoContext
+        var user = _mongoContext
             .GetCollection<User>("users")
             .Find(u => u.Id == ObjectId.Parse(Id))
             .FirstOrDefault();
-        if (userProfile == null)
+        if (user == null)
         {
             return NotFound();
         }
 
-        return View(userProfile);
+        Profile profile = new Profile();
+        profile.User = user;
+
+        var joins = _mongoContext
+            .GetCollection<JoinEvent>("joinEvents")
+            .Find(j => j.UserId == ObjectId.Parse(Id))
+            .ToList();
+        List<Event> events = new List<Event>();
+
+        Console.WriteLine(joins.Count());
+        foreach (var join in joins){
+            events.Add(_mongoContext
+            .GetCollection<Event>("events")
+            .Find(e => e.Id == join.EventId)
+            .FirstOrDefault());
+        }
+
+        profile.AttendEvent = events;
+        return View(profile);
     }
 
     public async Task<ActionResult> Edit(string id)

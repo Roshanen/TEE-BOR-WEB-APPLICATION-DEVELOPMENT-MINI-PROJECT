@@ -1,4 +1,4 @@
-@model User
+@model Profile
 @{
   ViewData["title"] = "Profile";
 }
@@ -19,11 +19,11 @@
         <div class="profile_card profile-top">
           <div class="content_wrapper">
             <div class="profile_image"
-              style="background-image: url('@(Model.ProfilePicture != null ? Model.ProfilePicture : Url.Content("~/src/image_.png"))')">
+              style="background-image: url('@(Model.User.ProfilePicture != null ? Model.User.ProfilePicture : Url.Content("~/src/image_.png"))')">
               <div class="image_text">
-                <h1>@Model.UserName</h1>
-                <p>@Model.Email</p>
-                <p>@Model.Address</p>
+                <h1>@Model.User.UserName</h1>
+                <p>@Model.User.Email</p>
+                <p>@Model.User.Address</p>
               </div>
             </div>
             <div class="profile-stats">
@@ -39,13 +39,13 @@
                     height: fit-content;
                   ">
                 <div class="profile-statsh3">Bio</div>
-                <div class="profile-statp">@Model.Bio</div>
+                <div class="profile-statp">@Model.User.Bio</div>
               </div>
             </div>
           </div>
           @if (ViewData["isProfileOwner"] != null)
           {
-            <a class="change-photo" href="@Url.Action("Edit", "Profile" , new { id=Model.Id })">
+            <a class="change-photo" href="@Url.Action("Edit", "Profile" , new { id=Model.User.Id })">
               <svg class="info-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -101,11 +101,11 @@
                   padding: 0%;
                   margin: 0%;
                 ">
-              <div style="text-align: left">@Model.UserName</div>
-              @if (ViewData["isProfileOwner"] != null)
+              <div style="text-align: left">@Model.User.UserName</div>
+              @if (ViewData["isProfileOwner"] == "true")
               {
                 <div style="text-align: left; color: rgb(250, 59, 6);">
-                  <a href="@Url.Action("Edit", "Profile", new { id = Model.Id })">Edit profile</a>
+                  <a href="@Url.Action("Edit", "Profile", new { id = Model.User.Id })">Edit profile</a>
                 </div>
               }
             </div>
@@ -167,83 +167,50 @@
               </svg>
             </div>
             <div class="column" style="align-items: center;">
-              <h2>@Model.Address</h2>
+              <h2>@Model.User.Address</h2>
             </div>
           </div>
         </div>
-        <div class="profile_card">
-          <a href="@Url.Action("Index", "YourEvent")" style="text-decoration: underline; color: inherit;">
+        <div class="profile_card"
+          style=" display: flex; flex-direction: column;">
+          <a href="@Url.Action("Index", "YourEvent")"
+            style="text-decoration: underline; color: inherit; width: fit-content; position: sticky; top: 0; left: 0;">
             <h3 style="
-                padding-left: 1.5rem;
-                padding-top: 0.25rem;
-                margin-bottom: 0.8rem;
-                font-size: 22px;
-                font-weight: 640;
-                color: rgb(0, 0, 0);
-                background-color: #ff7b0080;
-                padding-bottom: 6px;
-                padding-right: 10px;
-                line-height: 24px;
-                box-shadow: 3px 4px rgb(255, 202, 202);
-            ">
+                    padding-left: 1.5rem;
+                    padding-top: 0.25rem;
+                    margin-bottom: 0.8rem;
+                    font-size: 22px;
+                    font-weight: 640;
+                    color: rgb(0, 0, 0);
+                    background-color: #ff7b0080;
+                    padding-bottom: 6px;
+                    padding-right: 10px;
+                    line-height: 24px;
+                    box-shadow: 3px 4px rgb(255, 202, 202);
+                ">
               Event
             </h3>
           </a>
+
           <div class="profile-container" data-testid="groups-container" style="position: relative;">
-            <div class="profile_card_group">
-              <div class="row">
-                <div class="column">
-                  <div class="profile_image_group">
-                    <a href="https://www.meetup.com/startup-agile-bangkok/" class="mr-4 axsr06e"
-                      data-event-label="self_profile_group_click"><img
-                        alt="Photo of Startup Agile group - Bangkok group" data-testid="next-image" loading="lazy"
-                        width="120" height="72" decoding="async" data-nimg="1" class="h-[72px] rounded-lg" srcset="
-                            https://secure-content.meetupstatic.com/images/classic-events/477573276/120x72.jpg?w=120?w=128 1x,
-                            https://secure-content.meetupstatic.com/images/classic-events/477573276/120x72.jpg?w=120?w=256 2x
-                          "
-                        src="https://secure-content.meetupstatic.com/images/classic-events/477573276/120x72.jpg?w=120?w=256"
-                        style="color: transparent" /></a>
-                  </div>
-                </div>
-                <div class="column">
-                  <a href="https://www.meetup.com/startup-agile-bangkok/"
-                    class="ds-font-body-medium block hover:no-underline"
-                    data-event-label="self_profile_group_click">Startup Agile group - Bangkok</a>
-                  <div class="ds-font-small mb-2 text-secondary">Member</div>
-                  <a class="ds-font-small-medium underline" data-event-label="self_profile_membership_details_click"
-                    href="https://www.meetup.com/members/413796513/group/21629158/">Membership
-                    details</a>
-                </div>
-              </div>
-            </div>
-            <div class="profile_card_group">
-              <div class="row" style="flex-grow: 1;">
-                <div class="column">
-                  <div class="profile_image_group">
-                    <a href="https://www.meetup.com/bkkhack/" class="mr-4 axsr06e"
-                      data-event-label="self_profile_group_click"><img
-                        alt="Photo of BKK/hack – Code, Make, Learn, Share group" data-testid="next-image" loading="lazy"
-                        width="120" height="72" decoding="async" data-nimg="1" class="h-[72px] rounded-lg" srcset="
-                            https://secure-content.meetupstatic.com/images/classic-events/511725956/120x72.jpg?w=120?w=128 1x,
-                            https://secure-content.meetupstatic.com/images/classic-events/511725956/120x72.jpg?w=120?w=256 2x
-                          "
-                        src="https://secure-content.meetupstatic.com/images/classic-events/511725956/120x72.jpg?w=120?w=256"
-                        style="color: transparent" /></a>
-                  </div>
-                </div>
-                <div class="column">
-                  <div>
-                    <a href="https://www.meetup.com/bkkhack/" class="ds-font-body-medium block hover:no-underline"
-                      data-event-label="self_profile_group_click">BKK/hack – Code, Make, Learn,
-                      Share</a>
-                    <div class="ds-font-small mb-2 text-secondary">
-                      Member
-                    </div>
-                    <a class="ds-font-small-medium underline" data-event-label="self_profile_membership_details_click"
-                      href="https://www.meetup.com/members/413796513/group/18594486/">Membership
-                      details</a>
-                  </div>
-                </div>
+            <div class="your-event-displayer">
+              <div id="event-display">
+                @if (Model.AttendEvent.Count > 0)
+                {
+                  @foreach (var Event in Model.AttendEvent)
+                  {
+                      <div class="event">
+                        <a href="@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-image">
+                          <img src="@Event.EventImg" alt="Event Image">
+                        </a>
+                        <div class="event-info">
+                          <a href="@Url.Action("ViewId", "EventPage", new { id = @Event.Id })" class="event-title"
+                            class="event-title">@Event.EventName</a>
+                          <div class="event-date">@Event.EventStartDate</div>
+                        </div>
+                      </div>
+                  }
+                }
               </div>
             </div>
           </div>
@@ -270,7 +237,7 @@
     }
 
     window.onload = function () {
-      var userName = "@Model.UserName";
+      var userName = "@Model.User.UserName";
       document.getElementById('initial-letter').textContent = userName.charAt(0);
     };
 
