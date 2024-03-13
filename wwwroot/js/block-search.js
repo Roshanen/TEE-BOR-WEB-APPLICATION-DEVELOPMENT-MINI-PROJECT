@@ -32,6 +32,7 @@ function search() {
   var dateChoice = checkElementAndAny("day");
   var type = checkElementAndAny("type");
   var category = checkElementAndAny("category");
+  var sort = checkElementAndAny("sort");
 
   var inputValues = {
     Name: name,
@@ -39,11 +40,12 @@ function search() {
     DateChoice: dateChoice,
     Type: type,
     Category: category,
+    Sort: sort,
   };
 
   if (!window.location.pathname.startsWith("/search")) {
     window.location.href =
-      "/search?" + new URLSearchParams(inputValues).toString();
+      "/search?name=" + name;
   } else {
     sendSearch(inputValues);
   }

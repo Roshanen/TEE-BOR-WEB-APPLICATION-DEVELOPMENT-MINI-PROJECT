@@ -17,7 +17,6 @@ class Dropdown {
     });
   }
 
-
   handleClick(dropdownAction) {
     this.dropdowns.forEach((dropdown) => {
       if (dropdown.classList.contains("active")) {
@@ -43,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => new Dropdown());
 
 function qChangeDisplay() {
   var options = document.querySelectorAll(".dropdown-menu a");
+
   options.forEach((opt) => {
     opt.addEventListener("click", (ev) => {
       var selectedText = ev.target.innerHTML;
@@ -55,6 +55,8 @@ function qChangeDisplay() {
       } else {
         dropdownName.innerHTML = selectedText;
       }
+
+      search();
     });
   });
 }

@@ -32,7 +32,7 @@
                             </svg></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#" onclick="return false;" id="any"> Any day </a></li>
+                            <li><a href="#" onclick="return false;" id="Any"> Any day </a></li>
                             <li><a href="#" onclick="return false;" id="Today"> Today </a></li>
                             <li><a href="#" onclick="return false;" id="This week"> This week </a></li>
                             <li><a href="#" onclick="return false;" id="Next week"> Next week </a></li>
@@ -41,7 +41,6 @@
                     <div class="dropdown">
                         <a href="#" onclick="return false;" class="dropdown-action type">
                             <span id="type">Any type</span>
-
                             <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24">
                                 <title>chevron-down</title>
@@ -52,11 +51,11 @@
                             </svg></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#" onclick="return false; id="any">Any type</a></li>
-                            <li><a href="#" onclick="return false; id="Online">Online</a></li>
-                            <li><a href="#" onclick="return false; id="Indoor">Indoor only</a></li>
-                            <li><a href="#" onclick="return false; id="Outdoor">Outdoor only</a></li>
-                            <li><a href="#" onclick="return false; id="Storytelling">Storytelling</a></li>
+                            <li><a href="#" onclick="return false;" id="any">Any type</a></li>
+                            <li><a href="#" onclick="return false;" id="Online">Online</a></li>
+                            <li><a href="#" onclick="return false;" id="Indoor">Indoor only</a></li>
+                            <li><a href="#" onclick="return false;" id="Outdoor">Outdoor only</a></li>
+                            <li><a href="#" onclick="return false;" id="Storytelling">Storytelling</a></li>
                         </ul>
                     </div>
 
@@ -95,26 +94,20 @@
                             </svg></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#" onclick="return false;" id="any">Any category</a></li>
+                            <li><a href="#" onclick="return false;" id="Any">Any category</a></li>
                             <li><a href="#" onclick="return false;" id="Art & Culture">Art & Culture</a></li>
                             <li><a href="#" onclick="return false;" id="Career & Business">Career & Business</a></li>
-                            <li><a href="#" onclick="return false;" id="Community & Environment">Community &
-                                    Environment</a>
-                            </li>
+                            <li><a href="#" onclick="return false;" id="Community & Environment">Community & Environment</a></li>
                             <li><a href="#" onclick="return false;" id="Dancing">Dancing</a></li>
                             <li><a href="#" onclick="return false;" id="Games">Games</a></li>
                             <li><a href="#" onclick="return false;" id="Health & Wellbeing">Health & Wellbeing</a></li>
                             <li><a href="#" onclick="return false;" id="Hobbies & Pasion">Hobbies & Pasion</a></li>
-                            <li><a href="#" onclick="return false;" id="Identity & Languages">Identity & Languages</a>
-                            </li>
+                            <li><a href="#" onclick="return false;" id="Identity & Languages">Identity & Languages</a></li>
                             <li><a href="#" onclick="return false;" id="Music">Music</a></li>
                             <li><a href="#" onclick="return false;" id="Parents & Family">Parents & Family</a></li>
                             <li><a href="#" onclick="return false;" id="Pet & Animals">Pet & Animals</a></li>
-                            <li><a href="#" onclick="return false;" id="Religion & Spirituality">Religion &
-                                    Spirituality</a>
-                            </li>
-                            <li><a href="#" onclick="return false;" id="Science & Education">Science & Education </a>
-                            </li>
+                            <li><a href="#" onclick="return false;" id="Religion & Spirituality">Religion & Spirituality</a></li>
+                            <li><a href="#" onclick="return false;" id="Science & Education">Science & Education </a></li>
                             <li><a href="#" onclick="return false;" id="Shabu">Shabu </a></li>
                             <li><a href="#" onclick="return false;" id="Social Activities">Scial Activities</a></li>
                             <li><a href="#" onclick="return false;" id="Sports & Fitness">Sports & Fitness</a></li>
@@ -127,7 +120,7 @@
                     <div class="dropdown">
                         <a href="#" onclick="return false;" class="dropdown-action">
                             Sort by:&nbsp;
-                            <span id="sort">Date</span>
+                            <span id="sort">Newest</span>
                             <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24">
                                 <title>chevron-down</title>
@@ -138,59 +131,39 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" onclick="return false;">Date</a></li>
-                            <li><a href="#" onclick="return false;">Relevance</a></li>
+                            <li><a href="#" onclick="return false;" id="Newest">Newest</a></li>
+                            <li><a href="#" onclick="return false;" id="Oldest">Oldest</a></li>
                         </ul>
                     </div>
                 </nav>
-            </div>
-            <div class="dropdown">
-                <a href="#" onclick="return false;" class="dropdown-action">
-                    Sort by:&nbsp;
-                    <span id="sort">
-                        Date
-                    </span>
-                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24">
-                        <title>chevron-down</title>
-                        <g fill="none">
-                            <path stroke-linecap="round" stroke-linejoin="round " stroke-width="1.5"
-                                d="M15.25 10.75L12 14.25l-3.25-3.5"></path>
-                        </g>
-                    </svg>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" onclick="return false;">Date</a></li>
-                    <li><a href="#" onclick="return false;">Relevance</a></li>
-                </ul>
             </div>
         </nav>
     <div class="display-paragraph">
         <div class="card-container left">
             @foreach (var ev in Model)
             {
-                <div class="card">
-                    <a href="/eventpage/viewid/@ev.Id" class="image">
-                        <img class="img" src="@ev.EventImg" alt="@ev.EventName" />
-                    </a>
-                            <div class="details">
-                                <div class="date">
-                                    <h3>@ev.EndDate</h3>
-                                </div>
-                                <div class="header">
-                                        <a href="/eventpage/viewid/@ev.Id">
-                                            <div class="h2">@ev.EventName</div>
-                                        </a>
-                                    <div class="sub-header">
-                                        <div class="paragraph">@ev.EventDetails</div>
-                                            <div class="share-attend">
-                                                <div class="attendee">@ev.CurrentMember Attendees</div>
-                                                <div class="share"><i class="fa-solid fa-upload"></i></div>
-                                            </div>
-                                    </div>
-                                </div>
+            <div class="card">
+                <a href="/eventpage/viewid/@ev.Id" class="image">
+                    <img class="img" src="@ev.EventImg" alt="@ev.EventName" />
+                </a>
+                <div class="details">
+                    <div class="date">
+                        <div>@ev.EndDate</div>
+                    </div>
+                    <div class="header">
+                        <a href="/eventpage/viewid/@ev.Id">
+                            <div class="h2">@ev.EventName</div>
+                        </a>
+                        <div class="sub-header">
+                            <div class="paragraph">@ev.EventDetails</div>
+                            <div class="share-attend">
+                                <div class="attendee">@ev.CurrentMember Attendees</div>
+                                <div class="share"><i class="fa-solid fa-upload"></i></div>
                             </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
             }
                 @* <div class="right">
                     <iframe

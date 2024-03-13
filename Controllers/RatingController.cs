@@ -19,7 +19,7 @@ public class RatingController : BaseController
     [HttpPost]
     public IActionResult Create(Rating rating)
     {
-        String userIdString = _SetUserDataInViewData();
+        String? userIdString = _SetUserDataInViewData();
         if (userIdString is null)
             return RedirectToAction("login", "account");
 
