@@ -38,8 +38,6 @@ class Dropdown {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => new Dropdown());
-
 function qChangeDisplay() {
   var options = document.querySelectorAll(".dropdown-menu a");
 
@@ -61,4 +59,69 @@ function qChangeDisplay() {
   });
 }
 
-qChangeDisplay();
+function checkElementAndAny(name) {
+  var element = document.getElementById(name);
+  var text = element ? element.textContent.trim() : "any";
+  text = text.startsWith("Any") ? "any" : text;
+  return text;
+}
+
+function search() {
+  var name = document.getElementById("name").value || "";
+  var status = checkElementAndAny("status");
+  var dateChoice = checkElementAndAny("day");
+  var type = checkElementAndAny("type");
+  var category = checkElementAndAny("category");
+  var sort = checkElementAndAny("sort");
+
+  var inputValues = {
+    Name: name,
+    Status: status,
+    DateChoice: dateChoice,
+    Type: type,
+    Category: category,
+    Sort: sort,
+  };
+
+  if (!window.location.pathname.startsWith("/search")) {
+    window.location.href =
+      "/search?" + new URLSearchParams(inputValues).toString();
+  }
+
+  const newUrl = "/search?" + new URLSearchParams(inputValues).toString();
+  history.pushState(null, "", newUrl);
+
+  sendSearch(inputValues);
+}
+
+function sendSearch(inputValues) {
+  var formData = new FormData();
+  for (var key in inputValues) {
+    formData.append(key, inputValues[key]);
+  }
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("searchResultsContainer").innerHTML =
+        this.responseText;
+    }
+  };
+
+  xhttp.onerror = function (error) {
+    console.error(error);
+  };
+
+  xhttp.open("POST", "http://localhost:5180/search/viewresult", true);
+  xhttp.send(formData);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  new Dropdown();
+
+  var searchName = document.getElementById("name");
+  searchName.value = sessionStorage.getItem("searchName");
+  
+  qChangeDisplay();
+  search();
+});
