@@ -60,6 +60,7 @@ public class EventController : BaseController
         eventModel.EventDetails = createEvent?.EventDetails?.ToString() ?? "";
         eventModel.MaxMember = createEvent?.MaxMember ?? 1;
         eventModel.Rating = defaultRating;
+        eventModel.Type = createEvent?.Type ?? "Online";
 
         placeModel.MapUrl = createEvent?.MapUrl ?? "";
         placeModel.ActualPlace = createEvent?.ActualPlace ?? "";
