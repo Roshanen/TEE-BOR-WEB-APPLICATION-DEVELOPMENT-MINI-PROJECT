@@ -21,9 +21,13 @@ public class CreateEvent
     public string? CategoryName { get; set; }
     // date time
     [Required]
-    public DateTime StartDate { get; set; }
+    public DateTime EventStartDate { get; set; }
     [Required]
-    public DateTime EndDate { get; set; }
+    public DateTime EventEndDate { get; set; }
+    [Required]
+    public DateTime RecruitStartDate { get; set; }
+    [Required]
+    public DateTime RecruitEndDate { get; set; }
     // event
     [Required][StringLength(32)]
     public string? EventName { get; set; }

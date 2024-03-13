@@ -95,12 +95,20 @@
                         <h2>Your party detail</h2>
                         <div class="input-area">
                             <div class="date-group group">
-                                <span>Start date</span>
-                                <input type="datetime-local" name="StartDate" value="@GetDateString(@Model.StartDate)" required>
+                                <span>Event start date</span>
+                                <input type="datetime-local" name="EventStartDate" value="@GetDateString(@Model.EventStartDate)" required>
                             </div>
                             <div class="date-group group">
-                                <span>End date</span>
-                                <input type="datetime-local" name="EndDate" value="@GetDateString(@Model.EndDate)" required>
+                                <span>Event end date</span>
+                                <input type="datetime-local" name="EventEndDate" value="@GetDateString(@Model.EventEndDate)" required>
+                            </div>
+                            <div class="date-group group">
+                                <span>First recruit date</span>
+                                <input type="datetime-local" name="RecruitStartDate" value="@GetDateString(@Model.RecruitStartDate)" required>
+                            </div>
+                            <div class="date-group group">
+                                <span>Last recruit date</span>
+                                <input type="datetime-local" name="RecruitEndDate" value="@GetDateString(@Model.RecruitEndDate)" required>
                             </div>
                             @functions {
                                 String GetDateString(DateTime date){

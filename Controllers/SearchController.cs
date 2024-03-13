@@ -125,10 +125,10 @@ public class SearchController : BaseController
 
         if (!string.IsNullOrEmpty(search.Sort)) {
             if (search.Sort == "Newest"){
-                events = events.OrderByDescending(ev => ev.StartDate).ToList();
+                events = events.OrderByDescending(ev => ev.EventStartDate).ToList();
             }
             if (search.Sort == "Oldest"){
-                events = events.OrderBy(ev => ev.StartDate).ToList();
+                events = events.OrderBy(ev => ev.EventStartDate).ToList();
             }
         }
 
