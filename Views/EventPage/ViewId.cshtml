@@ -82,7 +82,7 @@
         <h2 id="num-attendees">Attendees (@ViewData["CurrentMember"])</h2>
         <section id="attendees-list">
           <section class="attendee-profile">
-            <img src=@Model.HostImg alt="" />
+            <img src=@Model.HostImg/>
             <a href="@Url.Action("ViewId", "Profile", new { Id = @ViewData["HostId"]})">@Model.HostName</a>
             <div>Host</div>
           </section>
@@ -213,18 +213,20 @@
       }
       @if(ViewBag.IsHost)
       {
+        Console.WriteLine(Model.Status);
         if(Model.Status == "Active")
         {
           <form id="close-form" method="post"
-            action="@Url.Action("Cancel", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
-            <button id="cancel-btn" type="button">Close</button>
+            action="@Url.Action("Close", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
+            <button id="close-btn" type="button">Close</button>
           </form>
         }
         else if(Model.Status == "Closed")
         {
+          
           <form id="open-form" method="post"
             action="@Url.Action("Open", "EventPage",new {eventId=@ViewBag.EventId,userId = ViewData["userId"] })">
-            <button id="cancel-btn" type="button">Close</button>
+            <button id="open-btn" type="button">Open</button>
           </form>
         }
       }

@@ -496,6 +496,38 @@ textarea {
   align-items: center;
 }
 
+#close-btn {
+  padding: 20px 30px;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid #000000;
+  border-radius: 10%;
+}
+
+#close-btn:hover {
+  transition: 0.5s;
+  background-color: white;
+  color: #000000;
+}
+
+#open-btn {
+  padding: 20px 30px;
+  background-color: #ffbd68;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid #ffbd68;
+  border-radius: 10%;
+}
+
+#open-btn:hover {
+  transition: 0.5s;
+  background-color: white;
+  color: #ffbd68;
+}
+
 @media only screen and (max-width: 768px) {
   .header h1 {
     margin-left: 2px;
