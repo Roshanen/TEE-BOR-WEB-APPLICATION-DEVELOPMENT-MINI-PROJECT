@@ -109,10 +109,6 @@ public class EventPageController : BaseController
         {
             eventView.Status = "Cancelled";
         }
-        else if (Event.Status == "Closed")
-        {
-            eventView.Status = "Closed";
-        }
         else if (DateTime.Compare(Event.EventEndDate, dateTimeNow) < 0)
         {
             eventView.Status = "Ended";
@@ -120,6 +116,10 @@ public class EventPageController : BaseController
         else if (Event.CurrentMember >= Event.MaxMember)
         {
             eventView.Status = "Full";
+        }
+        else if (Event.Status == "Closed")
+        {
+            eventView.Status = "Closed";
         }
         else
         {
