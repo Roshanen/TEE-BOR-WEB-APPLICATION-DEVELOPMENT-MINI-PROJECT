@@ -5,8 +5,8 @@ namespace WebApp.Models;
 
 public class Profile
 {
-public User User { get; set; }
-public List<Event> AttendEvent { get; set; }
+    public User? User { get; set; }
+    public List<Event>? AttendEvent { get; set; }
 
 }
 

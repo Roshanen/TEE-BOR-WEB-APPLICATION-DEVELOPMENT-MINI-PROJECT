@@ -14,17 +14,22 @@ function max(a, b) {
 
 function setButtonToSubmit() {
   let nextButton = document.getElementById("next-button");
-  if ((state - 1) >= maxProgress) {
-    nextButton.type = "submit";
-    document.getElementById("create-form").submit();
-  }
   if (state >= maxProgress) {
+    nextButton.type = "button";
+    nextButton.disabled = false;
     nextButton.innerText = "Submit";
   } else {
     nextButton.type = "button";
+    nextButton.disabled = false;
     nextButton.innerText = "Next";
   }
 }
+
+document.getElementById("next-button").addEventListener("click", () => {
+  if (state >= maxProgress) {
+    document.getElementById("create-form").submit();
+  }
+});
 
 function setProgress() {
   circles.forEach((circle, i) => {
@@ -40,27 +45,27 @@ function setProgress() {
 }
 
 nextButtons.forEach((bt) => {
-  bt.addEventListener("click", (event) => {
-    event.preventDefault();
+  bt.addEventListener("click", () => {
     var stepInputs = formSteps[state - 1].querySelectorAll("input, textarea");
     var validFlag = 1;
 
-    for (let i = 0; i < stepInputs.length; i++) {
+    for (let i = 0; i < stepInputs.length - 1; i++) {
       let inp = stepInputs[i];
+
       if (!inp.checkValidity()) {
         inp.reportValidity();
         validFlag = 0;
         break;
       }
     }
-    
+
     if (validFlag) {
-      state++;
-      // state = state < 5 ? ++state : 5;
+      state = state < maxProgress ? ++state : maxProgress;
       updateDisplay();
     }
   });
 });
+
 
 backButtons.forEach((bt) => {
   bt.addEventListener("click", () => {
@@ -75,10 +80,18 @@ function updateDisplay() {
     if (index === state - 1) {
       section.style.display = "block";
     }
-  }); // end for each
+  });
   setButtonToSubmit();
   setProgress();
   console.log(state);
 }
+
+const placeInput = document.getElementById('placeInput');
+
+placeInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+    }
+});
 
 updateDisplay();

@@ -39,5 +39,5 @@ public class CreateEvent
     [Required]
     public int MaxMember { get; set; }
     [Required]
-    public string Type { get; set; }
+    public string? Type { get; set; }
 }
