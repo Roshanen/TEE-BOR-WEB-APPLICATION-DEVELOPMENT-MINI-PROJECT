@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using WebApp.Models;
 
 namespace WebApp.Controllers;
@@ -154,5 +155,18 @@ public class AccountController : BaseController
         HttpContext.Session.Clear();
 
         return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    public IActionResult CheckEmail([FromBody] string email)
+    {
+        var user = _mongoContext
+            .GetCollection<User>("users")
+            .Find(u => u.Email == email)
+            .FirstOrDefault();
+
+        var response = new { exists = user != null };
+
+        return Content(JsonConvert.SerializeObject(response), "application/json");
     }
 }
