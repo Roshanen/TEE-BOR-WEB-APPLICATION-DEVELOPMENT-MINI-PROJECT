@@ -34,7 +34,7 @@ public class YourEventController : BaseController
         {
             var Event = _mongoContext
                 .GetCollection<Event>("events")
-                .Find(ei => ei.Id == e.EventId && ei.Status == "Active")
+                .Find(ei => ei.Id == e.EventId && ei.Status == "Active" || ei.Status == "Closed")
                 .FirstOrDefault();
             if (Event != null)
             {
