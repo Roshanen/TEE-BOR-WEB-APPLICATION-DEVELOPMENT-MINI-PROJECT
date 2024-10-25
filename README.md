@@ -1,11 +1,11 @@
 # TEE-BOR-WEB-APPLICATION-DEVELOPMENT-MINI-PROJECT
 
-Web Application Development Mini Project using ASP.NET MVC.
+TEE-BOR Web Application - A mini-project in web application development using the ASP.NET MVC framework.
 
-This app helps bring people together for events.
+This app is designed to bring people together by allowing anyone to create and join events. Whether it’s a game night, sports match, meeting, party, or movie marathon, TEE-BOR makes it easy for everyone to connect and enjoy activities together!
 
 <!-- Build -->
-## Building a sample
+## Build
 
 Build any .NET Core sample using the .NET Core CLI, which is installed with [the .NET Core SDK](https://www.microsoft.com/net/download). Then run
 these commands from the CLI in the directory of any sample:
@@ -25,15 +25,6 @@ The dotnet watch command is a file watcher. When it detects a change, it runs th
 dotnet watch
 ```
 
-<!-- ENV -->
-## .env Setup
-
-Store your sensitive Data about Connections in .env file.
-
-```
-MONGODB_CONNECTION_STRING="your mongodb connection string"
-DATABASE_NAME="your database name"
-JWT_SECRET_KEY="your jwt secret key"
-```
+---
 
 _Last thing is "this got me so sleepy"._
